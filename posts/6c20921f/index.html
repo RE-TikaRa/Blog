@@ -1,0 +1,2599 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="亓翎_Re-Tikara">
+    
+    <meta name="author" content="亓翎_Re-Tikara">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://re-tikara.fun/Blog/posts/6c20921f/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="这是一个很无趣的人写的很无趣的文章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Certificate-Management">
+<meta property="og:url" content="https://re-tikara.fun/Blog/posts/6c20921f/">
+<meta property="og:site_name" content="ALp_Studio Article Library">
+<meta property="og:description" content="这是一个很无趣的人写的很无趣的文章">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png">
+<meta property="article:published_time" content="2026-01-02T16:01:16.000Z">
+<meta property="article:modified_time" content="2026-01-02T16:04:00.814Z">
+<meta property="article:author" content="亓翎_Re-Tikara">
+<meta property="article:tag" content="亓翎_Re-Tikara">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://free.picui.cn/free/2025/12/30/6953f28ba97a0.ico" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://free.picui.cn/free/2025/12/30/6953f28ba97a0.ico">
+    <meta name="theme-color" content="#98B37D">
+    <link rel="shortcut icon" href="https://free.picui.cn/free/2025/12/30/6953f28ba97a0.ico">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Certificate-Management | ALp_Studio Article Library
+        
+    </title>
+
+    
+<link rel="stylesheet" href="/Blog/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/Blog/css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="/Blog/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/Blog/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+        
+<script src="/Blog/js/build/libs/anime.min.js"></script>
+
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"re-tikara.fun","root":"/Blog/","language":"zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#98B37D","secondary":"#997868","default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":true},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":true,"custom_message":"欢迎进入，实验体"},"side_tools":{"gear_rotation":true,"auto_expand":true},"open_graph":{"enable":true,"image":"https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png","description":"这是一个很无趣的人写的很无趣的文章"},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png","dark":"https://s2.loli.net/2025/12/22/uBnZDzxcI7JHCX3.png"},"title":"ALp_Studio","subtitle":{"text":["欢迎进入，实验体","情感数据记录中……"],"hitokoto":{"enable":true,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#F0EFEB","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/RE-TikaRa","instagram":null,"zhihu":null,"twitter":null,"email":"163mail@re-tikara.fun","bilibili":"https://space.bilibili.com/374412219"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":true,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tag":{"path":"/tags/","icon":"fa-solid fa-tags"},"Categories":{"icon":"fa-solid fa-folder","path":"/categories/"},"Bookmarks":{"icon":"fa-solid fa-bookmark","path":"/bookmarks/"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/RE-TikaRa","BiliBili":"https://space.bilibili.com/374412219","相册":"/masonry","Archives":"/archives","Friends":"/links","Bookmarks":"/bookmarks"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":{"MainWeb":{"path":"https://re-tikara.fun","icon":"fa-solid fa-globe"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023-12-16T14:23:50.000Z"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":true};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/Blog/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/Blog/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/Blog/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/Blog/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+	<span class="scroll-progress-bar"></span>
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        欢迎进入，实验体
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({ loop: true })
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [20, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                filter: ['blur(5px)', 'blur(0px)'],
+                easing: "easeOutExpo",
+                duration: 1200,
+                delay: (el, i) => 300 + 20 * i,
+            })
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [0, -20],
+                opacity: [1, 0],
+                filter: ['blur(0px)', 'blur(5px)'],
+                easing: "easeInExpo",
+                duration: 1000,
+                delay: (el, i) => 15 * i,
+                complete: function() {
+                    hidePreloader();
+                }
+            }, '-=700');
+
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+                <a class="logo-image h-8 w-8 sm:w-10 sm:h-10 mr-3" href="/Blog/">
+                    <img src="https://s2.loli.net/2025/12/22/BF6ApZlzjyELX5K.png" class="w-full h-full rounded-xs">
+                </a>
+            
+            <a class="logo-title" href="/Blog/">
+                
+                ALp_Studio Article Library
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/Blog/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/Blog/tags/"
+                                        >
+                                    <i class="fa-solid fa-tags fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/Blog/categories/"
+                                        >
+                                    <i class="fa-solid fa-folder fa-fw"></i>
+                                    分类
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/Blog/bookmarks/"
+                                        >
+                                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                                    BOOKMARKS
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/Blog/about">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://github.com/RE-TikaRa">
+                                                    GITHUB
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://space.bilibili.com/374412219">
+                                                    BILIBILI
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/Blog/masonry">
+                                                    相册
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/Blog/archives">
+                                                    归档
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/Blog/links">
+                                                    友情链接
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/Blog/bookmarks">
+                                                    BOOKMARKS
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/Blog/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/Blog/tags/"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-solid fa-tags fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/Blog/categories/"
+                        >
+                            <span>
+                                分类
+                            </span>
+                            
+                                <i class="fa-solid fa-folder fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/Blog/bookmarks/"
+                        >
+                            <span>
+                                BOOKMARKS
+                            </span>
+                            
+                                <i class="fa-solid fa-bookmark fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/Blog/about">ME</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://github.com/RE-TikaRa">GITHUB</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://space.bilibili.com/374412219">BILIBILI</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/Blog/masonry">相册</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/Blog/archives">归档</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/Blog/links">友情链接</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/Blog/bookmarks">BOOKMARKS</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="https://re-tikara.fun"
+                        >
+                            <span>MainWeb</span>
+                            <i class="fa-solid fa-globe fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/Blog/archives"
+                        >
+                            <span>Archives</span>
+                            <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/Blog/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">2</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">2</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">3</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			
+			
+			<img src="https://s2.loli.net/2025/12/22/uBnZDzxcI7JHCX3.png" alt="Certificate-Management" class="w-full h-60 sm:h-72 md:h-80 object-cover sm:rounded-t-large dark:brightness-75" />
+			
+			<div class="w-full flex items-center absolute bottom-0 justify-start">
+				<h1 class="article-title-cover text-center mx-6 my-6 text-second-text-color bg-background-color-transparent px-4 py-3 text-3xl sm:text-4xl md:text-5xl font-semibold backdrop-blur-lg rounded-xl border border-border-color ">Certificate-Management</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="https://s2.loli.net/2025/12/22/mkWtIYraVxdnTCe.jpg">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">亓翎_Re-Tikara</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv1</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2026-01-03 00:01:16</span>
+        <span class="mobile">2026-01-03 00:01:16</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2026-01-03 00:04</span>
+            <span class="mobile">2026-01-03 00:04</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>7.2k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>29 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+		<div class="article-expire mt-4 mx-2 sm:mx-6 md:mx-8 note p-4 rounded-lg red icon hidden" id="expiration-container">
+			<i class="expire-icon fa-solid fa-timer mr-0.5 text-red-600 dark:text-red-400"></i>
+			<span class="expire-label text-red-600 dark:text-red-400 " id="expiration-date">这篇文章最后更新于 some 天前，内容可能已经过时。</span>
+		</div>
+
+		<script data-swup-reload-script>
+			function updateExpirationDate() {
+				try {
+					const expiredDate = new Date("10000-01-01 07:59:59");
+					const updatedDate = new Date("Sat Jan 03 2026 00:04:00 GMT+0800");
+					const now = new Date();
+					const expirationValue = document.getElementById("expiration-date");
+					const expirationContainer = document.getElementById("expiration-container");
+					let daysAgo = Math.floor((now - updatedDate) / (1000 * 60 * 60 * 24));
+					if (expiredDate < now) {
+						expirationContainer.classList.remove("hidden");
+						// console.log(daysAgo)
+						expirationValue.innerHTML = expirationValue.innerHTML.replace("some", daysAgo);
+					}
+				} catch (e) {}
+			}
+			document.addEventListener("DOMContentLoaded", function() {
+				updateExpirationDate();
+			});
+			try {
+				swup.hooks.on("page:view", updateExpirationDate)
+			} catch (e) {}
+		</script>
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<div align="center">
+  <!-- Logo Section -->
+  <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/RE-TikaRa/Certificate-Management/main/img/LOGO.svg"
+                      alt="Logo" width="180" 
+                >
+  <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/RE-TikaRa/Certificate-Management/main/img/NewLogo.svg"
+                      alt="Logo" width="180" 
+                >
+
+  <!-- Typing Effect Title -->
+  <h1>荣誉证书管理系统</h1>
+
+
+  <p>
+    一款功能完整、界面精美的荣誉证书管理桌面应用。<br/>
+    支持荣誉证书的全生命周期管理：从录入、统计分析、成员管理到附件管理，一应俱全。<br/>
+    <b>当前版本：</b> v1.4.0（2025-12-18）
+  </p>
+
+  <!-- Badges -->
+  <p>
+    <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/badge/Python-3.14+-3776AB?style=for-the-badge&logo=python&logoColor=white"
+                      
+                >
+    <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/badge/PySide6-Latest-41CD52?style=for-the-badge&logo=qt&logoColor=white"
+                      
+                >
+    <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/badge/License-MIT-orange?style=for-the-badge"
+                      
+                >
+    <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/badge/Platform-Win%20%7C%20Mac%20%7C%20Linux-lightgrey?style=for-the-badge&logo=linux&logoColor=black"
+                      
+                >
+  </p>
+
+  <!-- Action Buttons -->
+  <p>
+    <a href="#-快速开始">
+      <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/badge/🚀_立即运行-Start_Demo-blue?style=flat-square"
+                      alt="Start Demo" 
+                >
+    </a>
+    &nbsp;
+    <a target="_blank" rel="noopener" href="https://github.com/RE-TikaRa/Certificate-Management/issues">
+      <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/badge/🐛_反馈问题-Report_Bug-red?style=flat-square"
+                      alt="Report Bug" 
+                >
+    </a>
+    &nbsp;
+    <a href="#-文件目录说明">
+      <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/badge/📚_浏览文档-Explore_Docs-green?style=flat-square"
+                      alt="Explore Docs" 
+                >
+    </a>
+  </p>
+</div>
+
+<hr>
+<!-- Table of Contents -->
+<details>
+  <summary><strong>📖 目录导航 (点击展开)</strong></summary>
+
+<ul>
+<li><a href="#-%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7">✨ 核心特性</a><ul>
+<li><a href="#-%E5%8A%9F%E8%83%BD%E8%AF%A6%E6%83%85">🎯 功能详情</a></li>
+</ul>
+</li>
+<li><a href="#%EF%B8%8F-%E6%8A%80%E6%9C%AF%E6%A0%88">🛠️ 技术栈</a></li>
+<li><a href="#-%E7%95%8C%E9%9D%A2%E9%A2%84%E8%A7%88">📸 界面预览</a></li>
+<li><a href="#-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B">🚀 快速开始</a><ul>
+<li><a href="#-%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4">📥 安装步骤</a></li>
+<li><a href="#%EF%B8%8F-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">🛠️ 常用命令</a></li>
+<li><a href="#-ai-%E8%AF%81%E4%B9%A6%E8%AF%86%E5%88%AB">🧾 AI 证书识别</a><ul>
+<li><a href="#%EF%B8%8F-%E9%85%8D%E7%BD%AE%E4%B8%8E%E6%A8%A1%E5%9E%8B">⚙️ 配置与模型</a></li>
+<li><a href="#-%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B">🧾 使用流程</a></li>
+</ul>
+</li>
+<li><a href="#-%E5%AF%BC%E5%85%A5--%E5%AF%BC%E5%87%BAcsvxlsx">📥 导入 &#x2F; 导出（CSV&#x2F;XLSX）</a></li>
+<li><a href="#-mcp-%E6%8E%A5%E5%85%A5%E6%9C%AC%E5%9C%B0">🤖 MCP 接入（本地）</a><ul>
+<li><a href="#-%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F">🔌 连接方式</a></li>
+<li><a href="#%EF%B8%8F-%E6%9D%83%E9%99%90%E4%B8%8E%E5%AE%89%E5%85%A8">🛡️ 权限与安全</a></li>
+<li><a href="#%EF%B8%8F-%E8%83%BD%E5%8A%9B%E6%A6%82%E8%A7%88">🛠️ 能力概览</a></li>
+<li><a href="#%EF%B8%8F-%E5%B8%B8%E7%94%A8%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F">⚙️ 常用环境变量</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E8%AF%B4%E6%98%8E">📂 文件目录说明</a></li>
+<li><a href="#%EF%B8%8F-%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84">🏗️ 项目架构</a></li>
+<li><a href="#-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B">💾 数据模型</a><ul>
+<li><a href="#-%E8%8D%A3%E8%AA%89%E8%AE%B0%E5%BD%95-awards">🏆 荣誉记录 (Awards)</a></li>
+<li><a href="#-%E8%8D%A3%E8%AA%89%E6%88%90%E5%91%98%E5%BF%AB%E7%85%A7-awardmembers">🧩 荣誉成员快照 (AwardMembers)</a></li>
+<li><a href="#-%E5%8F%82%E4%B8%8E%E6%88%90%E5%91%98-teammembers">👤 参与成员 (TeamMembers)</a></li>
+<li><a href="#-ai-%E6%8F%90%E4%BE%9B%E5%95%86-aiproviders">🤖 AI 提供商 (AIProviders)</a></li>
+<li><a href="#%EF%B8%8F-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%80%E5%85%B3-customflagsawardflagvalues">🏷️ 自定义开关 (CustomFlags&#x2F;AwardFlagValues)</a></li>
+<li><a href="#-%E4%B8%93%E4%B8%9A%E4%B8%8E%E5%AD%A6%E6%A0%A1-majorsschools">🎓 专业与学校 (Majors&#x2F;Schools)</a></li>
+</ul>
+</li>
+<li><a href="#-%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E4%B8%8E%E5%A4%87%E4%BB%BD">🔐 数据安全与备份</a></li>
+<li><a href="#-%E4%B8%BB%E9%A2%98%E7%B3%BB%E7%BB%9F">🎨 主题系统</a></li>
+<li><a href="#%EF%B8%8F-%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97">🛠️ 开发指南</a></li>
+<li><a href="#-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5">🧰 故障排查</a></li>
+<li><a href="#-%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97">📝 更新日志</a><ul>
+<li><a href="#v140-2025-12-18">v1.4.0 (2025-12-18)</a></li>
+<li><a href="#v131-2025-12-17">v1.3.1 (2025-12-17)</a></li>
+<li><a href="#v130-2025-12-16">v1.3.0 (2025-12-16)</a></li>
+<li><a href="#v120-2025-12-14">v1.2.0 (2025-12-14)</a></li>
+<li><a href="#v110-2025-12-09--2025-12-10">v1.1.0 (2025-12-09 ~ 2025-12-10)</a></li>
+<li><a href="#v101-2025-12-04--2025-12-07">v1.0.1 (2025-12-04 ~ 2025-12-07)</a></li>
+<li><a href="#v100-2025-12-02--2025-12-03">v1.0.0 (2025-12-02 ~ 2025-12-03)</a></li>
+</ul>
+</li>
+<li><a href="#-star-history">📈 Star History</a></li>
+<li><a href="#-%E5%A6%82%E4%BD%95%E8%B4%A1%E7%8C%AE">🤝 如何贡献</a></li>
+<li><a href="#-%E8%AE%B8%E5%8F%AF%E8%AF%81">📄 许可证</a></li>
+</ul>
+</details>
+
+<hr>
+<h2 id="✨-核心特性"><a href="#✨-核心特性" class="headerlink" title="✨ 核心特性"></a>✨ 核心特性</h2><div align="center">
+  <table>
+    <tr>
+      <td align="center" width="25%">
+        <h3>⚡ 极速检索</h3>
+        <p>500ms 防抖全文检索<br/>FTS5 引擎加持</p>
+      </td>
+      <td align="center" width="25%">
+        <h3>📊 数据可视化</h3>
+        <p>8 张动态指标卡<br/>图表实时联动</p>
+      </td>
+      <td align="center" width="25%">
+        <h3>🧭 丝滑体验</h3>
+        <p>页面异步懒加载<br/>启动速度飞快</p>
+      </td>
+      <td align="center" width="25%">
+        <h3>🛡️ 数据安全</h3>
+        <p>本地 SQLite 存储<br/>自动定时备份</p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <h3>🧠 智能补全</h3>
+        <p>专业/学院自动匹配<br/>支持拼音/代码搜索</p>
+      </td>
+      <td align="center">
+        <h3>🗑️ 后悔药</h3>
+        <p>回收站机制<br/>双重删除确认</p>
+      </td>
+      <td align="center">
+        <h3>🎨 炫彩主题</h3>
+        <p>深色/浅色模式<br/>一键实时切换</p>
+      </td>
+      <td align="center">
+        <h3>🛠️ 运维工具</h3>
+        <p>一键清理日志/备份<br/>数据库维护工具</p>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<h3 id="🎯-功能详情"><a href="#🎯-功能详情" class="headerlink" title="🎯 功能详情"></a>🎯 功能详情</h3><ul>
+<li><strong>首页</strong>: 快速导航与最近动态，一键直达常用功能。</li>
+<li><strong>仪表盘</strong>: 8 个梯度指标卡 + 饼&#x2F;柱图可视化 + 最近荣誉速览。</li>
+<li><strong>总览</strong>: FTS5 全文搜索（比赛名&#x2F;证书号&#x2F;成员）+ 筛选排序分页，支持编辑与批量操作。</li>
+<li><strong>录入</strong>: 卡片式表单，多成员动态管理；集成专业&#x2F;学校智能搜索（中文&#x2F;拼音&#x2F;代码）；支持一键 AI 识别证书（图片&#x2F;PDF）。</li>
+<li><strong>成员管理</strong>: 成员库维护与详情，10 字段监控与快速修改。</li>
+<li><strong>回收站</strong>: 已删除记录可恢复&#x2F;彻底删除，双重确认。</li>
+<li><strong>系统设置</strong>: 主题&#x2F;备份&#x2F;日志&#x2F;索引维护与清理工具，自定义开关管理，导入模板下载；AI 与 MCP 配置入口。</li>
+<li><strong>MCP 接入</strong>: 内置本地 MCP（stdio&#x2F;SSE）与可选 Web 控制台，默认只读，支持 PII 脱敏与写入开关。</li>
+</ul>
+<hr>
+<h2 id="🛠️-技术栈"><a href="#🛠️-技术栈" class="headerlink" title="🛠️ 技术栈"></a>🛠️ 技术栈</h2><div align="center">
+
+<table>
+<thead>
+<tr>
+<th align="center"><strong>核心框架</strong></th>
+<th align="center"><strong>数据存储</strong></th>
+<th align="center"><strong>工具链</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/badge/PySide6-41CD52?style=for-the-badge&logo=qt&logoColor=white"
+                      alt="PySide6"
+                ></td>
+<td align="center"><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white"
+                      alt="SQLite"
+                ></td>
+<td align="center"><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/badge/UV-Workflow-purple?style=for-the-badge"
+                      alt="UV"
+                ></td>
+</tr>
+<tr>
+<td align="center"><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/badge/QFluentWidgets-Fluent_UI-0078D4?style=for-the-badge&logo=microsoft&logoColor=white"
+                      alt="QFluentWidgets"
+                ></td>
+<td align="center"><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/badge/SQLAlchemy-ORM-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white"
+                      alt="SQLAlchemy"
+                ></td>
+<td align="center"><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/badge/Ruff-Linter-FCC21B?style=for-the-badge&logo=python&logoColor=black"
+                      alt="Ruff"
+                ></td>
+</tr>
+</tbody></table>
+</div>
+
+<ul>
+<li><strong>AI 证书识别</strong>：OpenAI 兼容 API（Chat Completions&#x2F;Responses）+ PyMuPDF（PDF 渲染）+ Pydantic（结构化解析）</li>
+<li><strong>MCP</strong>：<code>mcp</code>（FastMCP），支持 stdio&#x2F;SSE；可选 <code>gradio</code> Web 控制台</li>
+<li><strong>日志</strong>：<code>loguru</code>（应用日志与 MCP 进程日志输出到 <code>logs/</code>）</li>
+<li><strong>类型检查</strong>：<code>pyright</code>（标准模式）+ <code>ruff</code>（风格&#x2F;未使用项）</li>
+</ul>
+<hr>
+<h2 id="📸-界面预览"><a href="#📸-界面预览" class="headerlink" title="📸 界面预览"></a>📸 界面预览</h2><blockquote>
+<p>💡 <strong>提示</strong>: 点击图片可查看大图</p>
+</blockquote>
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2025/12/10/KbLFB2Ta3E8rCsf.jpg"
+                      alt="Home" width="100%" 
+                >
+        <br/><b>🏠 首页</b><br/>快速导航与最近动态
+      </td>
+      <td align="center">
+        <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2025/12/10/18nQ5Mt9yos4G7j.png"
+                      alt="Dashboard" width="100%" 
+                >
+        <br/><b>📊 仪表盘</b><br/>指标卡 + 统计图表
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2025/12/10/dKcrQUTo3xghDNq.png"
+                      alt="Overview" width="100%" 
+                >
+        <br/><b>👀 总览页</b><br/>FTS5 搜索 + 筛选排序
+      </td>
+      <td align="center">
+        <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2025/12/10/IA1hHyCiEGlfNSx.png"
+                      alt="Entry" width="100%" 
+                >
+        <br/><b>📝 录入页</b><br/>成员卡片式表单 + AI 识别
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2025/12/10/whom7bQ8pHrvdiT.png"
+                      alt="Members" width="100%" 
+                >
+        <br/><b>👥 成员管理</b><br/>10 字段监控与详情
+      </td>
+      <td align="center">
+        <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2025/12/10/eC2vklNYSyF5ipo.png"
+                      alt="Settings" width="100%" 
+                >
+        <br/><b>⚙️ 设置页</b><br/>主题/备份/清理/日志
+      </td>
+    </tr>
+  </table>
+</div>
+
+<hr>
+<h2 id="🚀-快速开始"><a href="#🚀-快速开始" class="headerlink" title="🚀 快速开始"></a>🚀 快速开始</h2><div align="center">
+  <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/badge/Python-3.14+-3776AB?style=flat-square&logo=python&logoColor=white"
+                      
+                >
+  <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/badge/UV-Package_Manager-purple?style=flat-square"
+                      
+                >
+  <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/badge/SQLite-Database-003B57?style=flat-square&logo=sqlite&logoColor=white"
+                      
+                >
+</div>
+
+<h3 id="📥-安装步骤"><a href="#📥-安装步骤" class="headerlink" title="📥 安装步骤"></a>📥 安装步骤</h3><ol>
+<li><p><strong>克隆仓库</strong></p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/RE-TikaRa/Certificate-Management.git</span><br><span class="line"><span class="built_in">cd</span> Certificate-Management</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>安装依赖</strong> (推荐使用 <code>uv</code>)</p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 uv (如果尚未安装)</span></span><br><span class="line"><span class="comment"># pip install uv</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同步环境</span></span><br><span class="line">uv <span class="built_in">sync</span></span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>启动应用</strong></p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Windows 快捷启动</span></span><br><span class="line">./main.bat</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或使用 uv 启动</span></span><br><span class="line">uv run python -m src.main</span><br></pre></td></tr></table></figure></div></li>
+</ol>
+<h3 id="🛠️-常用命令"><a href="#🛠️-常用命令" class="headerlink" title="🛠️ 常用命令"></a>🛠️ 常用命令</h3><table>
+<thead>
+<tr>
+<th align="left">操作</th>
+<th align="left">命令</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>运行</strong></td>
+<td align="left"><code>uv run python -m src.main</code></td>
+<td align="left">启动主程序</td>
+</tr>
+<tr>
+<td align="left"><strong>调试</strong></td>
+<td align="left"><code>uv run python -m src.main --debug</code></td>
+<td align="left">开启调试日志</td>
+</tr>
+<tr>
+<td align="left"><strong>检查</strong></td>
+<td align="left"><code>uv run ruff check .</code></td>
+<td align="left">代码 Lint 检查</td>
+</tr>
+<tr>
+<td align="left"><strong>格式化</strong></td>
+<td align="left"><code>uv run ruff format .</code></td>
+<td align="left">代码自动格式化</td>
+</tr>
+<tr>
+<td align="left"><strong>类型检查</strong></td>
+<td align="left"><code>uv run python -m pyright</code></td>
+<td align="left">Pyright 标准模式</td>
+</tr>
+<tr>
+<td align="left"><strong>语法检查</strong></td>
+<td align="left"><code>uv run python -m py_compile src/</code></td>
+<td align="left">基础语法编译检查</td>
+</tr>
+<tr>
+<td align="left"><strong>MCP 服务</strong></td>
+<td align="left"><code>uv run certificate-mcp</code></td>
+<td align="left">启动 MCP（默认 stdio，只读）</td>
+</tr>
+<tr>
+<td align="left"><strong>MCP SSE</strong></td>
+<td align="left"><code>CERT_MCP_TRANSPORT=sse uv run certificate-mcp</code></td>
+<td align="left">启动 SSE（默认 <code>http://127.0.0.1:8000/sse</code>；推荐用设置页随软件启动）</td>
+</tr>
+<tr>
+<td align="left"><strong>MCP Web</strong></td>
+<td align="left"><code>uv run certificate-mcp-web</code></td>
+<td align="left">启动本地 Web 控制台（需安装可选依赖；默认 <code>http://127.0.0.1:7860</code>）</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="🧾-AI-证书识别"><a href="#🧾-AI-证书识别" class="headerlink" title="🧾 AI 证书识别"></a>🧾 AI 证书识别</h3><p>AI 证书识别用于“荣誉录入”页面的一键识别：从证书图片&#x2F;PDF 自动抽取 <strong>比赛名称、获奖日期、赛事级别、奖项等级、证书编号、成员姓名</strong>，并在预览对话框中确认后再写入表单。</p>
+<h4 id="⚙️-配置与模型"><a href="#⚙️-配置与模型" class="headerlink" title="⚙️ 配置与模型"></a>⚙️ 配置与模型</h4><ol>
+<li>打开 <strong>系统设置 → AI 证书识别</strong>，勾选“启用 AI 证书识别”</li>
+<li>配置一个提供商（Provider）<ul>
+<li><strong>API 地址</strong>：OpenAI 兼容地址（如 <code>https://api.openai.com</code> 或你的兼容中转）</li>
+<li><strong>API Key</strong>：支持多 Key，程序会按请求轮换（见下文）</li>
+<li><strong>模型</strong>：可手动填写模型 ID；若你的服务支持 <code>/v1/models</code>，可在设置页刷新&#x2F;选择</li>
+<li><strong>PDF 页数</strong>：1~10（PDF 会渲染前 N 页作为图片参与识别）</li>
+</ul>
+</li>
+<li>点击“测试联通”验证配置（会发起最小请求）</li>
+</ol>
+<p>说明（按当前实现）：</p>
+<ul>
+<li>支持文件：<code>.pdf</code> <code>.png</code> <code>.jpg</code> <code>.jpeg</code> <code>.webp</code></li>
+<li>Key 轮换：每次调用（识别证书、刷新模型、测试联通）都会轮到下一个 Key；<strong>当前不会在失败时自动切 Key 重试</strong></li>
+<li>OpenAI 官方 <code>api.openai.com</code>：会走 <code>responses</code> 接口；PDF 会以文件方式上传，图片会以单张图片方式上传</li>
+<li>兼容服务：走 <code>/v1/chat/completions</code>；PDF 会按“PDF 页数”渲染多页图片后发送</li>
+</ul>
+<h4 id="🧾-使用流程"><a href="#🧾-使用流程" class="headerlink" title="🧾 使用流程"></a>🧾 使用流程</h4><ol>
+<li>在 <strong>荣誉录入</strong> 页点击顶部“AI 识别证书”</li>
+<li>选择证书文件后，程序会自动将其加入附件并开始识别</li>
+<li>在“AI 识别预览”中确认&#x2F;修改结果后应用到表单</li>
+</ol>
+<hr>
+<h3 id="📥-导入-导出（CSV-XLSX）"><a href="#📥-导入-导出（CSV-XLSX）" class="headerlink" title="📥 导入 &#x2F; 导出（CSV&#x2F;XLSX）"></a>📥 导入 &#x2F; 导出（CSV&#x2F;XLSX）</h3><ul>
+<li><strong>入口</strong>：系统设置 → 导入&#x2F;导出</li>
+<li><strong>导入</strong>：支持 CSV&#x2F;XLSX；表头需与模板一致；可选字段 <strong>附件路径</strong>（用 <code>;</code> 分隔多个文件的绝对路径）</li>
+<li><strong>导出</strong>：导出文件包含 <strong>附件数量</strong> 与 <strong>附件路径</strong>；若要回导请确保附件文件在原路径可访问（跨机器需自行拷贝并修正路径）</li>
+</ul>
+<hr>
+<h3 id="🤖-MCP-接入（本地）"><a href="#🤖-MCP-接入（本地）" class="headerlink" title="🤖 MCP 接入（本地）"></a>🤖 MCP 接入（本地）</h3><p>本项目内置了 MCP (Model Context Protocol) 服务，允许 AI Agent（如 Claude Desktop、Cursor 等）安全地读取本地荣誉数据与附件。</p>
+<h4 id="🔌-连接方式"><a href="#🔌-连接方式" class="headerlink" title="🔌 连接方式"></a>🔌 连接方式</h4><ol>
+<li><p><strong>stdio 模式（推荐）</strong></p>
+<ul>
+<li><strong>适用场景</strong>：本地客户端直接拉起进程（无需占用端口）。</li>
+<li><strong>启动命令</strong>：<code>uv run certificate-mcp</code></li>
+<li><strong>配置示例</strong>：见下文“客户端配置示例”。</li>
+</ul>
+</li>
+<li><p><strong>SSE 模式（HTTP 服务）</strong></p>
+<ul>
+<li><strong>适用场景</strong>：本机调试（HTTP）。</li>
+<li><strong>地址</strong>：<code>http://127.0.0.1:8000/sse</code></li>
+<li><strong>启动方式</strong>：<ul>
+<li><strong>自动（推荐）</strong>：在“设置页 → MCP 服务”中开启“随软件启动 MCP”。</li>
+<li><strong>手动</strong>：<code>CERT_MCP_TRANSPORT=sse uv run certificate-mcp</code></li>
+</ul>
+</li>
+<li><strong>日志</strong>：<code>logs/mcp_sse.log</code></li>
+<li><strong>注意</strong>：服务端强制本地绑定，<code>CERT_MCP_HOST</code> 只能是 <code>127.0.0.1</code> &#x2F; <code>localhost</code> &#x2F; <code>::1</code>，请勿暴露到公网。</li>
+</ul>
+<details>
+<summary><strong>Windows PowerShell 手动启动命令</strong></summary>
+
+<div class="code-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$env:CERT_MCP_TRANSPORT</span> = <span class="string">&quot;sse&quot;</span></span><br><span class="line"><span class="variable">$env:CERT_MCP_HOST</span> = <span class="string">&quot;127.0.0.1&quot;</span></span><br><span class="line"><span class="variable">$env:CERT_MCP_PORT</span> = <span class="string">&quot;8000&quot;</span></span><br><span class="line">uv run certificate<span class="literal">-mcp</span></span><br></pre></td></tr></table></figure></div>
+</details>
+</li>
+<li><p><strong>Web 控制台（调试用）</strong></p>
+<ul>
+<li><strong>功能</strong>：提供一个 Web 界面来测试 MCP 工具调用。</li>
+<li><strong>安装</strong>：<code>uv sync --group mcp-web</code>（或在设置页点击安装）。</li>
+<li><strong>启动</strong>：<code>uv run certificate-mcp-web</code>（默认访问 <code>http://127.0.0.1:7860</code>）。</li>
+<li><strong>说明</strong>：无登录，仅用于本机调试；如关闭后端口仍占用见“故障排查”。</li>
+</ul>
+</li>
+</ol>
+<h4 id="🛡️-权限与安全"><a href="#🛡️-权限与安全" class="headerlink" title="🛡️ 权限与安全"></a>🛡️ 权限与安全</h4><ul>
+<li><strong>默认只读</strong>：默认不允许写入数据库或修改文件。如需开启写入（仅限本地），请在设置页勾选或设置环境变量 <code>CERT_MCP_ALLOW_WRITE=1</code>。</li>
+<li><strong>隐私保护</strong>：默认开启 PII 脱敏（<code>CERT_MCP_REDACT_PII=1</code>），自动隐藏身份证号与手机号中间位。</li>
+<li><strong>附件限额</strong>：单次读取附件最大 1MB（可配置 <code>CERT_MCP_MAX_BYTES</code>）。</li>
+<li><strong>网络安全</strong>：服务默认绑定 <code>127.0.0.1</code>，请勿暴露到公网。</li>
+</ul>
+<h4 id="🛠️-能力概览"><a href="#🛠️-能力概览" class="headerlink" title="🛠️ 能力概览"></a>🛠️ 能力概览</h4><ul>
+<li><strong>Tools (工具)</strong>：<ul>
+<li><code>list_awards</code> &#x2F; <code>get_award</code> &#x2F; <code>search_awards</code>：查询荣誉记录。</li>
+<li><code>list_members</code> &#x2F; <code>get_member</code>：查询成员信息。</li>
+<li><code>read_attachment</code>：读取附件内容（支持文本提取）。</li>
+<li><code>health</code>：健康检查。</li>
+</ul>
+</li>
+<li><strong>Resources (资源)</strong>：<ul>
+<li><code>docs://readme</code> &#x2F; <code>docs://agents</code>：读取项目 README&#x2F;AGENTS 指南。</li>
+<li><code>schema://models</code>：查看数据库模型定义。</li>
+<li><code>templates://awards_csv</code>：获取导入模板。</li>
+</ul>
+</li>
+</ul>
+<h4 id="⚙️-常用环境变量"><a href="#⚙️-常用环境变量" class="headerlink" title="⚙️ 常用环境变量"></a>⚙️ 常用环境变量</h4><table>
+<thead>
+<tr>
+<th align="left">变量名</th>
+<th align="left">说明</th>
+<th align="left">默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>CERT_MCP_TRANSPORT</code></td>
+<td align="left">传输模式 (<code>stdio</code>&#x2F;<code>sse</code>)</td>
+<td align="left"><code>stdio</code></td>
+</tr>
+<tr>
+<td align="left"><code>CERT_MCP_HOST</code></td>
+<td align="left">SSE Host（仅允许本地）</td>
+<td align="left"><code>127.0.0.1</code></td>
+</tr>
+<tr>
+<td align="left"><code>CERT_MCP_PORT</code></td>
+<td align="left">SSE 端口</td>
+<td align="left"><code>8000</code></td>
+</tr>
+<tr>
+<td align="left"><code>CERT_MCP_ALLOW_WRITE</code></td>
+<td align="left">允许写入 (<code>0</code>&#x2F;<code>1</code>)</td>
+<td align="left"><code>0</code></td>
+</tr>
+<tr>
+<td align="left"><code>CERT_MCP_REDACT_PII</code></td>
+<td align="left">敏感信息脱敏 (<code>0</code>&#x2F;<code>1</code>)</td>
+<td align="left"><code>1</code></td>
+</tr>
+<tr>
+<td align="left"><code>CERT_MCP_MAX_BYTES</code></td>
+<td align="left">单次附件读取上限（字节）</td>
+<td align="left"><code>1048576</code></td>
+</tr>
+<tr>
+<td align="left"><code>CERT_MCP_DEBUG</code></td>
+<td align="left">输出调试错误细节 (<code>0</code>&#x2F;<code>1</code>)</td>
+<td align="left"><code>0</code></td>
+</tr>
+<tr>
+<td align="left"><code>CERT_MCP_WEB_HOST</code></td>
+<td align="left">Web 控制台 Host</td>
+<td align="left"><code>127.0.0.1</code></td>
+</tr>
+<tr>
+<td align="left"><code>CERT_MCP_WEB_PORT</code></td>
+<td align="left">Web 控制台端口</td>
+<td align="left"><code>7860</code></td>
+</tr>
+<tr>
+<td align="left"><code>CERT_MCP_WEB_INBROWSER</code></td>
+<td align="left">是否自动打开浏览器 (<code>0</code>&#x2F;<code>1</code>)</td>
+<td align="left"><code>1</code></td>
+</tr>
+</tbody></table>
+<details>
+<summary><strong>📎 客户端配置示例 (Claude Desktop / Cursor)</strong></summary>
+
+<p><strong>stdio 模式 (推荐)</strong>：</p>
+<div class="code-container" data-rel="Json"><figure class="iseeu highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;mcpServers&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;certificate&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;uv&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;run&quot;</span><span class="punctuation">,</span> <span class="string">&quot;certificate-mcp&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;env&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;CERT_MCP_ALLOW_WRITE&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;CERT_MCP_REDACT_PII&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>SSE 模式</strong>：</p>
+<div class="code-container" data-rel="Json"><figure class="iseeu highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;mcpServers&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;certificate&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;sse&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://127.0.0.1:8000/sse&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></div>
+
+</details>
+
+<h2 id="📂-文件目录说明"><a href="#📂-文件目录说明" class="headerlink" title="📂 文件目录说明"></a>📂 文件目录说明</h2><details>
+<summary><strong>点击展开完整目录树</strong></summary>
+
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">Certificate-Management/</span><br><span class="line">├── 📄 README.md                    # 项目文档</span><br><span class="line">├── ⚙️ pyproject.toml               # 依赖配置</span><br><span class="line">├── 🔒 uv.lock                      # 依赖锁定</span><br><span class="line">├── 🚀 main.bat                     # Windows 启动脚本</span><br><span class="line">├── 🚫 .gitignore                   # Git 忽略规则</span><br><span class="line">├── 🧰 tools/                       # 开发辅助脚本（可选）</span><br><span class="line">│</span><br><span class="line">├── 📦 src/                         # 源代码</span><br><span class="line">│   ├── 🏁 main.py                  # 入口文件</span><br><span class="line">│   ├── 🌍 app_context.py           # DI 容器</span><br><span class="line">│   ├── ⚙️ config.py                # 配置加载</span><br><span class="line">│   ├── 📝 logger.py                # 日志配置</span><br><span class="line">│   ├── 🤖 mcp/                     # MCP 模块（本地）</span><br><span class="line">│   │   ├── server.py               # MCP 服务端（默认只读）</span><br><span class="line">│   │   ├── web.py                  # MCP 本地 Web 控制台（可选）</span><br><span class="line">│   │   ├── helpers.py              # MCP 配置/解析辅助</span><br><span class="line">│   │   └── runtime.py              # MCP 进程/自启动管理（本地）</span><br><span class="line">│   │</span><br><span class="line">│   ├── 💾 data/                    # 数据层</span><br><span class="line">│   │   ├── models.py               # SQLAlchemy 模型</span><br><span class="line">│   │   └── database.py             # 数据库会话</span><br><span class="line">│   │</span><br><span class="line">│   ├── 🔧 services/                # 业务层</span><br><span class="line">│   │   ├── award_service.py        # 荣誉逻辑</span><br><span class="line">│   │   ├── statistics_service.py   # 统计分析</span><br><span class="line">│   │   ├── import_export.py        # 导入导出</span><br><span class="line">│   │   ├── ai_certificate_service.py # AI 证书识别（OpenAI 兼容 API）</span><br><span class="line">│   │   ├── ai_provider_service.py  # AI Provider / Key 轮换</span><br><span class="line">│   │   ├── attachment_manager.py   # 附件存储/去重/回收站</span><br><span class="line">│   │   ├── backup_manager.py       # 备份/验证/恢复（含定时任务）</span><br><span class="line">│   │   ├── flag_service.py         # 自定义布尔开关（flag）</span><br><span class="line">│   │   └── ...</span><br><span class="line">│   │</span><br><span class="line">│   ├── 🎨 ui/                      # 表现层</span><br><span class="line">│   │   ├── main_window.py          # 主窗口</span><br><span class="line">│   │   ├── styled_theme.py         # 主题管理</span><br><span class="line">│   │   ├── pages/                  # 各功能页面</span><br><span class="line">│   │   └── widgets/                # 自定义组件</span><br><span class="line">│   │</span><br><span class="line">│   └── 📂 resources/               # 静态资源</span><br><span class="line">│       ├── styles/                 # QSS 样式</span><br><span class="line">│       └── templates/              # 导入模板</span><br><span class="line">│</span><br><span class="line">├── 📂 data/                        # 数据库存储 (自动生成)</span><br><span class="line">├── 📂 attachments/                 # 附件存储</span><br><span class="line">├── 📂 backups/                     # 自动备份</span><br><span class="line">├── 📂 logs/                        # 运行日志</span><br><span class="line">└── 📂 docs/                        # 文档与参考数据</span><br></pre></td></tr></table></figure></div>
+</details>
+
+<hr>
+<h2 id="🏗️-项目架构"><a href="#🏗️-项目架构" class="headerlink" title="🏗️ 项目架构"></a>🏗️ 项目架构</h2><div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">flowchart TD</span><br><span class="line">    subgraph UI [表现层 Presentation]</span><br><span class="line">        direction TB</span><br><span class="line">        MainWindow[主窗口 MainWindow]</span><br><span class="line">        Pages[页面 Pages]</span><br><span class="line">        Widgets[组件 Widgets]</span><br><span class="line">        Theme[主题 ThemeManager]</span><br><span class="line">    end</span><br><span class="line"></span><br><span class="line">    subgraph Service [业务层 Business Logic]</span><br><span class="line">        direction TB</span><br><span class="line">        AwardSvc[荣誉服务 AwardService]</span><br><span class="line">        StatSvc[统计服务 StatisticsService]</span><br><span class="line">        BackupSvc[备份服务 BackupManager]</span><br><span class="line">        ImportSvc[导入服务 ImportExport]</span><br><span class="line">        AttachSvc[附件服务 AttachmentManager]</span><br><span class="line">        FlagSvc[开关服务 FlagService]</span><br><span class="line">        AISvc[AI 证书识别 AICertificateService]</span><br><span class="line">    end</span><br><span class="line"></span><br><span class="line">    subgraph Data [数据层 Data Access]</span><br><span class="line">        direction TB</span><br><span class="line">        ORM[SQLAlchemy ORM]</span><br><span class="line">        SQLite[(SQLite Database)]</span><br><span class="line">    end</span><br><span class="line"></span><br><span class="line">    subgraph Integration [集成 Integration]</span><br><span class="line">        direction TB</span><br><span class="line">        MCP[MCP Server (FastMCP)]</span><br><span class="line">    end</span><br><span class="line"></span><br><span class="line">    UI --&gt; Service</span><br><span class="line">    Service --&gt; Data</span><br><span class="line">    MCP --&gt; Service</span><br><span class="line">    </span><br><span class="line">    style UI fill:#e1f5fe,stroke:#01579b</span><br><span class="line">    style Service fill:#fff3e0,stroke:#ff6f00</span><br><span class="line">    style Data fill:#e8f5e9,stroke:#2e7d32</span><br><span class="line">    style Integration fill:#f3e5f5,stroke:#6a1b9a</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p><strong>架构说明</strong>：本项目采用经典的三层架构（表现层、业务层、数据层），各层职责分明，通过依赖注入（DI）容器 <code>AppContext</code> 进行解耦。</p>
+</blockquote>
+<hr>
+<h2 id="💾-数据模型"><a href="#💾-数据模型" class="headerlink" title="💾 数据模型"></a>💾 数据模型</h2><details>
+<summary><strong>查看详细数据库表结构</strong></summary>
+
+<h3 id="🏆-荣誉记录-Awards"><a href="#🏆-荣誉记录-Awards" class="headerlink" title="🏆 荣誉记录 (Awards)"></a>🏆 荣誉记录 (Awards)</h3><table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th align="left">类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>id</code></td>
+<td align="left">Integer</td>
+<td align="left">主键</td>
+</tr>
+<tr>
+<td align="left"><code>competition_name</code></td>
+<td align="left">String</td>
+<td align="left">比赛名称</td>
+</tr>
+<tr>
+<td align="left"><code>award_date</code></td>
+<td align="left">Date</td>
+<td align="left">获奖日期</td>
+</tr>
+<tr>
+<td align="left"><code>level</code></td>
+<td align="left">String</td>
+<td align="left">级别（国家&#x2F;省&#x2F;校等）</td>
+</tr>
+<tr>
+<td align="left"><code>rank</code></td>
+<td align="left">String</td>
+<td align="left">等级（一&#x2F;二&#x2F;三&#x2F;优秀）</td>
+</tr>
+<tr>
+<td align="left"><code>certificate_code</code></td>
+<td align="left">String</td>
+<td align="left">证书编号</td>
+</tr>
+<tr>
+<td align="left"><code>remarks</code></td>
+<td align="left">Text</td>
+<td align="left">备注</td>
+</tr>
+<tr>
+<td align="left"><code>attachment_folder</code></td>
+<td align="left">String</td>
+<td align="left">附件目录相对路径</td>
+</tr>
+<tr>
+<td align="left"><code>deleted</code> &#x2F; <code>deleted_at</code></td>
+<td align="left">Bool&#x2F;DateTime</td>
+<td align="left">软删除标记</td>
+</tr>
+<tr>
+<td align="left"><code>created_at</code> &#x2F; <code>updated_at</code></td>
+<td align="left">DateTime</td>
+<td align="left">时间戳</td>
+</tr>
+<tr>
+<td align="left"><code>award_members</code></td>
+<td align="left">Relation</td>
+<td align="left">荣誉成员快照（<code>AwardMember</code>，级联删除）</td>
+</tr>
+<tr>
+<td align="left"><code>attachments</code></td>
+<td align="left">Relation</td>
+<td align="left">附件（级联删除）</td>
+</tr>
+</tbody></table>
+<h3 id="🧩-荣誉成员快照-AwardMembers"><a href="#🧩-荣誉成员快照-AwardMembers" class="headerlink" title="🧩 荣誉成员快照 (AwardMembers)"></a>🧩 荣誉成员快照 (AwardMembers)</h3><table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th align="left">类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>id</code></td>
+<td align="left">Integer</td>
+<td align="left">主键</td>
+</tr>
+<tr>
+<td align="left"><code>award_id</code></td>
+<td align="left">FK</td>
+<td align="left">关联荣誉</td>
+</tr>
+<tr>
+<td align="left"><code>member_id</code></td>
+<td align="left">FK &#x2F; Nullable</td>
+<td align="left">关联成员库（可空；未入库则为空）</td>
+</tr>
+<tr>
+<td align="left"><code>member_name</code></td>
+<td align="left">String</td>
+<td align="left">当时录入的姓名快照（必填）</td>
+</tr>
+<tr>
+<td align="left"><code>sort_order</code></td>
+<td align="left">Integer</td>
+<td align="left">成员顺序</td>
+</tr>
+</tbody></table>
+<h3 id="👤-参与成员-TeamMembers"><a href="#👤-参与成员-TeamMembers" class="headerlink" title="👤 参与成员 (TeamMembers)"></a>👤 参与成员 (TeamMembers)</h3><table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th align="left">类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>id</code></td>
+<td align="left">Integer</td>
+<td align="left">主键</td>
+</tr>
+<tr>
+<td align="left"><code>name</code></td>
+<td align="left">String</td>
+<td align="left">姓名</td>
+</tr>
+<tr>
+<td align="left"><code>gender</code></td>
+<td align="left">String</td>
+<td align="left">性别</td>
+</tr>
+<tr>
+<td align="left"><code>id_card</code></td>
+<td align="left">String</td>
+<td align="left">身份证号（唯一）</td>
+</tr>
+<tr>
+<td align="left"><code>phone</code></td>
+<td align="left">String</td>
+<td align="left">手机号</td>
+</tr>
+<tr>
+<td align="left"><code>student_id</code></td>
+<td align="left">String</td>
+<td align="left">学号（唯一）</td>
+</tr>
+<tr>
+<td align="left"><code>email</code></td>
+<td align="left">String</td>
+<td align="left">邮箱</td>
+</tr>
+<tr>
+<td align="left"><code>school</code> &#x2F; <code>school_code</code></td>
+<td align="left">String</td>
+<td align="left">学校名称&#x2F;标识码</td>
+</tr>
+<tr>
+<td align="left"><code>major</code> &#x2F; <code>major_code</code></td>
+<td align="left">String</td>
+<td align="left">专业名称&#x2F;代码</td>
+</tr>
+<tr>
+<td align="left"><code>class_name</code></td>
+<td align="left">String</td>
+<td align="left">班级</td>
+</tr>
+<tr>
+<td align="left"><code>college</code></td>
+<td align="left">String</td>
+<td align="left">学院</td>
+</tr>
+<tr>
+<td align="left"><code>pinyin</code></td>
+<td align="left">String</td>
+<td align="left">姓名拼音</td>
+</tr>
+<tr>
+<td align="left"><code>active</code></td>
+<td align="left">Bool</td>
+<td align="left">启用状态</td>
+</tr>
+<tr>
+<td align="left"><code>sort_index</code></td>
+<td align="left">Integer</td>
+<td align="left">排序权重</td>
+</tr>
+<tr>
+<td align="left"><code>created_at</code> &#x2F; <code>updated_at</code></td>
+<td align="left">DateTime</td>
+<td align="left">时间戳</td>
+</tr>
+<tr>
+<td align="left"><code>award_associations</code></td>
+<td align="left">Relation</td>
+<td align="left">通过 <code>AwardMember</code> 关联荣誉（成员库可变更不影响历史快照）</td>
+</tr>
+</tbody></table>
+<h3 id="🤖-AI-提供商-AIProviders"><a href="#🤖-AI-提供商-AIProviders" class="headerlink" title="🤖 AI 提供商 (AIProviders)"></a>🤖 AI 提供商 (AIProviders)</h3><table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th align="left">类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>id</code></td>
+<td align="left">Integer</td>
+<td align="left">主键</td>
+</tr>
+<tr>
+<td align="left"><code>name</code></td>
+<td align="left">String</td>
+<td align="left">提供商名称（唯一）</td>
+</tr>
+<tr>
+<td align="left"><code>api_base</code></td>
+<td align="left">String</td>
+<td align="left">OpenAI 兼容 API Base</td>
+</tr>
+<tr>
+<td align="left"><code>api_keys</code></td>
+<td align="left">Text</td>
+<td align="left">多 Key（支持 &#96;name</td>
+</tr>
+<tr>
+<td align="left"><code>model</code></td>
+<td align="left">String</td>
+<td align="left">默认模型 ID</td>
+</tr>
+<tr>
+<td align="left"><code>pdf_pages</code></td>
+<td align="left">Integer</td>
+<td align="left">PDF 渲染页数（1~10）</td>
+</tr>
+<tr>
+<td align="left"><code>last_key_index</code></td>
+<td align="left">Integer</td>
+<td align="left">Key 轮换索引（-1 表示未开始）</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><code>settings.ai_active_provider_id</code> 用于标记当前激活的 provider；旧版单配置（<code>ai_api_base/ai_api_key/ai_model</code>）会在首次启动时迁移到默认 provider。</p>
+</blockquote>
+<h3 id="🏷️-自定义开关-CustomFlags-AwardFlagValues"><a href="#🏷️-自定义开关-CustomFlags-AwardFlagValues" class="headerlink" title="🏷️ 自定义开关 (CustomFlags&#x2F;AwardFlagValues)"></a>🏷️ 自定义开关 (CustomFlags&#x2F;AwardFlagValues)</h3><table>
+<thead>
+<tr>
+<th align="left">模型</th>
+<th align="left">关键字段</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>CustomFlag</code></td>
+<td align="left"><code>key</code>(唯一), <code>label</code>, <code>enabled</code>, <code>default_value</code>, <code>sort_order</code></td>
+<td align="left">自定义布尔开关定义（用于录入&#x2F;导出&#x2F;筛选）</td>
+</tr>
+<tr>
+<td align="left"><code>AwardFlagValue</code></td>
+<td align="left"><code>award_id</code>, <code>flag_key</code>, <code>value</code></td>
+<td align="left">荣誉对应的开关值（与 <code>award_id+flag_key</code> 唯一）</td>
+</tr>
+</tbody></table>
+<h3 id="🎓-专业与学校-Majors-Schools"><a href="#🎓-专业与学校-Majors-Schools" class="headerlink" title="🎓 专业与学校 (Majors&#x2F;Schools)"></a>🎓 专业与学校 (Majors&#x2F;Schools)</h3><table>
+<thead>
+<tr>
+<th align="left">模型</th>
+<th align="left">关键字段</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>Major</code></td>
+<td align="left"><code>name</code>(唯一), <code>code</code>(唯一), <code>pinyin</code>, <code>category</code>, <code>discipline_code/name</code>, <code>class_code/name</code>, 时间戳</td>
+<td align="left">2025 本科专业目录（约 840 条）</td>
+</tr>
+<tr>
+<td align="left"><code>School</code></td>
+<td align="left"><code>name</code>(唯一), <code>code</code>(唯一), <code>pinyin</code>, <code>region</code>, 时间戳</td>
+<td align="left">全国高校列表</td>
+</tr>
+<tr>
+<td align="left"><code>SchoolMajorMapping</code></td>
+<td align="left"><code>school_name/code</code>, <code>major_name/code</code>, <code>college_name</code>, <code>category</code>, <code>discipline_*</code>, <code>class_*</code></td>
+<td align="left">学校-专业-学院映射，支持代码缺失时按名称回退</td>
+</tr>
+<tr>
+<td align="left"><code>Attachment</code></td>
+<td align="left"><code>award_id</code>, <code>stored_name</code>, <code>original_name</code>, <code>relative_path</code>(唯一), <code>file_md5</code>, <code>file_size</code>, <code>deleted</code>, 时间戳</td>
+<td align="left">附件记录</td>
+</tr>
+<tr>
+<td align="left"><code>BackupRecord</code> &#x2F; <code>ImportJob</code></td>
+<td align="left">路径&#x2F;状态&#x2F;消息&#x2F;时间戳</td>
+<td align="left">备份与导入任务记录</td>
+</tr>
+</tbody></table>
+<p><em>(更多模型细节请查阅源码 <code>src/data/models.py</code>)</em></p>
+</details>
+
+<hr>
+<h2 id="🔐-数据安全与备份"><a href="#🔐-数据安全与备份" class="headerlink" title="🔐 数据安全与备份"></a>🔐 数据安全与备份</h2><div align="center">
+  <table>
+    <tr>
+      <td width="50%">
+        <h4>🛡️ 本地优先</h4>
+        <p>数据存于 <code>data/awards.db</code>，附件在 <code>attachments/</code>，默认不上传云端。</p>
+      </td>
+      <td width="50%">
+        <h4>🔄 自动备份</h4>
+        <p>支持手动/启动时/每日/每周备份；基于 SQLite <code>backup()</code> 生成快照，并可在恢复前自动创建还原点。</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h4>🗑️ 回收站</h4>
+        <p>删除荣誉进入回收站可恢复；附件删除会移入 <code>attachments/.trash</code>。</p>
+      </td>
+      <td>
+        <h4>🧹 清理策略</h4>
+        <p>提供日志/备份清空与数据库重建（reset）工具，均带双重确认；数据库清空会重建空库并重载默认设置。</p>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<blockquote>
+<p>⚠️ <strong>隐私提醒</strong>：请勿将 <code>data/</code>、<code>backups/</code>、<code>attachments/</code>、<code>logs/</code>、<code>.env</code> 等敏感目录提交到版本控制系统。</p>
+</blockquote>
+<hr>
+<h2 id="🎨-主题系统"><a href="#🎨-主题系统" class="headerlink" title="🎨 主题系统"></a>🎨 主题系统</h2><p>应用内置了一套精美的色彩系统，适配深色&#x2F;浅色模式。</p>
+<table>
+<thead>
+<tr>
+<th align="left">指标类型</th>
+<th align="left">渐变色 (Light -&gt; Dark)</th>
+<th align="left">语义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>总荣誉</strong></td>
+<td align="left"><code>💜 #a071ff</code> → <code>#7b6cff</code></td>
+<td align="left">综合实力</td>
+</tr>
+<tr>
+<td align="left"><strong>国家级</strong></td>
+<td align="left"><code>💙 #5a80f3</code> → <code>#4ac6ff</code></td>
+<td align="left">最高荣誉</td>
+</tr>
+<tr>
+<td align="left"><strong>省级</strong></td>
+<td align="left"><code>💛 #ffb347</code> → <code>#ffcc33</code></td>
+<td align="left">中坚力量</td>
+</tr>
+<tr>
+<td align="left"><strong>校级</strong></td>
+<td align="left"><code>💚 #3ec8a0</code> → <code>#45dd8e</code></td>
+<td align="left">基础积累</td>
+</tr>
+<tr>
+<td align="left"><strong>一等奖</strong></td>
+<td align="left"><code>💠 #00b4d8</code> → <code>#48cae4</code></td>
+<td align="left">顶尖表现</td>
+</tr>
+<tr>
+<td align="left"><strong>二等奖</strong></td>
+<td align="left"><code>💜 #b54cb8</code> → <code>#d896ff</code></td>
+<td align="left">稳定发挥</td>
+</tr>
+<tr>
+<td align="left"><strong>三等奖</strong></td>
+<td align="left"><code>❤️ #ff6b6b</code> → <code>#ff8787</code></td>
+<td align="left">鼓励奖项</td>
+</tr>
+<tr>
+<td align="left"><strong>优秀奖</strong></td>
+<td align="left"><code>🤍 #999999</code> → <code>#b3b3b3</code></td>
+<td align="left">参与&#x2F;优秀</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="🛠️-开发指南"><a href="#🛠️-开发指南" class="headerlink" title="🛠️ 开发指南"></a>🛠️ 开发指南</h2><ol>
+<li><strong>环境准备</strong>: 确保 Python 3.14+，推荐使用 <code>uv</code> 管理虚拟环境。</li>
+<li><strong>新增页面</strong>: 继承 <code>BasePage</code>，在 <code>main_window.py</code> 中注册路由。</li>
+<li><strong>数据库变更</strong>: 修改 <code>models.py</code>，目前使用自动建表，生产环境建议引入 Alembic。</li>
+<li><strong>代码规范</strong>: 提交前请运行 <code>ruff check</code> 和 <code>pyright</code>。</li>
+<li><strong>版本与文档</strong>: 版本号统一来自 <code>pyproject.toml</code>（运行时由 <code>src/version.py</code> 读取）；升级版本时请同步更新 README 顶部&#x2F;更新日志与应用“关于”页文案。</li>
+</ol>
+<hr>
+<h2 id="🧰-故障排查"><a href="#🧰-故障排查" class="headerlink" title="🧰 故障排查"></a>🧰 故障排查</h2><details>
+<summary><strong>点击查看常见问题解决方案</strong></summary>
+
+<table>
+<thead>
+<tr>
+<th align="left">问题现象</th>
+<th align="left">可能原因</th>
+<th align="left">解决方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>启动缺少 Qt 插件</strong></td>
+<td align="left">环境依赖不完整</td>
+<td align="left">运行 <code>uv sync</code>，若无效则删除 <code>.venv</code> 重试</td>
+</tr>
+<tr>
+<td align="left"><strong>界面文字乱码</strong></td>
+<td align="left">字体缺失或编码问题</td>
+<td align="left">检查系统字体，确认未强制覆盖 <code>QFontDatabase</code></td>
+</tr>
+<tr>
+<td align="left"><strong>数据库被锁</strong></td>
+<td align="left">异常退出导致锁文件残留</td>
+<td align="left">先关闭应用；仍锁时删除 <code>data/awards.db-shm</code> 和 <code>.db-wal</code>（恢复备份前程序会尝试清理这两类文件）</td>
+</tr>
+<tr>
+<td align="left"><strong>导入无响应</strong></td>
+<td align="left">模板格式错误</td>
+<td align="left">确认 CSV&#x2F;XLSX 表头与模板一致，查看设置页日志</td>
+</tr>
+<tr>
+<td align="left"><strong>MCP 连接失败</strong></td>
+<td align="left">端口未启动&#x2F;URL 错误&#x2F;依赖缺失</td>
+<td align="left">SSE：确认 <code>http://127.0.0.1:8000/sse</code> 且设置页已启动；Web：先 <code>uv sync --group mcp-web</code>，再启动 Web 控制台并访问 <code>http://127.0.0.1:7860</code></td>
+</tr>
+<tr>
+<td align="left"><strong>MCP Web 关闭后端口仍占用（7860）</strong></td>
+<td align="left">进程未退出&#x2F;残留子进程</td>
+<td align="left">退出应用与相关终端后，用 <code>netstat -ano | findstr :7860</code> 查 PID，再 <code>taskkill /PID &lt;pid&gt; /T /F</code></td>
+</tr>
+<tr>
+<td align="left"><strong>MCP SSE 启动报 host 限制</strong></td>
+<td align="left">MCP 服务仅允许本地绑定</td>
+<td align="left">将 <code>CERT_MCP_HOST</code> 设置为 <code>127.0.0.1</code> &#x2F; <code>localhost</code> &#x2F; <code>::1</code>（或直接用设置页启动）</td>
+</tr>
+<tr>
+<td align="left"><strong>AI 识别提示缺少 PDF 依赖</strong></td>
+<td align="left">未安装 PyMuPDF</td>
+<td align="left">运行 <code>uv sync</code> 安装依赖（需要识别 PDF 时必须）</td>
+</tr>
+<tr>
+<td align="left"><strong>AI 识别失败：Cloudflare 1010</strong></td>
+<td align="left">网络&#x2F;代理&#x2F;风控拦截</td>
+<td align="left">更换网络&#x2F;代理或更换中转；该错误通常与本机环境无关</td>
+</tr>
+<tr>
+<td align="left"><strong>AI 识别失败：模型输出不是有效 JSON</strong></td>
+<td align="left">模型不按要求输出结构化结果</td>
+<td align="left">更换模型&#x2F;提供商；确保模型支持图像输入，并尝试在设置页手动填写模型 ID</td>
+</tr>
+<tr>
+<td align="left"><strong>主题不更新</strong></td>
+<td align="left">信号未连接</td>
+<td align="left">检查 <code>__init__</code> 是否连接 <code>themeChanged</code> 信号</td>
+</tr>
+<tr>
+<td align="left"><strong>附件校验失败</strong></td>
+<td align="left">文件被占用或修改</td>
+<td align="left">检查文件权限，清空回收站后重试</td>
+</tr>
+</tbody></table>
+</details>
+
+<hr>
+<h2 id="📝-更新日志"><a href="#📝-更新日志" class="headerlink" title="📝 更新日志"></a>📝 更新日志</h2><blockquote>
+<p>说明：以下版本号按 GitHub <code>main</code> 分支提交记录分段整理（无 Tag 时以日期为准），采用 SemVer（主版本&#x2F;次版本&#x2F;修订号）。</p>
+</blockquote>
+<h3 id="v1-4-0-2025-12-18"><a href="#v1-4-0-2025-12-18" class="headerlink" title="v1.4.0 (2025-12-18)"></a>v1.4.0 (2025-12-18)</h3><ul>
+<li><strong>AI 证书识别</strong><ul>
+<li>荣誉录入页支持一键从证书图片&#x2F;PDF 抽取比赛名称、日期、级别、奖项、证书编号与成员姓名，并提供预览确认后再填充</li>
+<li>AI 设置页新增&#x2F;完善：多 Provider 管理（名称&#x2F;API 地址&#x2F;模型&#x2F;PDF 页数）、模型列表刷新&#x2F;选择、联通测试、API Key 多 Key 轮换</li>
+</ul>
+</li>
+<li><strong>运维与数据</strong><ul>
+<li>新增数据库 reset 与自定义布尔开关批量保存，便于清理与批处理</li>
+<li>修复奖项成员快照在部分路径下的赋值顺序问题</li>
+</ul>
+</li>
+<li><strong>文档</strong><ul>
+<li>修正目录锚点与奖项说明细节</li>
+</ul>
+</li>
+</ul>
+<details>
+<summary><strong>提交记录（v1.4.0，共 7 条）</strong></summary>
+
+<ul>
+<li><code>cde6154</code> 2025-12-17 docs: 修正目录锚点与补充奖项说明</li>
+<li><code>47a45f0</code> 2025-12-17 feat: 支持数据库 reset 与 flag 批量保存</li>
+<li><code>0a7abf4</code> 2025-12-18 fix: 修正奖项成员快照赋值顺序</li>
+<li><code>9e0fde6</code> 2025-12-18 feat: 增加 AI 证书识别与多 Provider 支持</li>
+<li><code>e70fa2c</code> 2025-12-18 fix: 优化 AI 证书按钮与模型输入兼容性</li>
+<li><code>c0d2912</code> 2025-12-18 fix: 优化 AI 密钥表格内容居中显示</li>
+<li><code>8a7c285</code> 2025-12-18 refactor: 拆分 AI 设置表单结构</li>
+</ul>
+</details>
+
+<h3 id="v1-3-1-2025-12-17"><a href="#v1-3-1-2025-12-17" class="headerlink" title="v1.3.1 (2025-12-17)"></a>v1.3.1 (2025-12-17)</h3><ul>
+<li><strong>荣誉成员快照 &#x2F; 可选入库</strong><ul>
+<li>荣誉成员改为快照模型：荣誉始终保存 <code>member_name</code>，可选绑定成员库 <code>member_id</code>，成员库变更&#x2F;停用不影响历史荣誉显示</li>
+<li>录入页每个成员卡片新增“加入成员库”勾选（默认关闭），不入库时仅保存姓名；总览&#x2F;仪表盘&#x2F;导入导出同步适配</li>
+</ul>
+</li>
+<li><strong>性能&#x2F;体验</strong><ul>
+<li>页面引入懒加载占位页，并在启动后分批后台预热，显著降低首屏初始化压力</li>
+<li>专业&#x2F;学校搜索与仪表盘数据加载迁移到线程池异步执行，减少输入与切页时的 UI 阻塞</li>
+<li>页面切换时仅在可见页面运行刷新&#x2F;轮询定时器，修复“每 5 秒卡一下”的卡顿问题</li>
+<li>控制台日志格式更清晰（时间+等级对齐，可选颜色），过滤第三方提示信息，Windows 启动脚本成功退出不再强制暂停</li>
+</ul>
+</li>
+<li><strong>数据安全</strong><ul>
+<li>备份改用 SQLite <code>backup()</code> 快照生成，避免 WAL 模式下直接复制 <code>awards.db</code> 可能导致的不一致</li>
+</ul>
+</li>
+<li><strong>稳定性</strong><ul>
+<li>修复 <code>run_in_thread()</code> 线程池任务回调偶发丢失（worker 生命周期过短导致未回调）</li>
+<li>修复部分类型标注在运行时导入触发 <code>NameError</code> 的问题（提升对不同 Python 版本的兼容性）</li>
+</ul>
+</li>
+<li><strong>MCP</strong><ul>
+<li>附件读取工具返回信息更准确，并跟随设置页配置的附件目录工作（修改目录后重启 MCP 生效）</li>
+</ul>
+</li>
+<li><strong>工程化</strong><ul>
+<li>规范化版本号管理，统一从 <code>pyproject.toml</code> 读取，窗口标题显示版本号</li>
+</ul>
+</li>
+<li><strong>文档</strong><ul>
+<li>修正 README 段落缩进与更新日志结构，补齐各版本提交记录</li>
+<li>完善 MCP&#x2F;AI 接入与本地安全说明（仅本地使用，保持绑定 <code>127.0.0.1</code>）</li>
+</ul>
+</li>
+</ul>
+<details>
+<summary><strong>提交记录（v1.3.1，共 7 条）</strong></summary>
+
+<ul>
+<li><code>1bb7c41</code> 2025-12-17 feat: 荣誉成员支持快照与可选入库</li>
+<li><code>1ae5479</code> 2025-12-17 feat: 优化页面加载与错误处理，提升性能</li>
+<li><code>ac8cc5c</code> 2025-12-17 feat: 优化日志输出与懒加载页面体验</li>
+<li><code>25041a0</code> 2025-12-17 chore: 规范化版本号管理 (v1.3.1)</li>
+<li><code>f6b55c3</code> 2025-12-17 feat: 优化荣誉成员快照与页面性能</li>
+<li><code>ef15694</code> 2025-12-17 docs: 修正 README.md 段落缩进与更新日志</li>
+<li><code>4ed0e17</code> 2025-12-17 docs: 完善 MCP&#x2F;AI 接入与安全说明</li>
+</ul>
+</details>
+
+<h3 id="v1-3-0-2025-12-16"><a href="#v1-3-0-2025-12-16" class="headerlink" title="v1.3.0 (2025-12-16)"></a>v1.3.0 (2025-12-16)</h3><ul>
+<li><strong>MCP 接入</strong><ul>
+<li>新增本地 MCP 服务（stdio&#x2F;SSE），默认只读；支持敏感信息脱敏与附件读取限额</li>
+<li>新增可选 Web 控制台（Gradio），用于本机调试 MCP 输出（无登录，仅本地）</li>
+<li>设置页集成 MCP 管理（随软件启动、端口&#x2F;权限&#x2F;脱敏配置、日志入口、Web 依赖一键安装&#x2F;更新）</li>
+</ul>
+</li>
+<li><strong>工程化与结构</strong><ul>
+<li>MCP 相关代码整理到 <code>src/mcp/</code>，统一模块命名与脚本入口（<code>certificate-mcp</code> &#x2F; <code>certificate-mcp-web</code>）</li>
+<li>MCP 进程与 Web 控制台运行日志落盘（<code>logs/mcp_sse.log</code>、<code>logs/mcp_web.log</code>、<code>logs/mcp_web_install.log</code>）</li>
+</ul>
+</li>
+<li><strong>细节修复</strong><ul>
+<li>修复导入模板与设置页布局细节，优化 MCP 说明与使用指引</li>
+</ul>
+</li>
+</ul>
+<details>
+<summary><strong>提交记录（v1.3.0，共 5 条）</strong></summary>
+
+<ul>
+<li><code>f6086cd</code> 2025-12-16 feat: 集成 MCP 服务及本地 Web 控制台</li>
+<li><code>2ed061f</code> 2025-12-16 feat: 增强 MCP 进程管理与敏感信息脱敏</li>
+<li><code>493d310</code> 2025-12-16 feat: 优化 MCP 说明与 Web 控制台操作</li>
+<li><code>5a2a907</code> 2025-12-16 refactor: MCP 相关模块目录结构调整与功能优化</li>
+<li><code>35f397c</code> 2025-12-16 chore: 更新版本号至 1.3.0 并补充更新日志</li>
+</ul>
+</details>
+
+<h3 id="v1-2-0-2025-12-14"><a href="#v1-2-0-2025-12-14" class="headerlink" title="v1.2.0 (2025-12-14)"></a>v1.2.0 (2025-12-14)</h3><ul>
+<li><strong>新增</strong>：自定义布尔开关（<code>CustomFlag</code> &#x2F; <code>AwardFlagValue</code>）及与荣誉记录关联</li>
+<li><strong>新增</strong>：设置页开关管理界面（改名、启用、默认值、排序、删除双重确认）</li>
+<li><strong>增强</strong>：录入页&#x2F;导入导出支持开关值读写，统计与相关逻辑同步完善</li>
+</ul>
+<details>
+<summary><strong>提交记录（v1.2.0，共 1 条）</strong></summary>
+
+<ul>
+<li><code>86f6d01</code> 2025-12-14 feat: 增加自定义布尔开关及荣誉关联</li>
+</ul>
+</details>
+
+<h3 id="v1-1-0-2025-12-09-2025-12-10"><a href="#v1-1-0-2025-12-09-2025-12-10" class="headerlink" title="v1.1.0 (2025-12-09 ~ 2025-12-10)"></a>v1.1.0 (2025-12-09 ~ 2025-12-10)</h3><ul>
+<li><strong>新增</strong>：批量管理（全选&#x2F;反选&#x2F;全不选）与成员排序优化</li>
+<li><strong>新增</strong>：荣誉&#x2F;成员全文检索（FTS5）与导入流程优化</li>
+<li><strong>增强</strong>：附件去重（含按奖项限定）与备份&#x2F;恢复体验优化</li>
+<li><strong>增强</strong>：主窗口导航快捷键、自动备份选项、LOGO 与文档说明完善</li>
+</ul>
+<details>
+<summary><strong>提交记录（v1.1.0，共 15 条）</strong></summary>
+
+<ul>
+<li><code>3c1aa2f</code> 2025-12-09 feat: 批量管理与成员排序功能优化</li>
+<li><code>df74008</code> 2025-12-09 feat: 批量管理支持全选&#x2F;反选&#x2F;全不选</li>
+<li><code>8848538</code> 2025-12-09 refactor: 优化最新荣誉查询逻辑</li>
+<li><code>c18bc0e</code> 2025-12-09 feat: 学校与专业导入及数据模板完善</li>
+<li><code>cf09d34</code> 2025-12-10 feat: 附件去重与备份恢复功能优化</li>
+<li><code>2c7ad87</code> 2025-12-10 feat: 附件查重支持按奖项限定</li>
+<li><code>193a4cb</code> 2025-12-10 feat: 增加主窗口导航快捷键与备份自动备份选项</li>
+<li><code>661c30e</code> 2025-12-10 feat: 荣誉与成员全文搜索及导入优化</li>
+<li><code>85a4fe7</code> 2025-12-10 feat: 更新 LOGO 与设置&#x2F;搜索功能说明</li>
+<li><code>3de33e0</code> 2025-12-10 docs: 优化 README LOGO 展示布局</li>
+<li><code>67a5bc6</code> 2025-12-10 docs: 优化 README 顶部布局与徽章展示</li>
+<li><code>15b3aed</code> 2025-12-10 docs: 完善数据模型与目录说明</li>
+<li><code>901b405</code> 2025-12-10 docs: 修正 README 顶部打字动画内容编码</li>
+<li><code>b3616d7</code> 2025-12-10 docs: 完善数据模型说明并删除测试脚本</li>
+<li><code>b530069</code> 2025-12-10 chore: 更新 .gitignore 及 AGENTS.md 数据目录说明</li>
+</ul>
+</details>
+
+<h3 id="v1-0-1-2025-12-04-2025-12-07"><a href="#v1-0-1-2025-12-04-2025-12-07" class="headerlink" title="v1.0.1 (2025-12-04 ~ 2025-12-07)"></a>v1.0.1 (2025-12-04 ~ 2025-12-07)</h3><ul>
+<li><strong>体验优化</strong>：表单&#x2F;仪表盘&#x2F;列表 UI 大量调整，表格迁移至 <code>QTableView</code> 并支持居中显示</li>
+<li><strong>主题&#x2F;性能</strong>：浅色表格修复、深色背景调整、减少模糊特效避免掉帧、动画更顺滑</li>
+<li><strong>数据能力</strong>：专业库 Excel 导入与统计展示、附件表格支持拖拽添加</li>
+<li><strong>工程化</strong>：依赖管理切换为 <code>pyproject.toml + uv</code>，集成 Ruff&#x2F;Pyright；构建系统切换为 setuptools</li>
+<li><strong>稳定性</strong>：支持信号中断安全退出，修复字体重置、总览页附件显示等问题</li>
+</ul>
+<details>
+<summary><strong>提交记录（v1.0.1，共 61 条）</strong></summary>
+
+<ul>
+<li><code>e0c1b33</code> 2025-12-04 修复操作细节</li>
+<li><code>6e90000</code> 2025-12-04 逻辑优化</li>
+<li><code>1b492fd</code> 2025-12-04 无更新</li>
+<li><code>ef0b2d4</code> 2025-12-04 Remove docs folder</li>
+<li><code>75a6902</code> 2025-12-04 feat: 添加文档导入功能和邮箱自动生成</li>
+<li><code>55bc0fd</code> 2025-12-04 修复小BUG</li>
+<li><code>5297fcf</code> 2025-12-04 修复小BUG</li>
+<li><code>a29a915</code> 2025-12-05 修复总览页不显示附件的BUG</li>
+<li><code>68318b7</code> 2025-12-05 优化体验</li>
+<li><code>7176bd5</code> 2025-12-05 加入关于页</li>
+<li><code>f4fa0fd</code> 2025-12-05 提供个人信息模板</li>
+<li><code>dc4161a</code> 2025-12-05 更新排序功能</li>
+<li><code>584f049</code> 2025-12-05 更新文本</li>
+<li><code>a8c8af5</code> 2025-12-05 更新细节</li>
+<li><code>05d60b1</code> 2025-12-05 RM更新</li>
+<li><code>85f6fe9</code> 2025-12-05 RM更新</li>
+<li><code>3260af5</code> 2025-12-05 fix: 移除模糊特效防止掉帧</li>
+<li><code>9b25efa</code> 2025-12-05 fix: 优化备份目录配置容错处理</li>
+<li><code>c751e23</code> 2025-12-05 feat: 支持logo随主题切换</li>
+<li><code>69d383d</code> 2025-12-05 fix: 防止动画中卡顿</li>
+<li><code>4729233</code> 2025-12-05 refactor: 全面替换表格为QTableView并引入模型</li>
+<li><code>f2363bb</code> 2025-12-05 refactor: 优化表单与仪表盘UI及交互</li>
+<li><code>93537a2</code> 2025-12-05 refactor: 表单控件统一为qfluentwidgets组件</li>
+<li><code>be6c61a</code> 2025-12-05 refactor: 统一成员卡片样式为QSS卡片属性</li>
+<li><code>a80e672</code> 2025-12-05 refactor: 隐藏日期选择器符号按钮</li>
+<li><code>79b65ae</code> 2025-12-05 refactor: 优化搜索框与荣誉卡片样式</li>
+<li><code>48a3e17</code> 2025-12-05 refactor: 设置全局字体避免警告</li>
+<li><code>dbc5819</code> 2025-12-05 fix: 修复字体重置的问题</li>
+<li><code>f61e75c</code> 2025-12-05 fix: 移除弹窗模糊特效防止掉帧</li>
+<li><code>958aea2</code> 2025-12-05 chore: 切换依赖管理为 pyproject.toml+uv</li>
+<li><code>6afce89</code> 2025-12-05 refactor: 移除表情符号并优化注释</li>
+<li><code>49358ff</code> 2025-12-05 refactor: 精简注释与优化代码结构</li>
+<li><code>6ee169e</code> 2025-12-05 chore: 调整ruff配置项位置</li>
+<li><code>2d9fe94</code> 2025-12-05 refactor: 统一导航方法为navigate_to</li>
+<li><code>c79858a</code> 2025-12-05 style: 统一代码风格与格式优化</li>
+<li><code>893226f</code> 2025-12-05 refactor: 优化类型导入与异常处理</li>
+<li><code>6905e1a</code> 2025-12-05 refactor: 统一文件操作与类型注解优化</li>
+<li><code>4fb64e9</code> 2025-12-05 docs: 重命名 agents.md 至 AGENTS.md</li>
+<li><code>a348921</code> 2025-12-06 docs: 更新 AI 开发指南</li>
+<li><code>b3ea343</code> 2025-12-06 docs: 更新数据模型与依赖说明</li>
+<li><code>19096b8</code> 2025-12-06 chore: 移除 ruff 配置中的 PL 规则</li>
+<li><code>775c69c</code> 2025-12-06 refactor: 精简条件表达式与移除无用Tag相关方法</li>
+<li><code>c17746a</code> 2025-12-06 feat: 集成 Pyright 类型检查支持</li>
+<li><code>330c982</code> 2025-12-06 refactor: 适配 PySide6 新版 API 与类型注解优化</li>
+<li><code>139ab0d</code> 2025-12-06 refactor: 移除 <strong>future</strong> annotations 导入</li>
+<li><code>66d29cc</code> 2025-12-06 refactor: 优化页面初始化与导航栏注册</li>
+<li><code>8e93328</code> 2025-12-06 feat: 优化页面切换动画</li>
+<li><code>1bba145</code> 2025-12-06 style: 调整深色主题主背景色</li>
+<li><code>7756c10</code> 2025-12-06 fix: 修复表格亮色模式</li>
+<li><code>6c048e0</code> 2025-12-06 feat: 支持信号中断安全退出</li>
+<li><code>a91ebd1</code> 2025-12-06 feat: 真正的 Fluent Design 切换动画</li>
+<li><code>57bef83</code> 2025-12-06 Merge pull request #1 from zetaloop&#x2F;refactorxx</li>
+<li><code>20e1a66</code> 2025-12-07 chore: 启动脚本增加虚拟环境激活</li>
+<li><code>7d6b279</code> 2025-12-07 chore: 格式化依赖配置与部分代码结构</li>
+<li><code>a235df8</code> 2025-12-07 chore: 切换构建系统为 setuptools</li>
+<li><code>2eeb63e</code> 2025-12-07 feat: 附件表格支持拖拽添加文件</li>
+<li><code>e526e91</code> 2025-12-07 feat: 表格内容居中显示</li>
+<li><code>27755da</code> 2025-12-07 refactor: 优化类型导入与依赖</li>
+<li><code>07d3ccc</code> 2025-12-07 feat: 专业库支持 Excel 导入与统计展示</li>
+<li><code>da71f6d</code> 2025-12-07 refactor: 专业库导入脚本迁移与优化</li>
+<li><code>61d99e9</code> 2025-12-07 refactor: 优化 test_majors.py 导入与格式</li>
+</ul>
+</details>
+
+<h3 id="v1-0-0-2025-12-02-2025-12-03"><a href="#v1-0-0-2025-12-02-2025-12-03" class="headerlink" title="v1.0.0 (2025-12-02 ~ 2025-12-03)"></a>v1.0.0 (2025-12-02 ~ 2025-12-03)</h3><ul>
+<li><strong>初版完成</strong>：基础页面、主题样式与主要组件搭建</li>
+<li><strong>文档</strong>：引入 <code>AGENTS.md</code>，为 AI&#x2F;自动化开发提供项目导航与规范</li>
+</ul>
+<details>
+<summary><strong>提交记录（v1.0.0，共 10 条）</strong></summary>
+
+<ul>
+<li><code>e30a773</code> 2025-12-02 V1.0 创建</li>
+<li><code>81e6477</code> 2025-12-02 添加主题样式和页面组件功能</li>
+<li><code>27071ef</code> 2025-12-02 Clean up: remove unused files and configure .gitignore for sensitive data</li>
+<li><code>2643a2d</code> 2025-12-02 chore: remove .codemap from version control</li>
+<li><code>9d38507</code> 2025-12-02 更新细节</li>
+<li><code>85d8e2f</code> 2025-12-03 feat: implement comprehensive code improvements</li>
+<li><code>cd2214b</code> 2025-12-03 细节修复</li>
+<li><code>a9a6fc9</code> 2025-12-03 细节修复</li>
+<li><code>ca924ab</code> 2025-12-03 大版本V1.0完成</li>
+<li><code>5d6f019</code> 2025-12-03 创建agents.md为AI开发提供便利</li>
+</ul>
+</details>
+
+<hr>
+<h2 id="📈-Star-History"><a href="#📈-Star-History" class="headerlink" title="📈 Star History"></a>📈 Star History</h2><a target="_blank" rel="noopener" href="https://star-history.com/#RE-TikaRa/Certificate-Management&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=RE-TikaRa/Certificate-Management&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=RE-TikaRa/Certificate-Management&type=Date" />
+   <img  alt="Star History Chart" 
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://api.star-history.com/svg?repos=RE-TikaRa/Certificate-Management&type=Date"
+                      
+                >
+ </picture>
+</a>
+
+<hr>
+<h2 id="🤝-如何贡献"><a href="#🤝-如何贡献" class="headerlink" title="🤝 如何贡献"></a>🤝 如何贡献</h2><p>非常欢迎您的贡献！请遵循以下流程：</p>
+<ol>
+<li>Fork 本仓库</li>
+<li>创建特性分支 (<code>git checkout -b feature/AmazingFeature</code>)</li>
+<li>提交更改 (<code>git commit -m &#39;Add some AmazingFeature&#39;</code>)</li>
+<li>推送到分支 (<code>git push origin feature/AmazingFeature</code>)</li>
+<li>提交 Pull Request</li>
+</ol>
+<hr>
+<h2 id="📄-许可证"><a href="#📄-许可证" class="headerlink" title="📄 许可证"></a>📄 许可证</h2><p>本项目基于 <a href="LICENSE">MIT License</a> 开源。</p>
+<hr>
+<div align="center">
+  <p>
+    <b>Author:</b> <a class="link"   target="_blank" rel="noopener" href="https://github.com/RE-TikaRa" >RE-TikaRa<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a> |
+    <b>Powered by:</b> PySide6 & QFluentWidgets
+  </p>
+  
+  <p>
+    <a target="_blank" rel="noopener" href="https://github.com/RE-TikaRa/Certificate-Management/stargazers">
+      <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/github/stars/RE-TikaRa/Certificate-Management?style=social"
+                      alt="GitHub stars" 
+                >
+    </a>
+    <a target="_blank" rel="noopener" href="https://github.com/RE-TikaRa/Certificate-Management/network/members">
+      <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img.shields.io/github/forks/RE-TikaRa/Certificate-Management?style=social"
+                      alt="GitHub forks" 
+                >
+    </a>
+  </p>
+</div>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> Certificate-Management</li>
+        <li><strong>作者:</strong> 亓翎_Re-Tikara</li>
+        <li><strong>创建于
+                :</strong> 2026-01-03 00:01:16</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2026-01-03 00:04:00
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://re-tikara.fun/Blog/posts/6c20921f/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+
+		
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/Blog/posts/828fd9e/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">LaTeX学习日志01-前期准备</span>
+						<span class="post-nav-item">下一篇</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">目录</div>
+		<div class="page-title">Certificate-Management</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">荣誉证书管理系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%9C%A8-%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7"><span class="nav-text">✨ 核心特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">⚡ 极速检索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">📊 数据可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">🧭 丝滑体验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">🛡️ 数据安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">🧠 智能补全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">🗑️ 后悔药</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">🎨 炫彩主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text">🛠️ 运维工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8E%AF-%E5%8A%9F%E8%83%BD%E8%AF%A6%E6%83%85"><span class="nav-text">🎯 功能详情</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%9B%A0%EF%B8%8F-%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="nav-text">🛠️ 技术栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%B8-%E7%95%8C%E9%9D%A2%E9%A2%84%E8%A7%88"><span class="nav-text">📸 界面预览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%9A%80-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B"><span class="nav-text">🚀 快速开始</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%A5-%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-text">📥 安装步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9B%A0%EF%B8%8F-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-text">🛠️ 常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%A7%BE-AI-%E8%AF%81%E4%B9%A6%E8%AF%86%E5%88%AB"><span class="nav-text">🧾 AI 证书识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%A5-%E5%AF%BC%E5%85%A5-%E5%AF%BC%E5%87%BA%EF%BC%88CSV-XLSX%EF%BC%89"><span class="nav-text">📥 导入 &#x2F; 导出（CSV&#x2F;XLSX）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%A4%96-MCP-%E6%8E%A5%E5%85%A5%EF%BC%88%E6%9C%AC%E5%9C%B0%EF%BC%89"><span class="nav-text">🤖 MCP 接入（本地）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%82-%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E8%AF%B4%E6%98%8E"><span class="nav-text">📂 文件目录说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8F%97%EF%B8%8F-%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84"><span class="nav-text">🏗️ 项目架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%92%BE-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="nav-text">💾 数据模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8F%86-%E8%8D%A3%E8%AA%89%E8%AE%B0%E5%BD%95-Awards"><span class="nav-text">🏆 荣誉记录 (Awards)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%A7%A9-%E8%8D%A3%E8%AA%89%E6%88%90%E5%91%98%E5%BF%AB%E7%85%A7-AwardMembers"><span class="nav-text">🧩 荣誉成员快照 (AwardMembers)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%91%A4-%E5%8F%82%E4%B8%8E%E6%88%90%E5%91%98-TeamMembers"><span class="nav-text">👤 参与成员 (TeamMembers)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%A4%96-AI-%E6%8F%90%E4%BE%9B%E5%95%86-AIProviders"><span class="nav-text">🤖 AI 提供商 (AIProviders)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8F%B7%EF%B8%8F-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%80%E5%85%B3-CustomFlags-AwardFlagValues"><span class="nav-text">🏷️ 自定义开关 (CustomFlags&#x2F;AwardFlagValues)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8E%93-%E4%B8%93%E4%B8%9A%E4%B8%8E%E5%AD%A6%E6%A0%A1-Majors-Schools"><span class="nav-text">🎓 专业与学校 (Majors&#x2F;Schools)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%94%90-%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E4%B8%8E%E5%A4%87%E4%BB%BD"><span class="nav-text">🔐 数据安全与备份</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%8E%A8-%E4%B8%BB%E9%A2%98%E7%B3%BB%E7%BB%9F"><span class="nav-text">🎨 主题系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%9B%A0%EF%B8%8F-%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97"><span class="nav-text">🛠️ 开发指南</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%B0-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5"><span class="nav-text">🧰 故障排查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%9D-%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97"><span class="nav-text">📝 更新日志</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#v1-4-0-2025-12-18"><span class="nav-text">v1.4.0 (2025-12-18)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v1-3-1-2025-12-17"><span class="nav-text">v1.3.1 (2025-12-17)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v1-3-0-2025-12-16"><span class="nav-text">v1.3.0 (2025-12-16)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v1-2-0-2025-12-14"><span class="nav-text">v1.2.0 (2025-12-14)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v1-1-0-2025-12-09-2025-12-10"><span class="nav-text">v1.1.0 (2025-12-09 ~ 2025-12-10)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v1-0-1-2025-12-04-2025-12-07"><span class="nav-text">v1.0.1 (2025-12-04 ~ 2025-12-07)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v1-0-0-2025-12-02-2025-12-03"><span class="nav-text">v1.0.0 (2025-12-02 ~ 2025-12-03)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%88-Star-History"><span class="nav-text">📈 Star History</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A4%9D-%E5%A6%82%E4%BD%95%E8%B4%A1%E7%8C%AE"><span class="nav-text">🤝 如何贡献</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%93%84-%E8%AE%B8%E5%8F%AF%E8%AF%81"><span class="nav-text">📄 许可证</span></a></li></ol></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">非常感谢你能坚持到这里！</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2026&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/Blog/">亓翎_Re-Tikara</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 3 篇文章
+                    </span>
+                    
+                        <span>
+                            共 8.3k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="站内搜索您需要的内容..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+
+<script src="/Blog/js/build/libs/Swup.min.js"></script>
+
+<script src="/Blog/js/build/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/Blog/js/build/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/Blog/js/build/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/Blog/js/build/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/Blog/js/build/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	
+<script src="/Blog/js/build/tools/imageViewer.js" type="module"></script>
+
+<script src="/Blog/js/build/utils.js" type="module"></script>
+
+<script src="/Blog/js/build/main.js" type="module"></script>
+
+<script src="/Blog/js/build/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/Blog/js/build/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/Blog/js/build/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/Blog/js/build/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/Blog/js/build/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/Blog/js/build/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/Blog/js/build/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/Blog/js/build/tools/runtime.js"></script>
+
+    
+<script src="/Blog/js/build/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/Blog/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/Blog/js/build/libs/Typed.min.js"></script>
+
+  
+<script src="/Blog/js/build/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+    
+<script src="/Blog/js/build/libs/minimasonry.min.js"></script>
+
+    
+<script src="/Blog/js/build/plugins/masonry.js" type="module"></script>
+
+
+
+
+
+
+
+    
+<script src="/Blog/js/build/tools/tocToggle.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/Blog/js/build/layouts/toc.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/Blog/js/build/plugins/tabs.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+<script src="/Blog/js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+<script src="/Blog/js/build/layouts/essays.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+
+    
+<script src="/Blog/js/build/layouts/bookmarkNav.js" type="module"></script>
+
+
+	
+</body>
+
+</html>
