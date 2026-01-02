@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>ALp_Studio Article Library</title>
+    <link>https://re-tikara.fun/Blog/</link>
+    
+    <atom:link href="https://re-tikara.fun/Blog/rss2.xml" rel="self" type="application/rss+xml"/>
+    
+    <description>重构的版本</description>
+    <pubDate>Fri, 02 Jan 2026 19:47:55 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>DesktopTimer</title>
+      <link>https://re-tikara.fun/Blog/posts/998ef9dc/</link>
+      <guid>https://re-tikara.fun/Blog/posts/998ef9dc/</guid>
+      <pubDate>Fri, 02 Jan 2026 19:45:49 GMT</pubDate>
+      
+      <description>这是文章摘要 This is the excerpt of the post</description>
+      
+      
+      
+      
+      <category domain="https://re-tikara.fun/Blog/categories/Project/">Project</category>
+      
+      
+      <category domain="https://re-tikara.fun/Blog/tags/project/">project</category>
+      
+      
+      <comments>https://re-tikara.fun/Blog/posts/998ef9dc/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Certificate-Management</title>
+      <link>https://re-tikara.fun/Blog/posts/6c20921f/</link>
+      <guid>https://re-tikara.fun/Blog/posts/6c20921f/</guid>
+      <pubDate>Fri, 02 Jan 2026 16:01:16 GMT</pubDate>
+      
+      <description>奖项管理平台</description>
+      
+      
+      
+      
+      <category domain="https://re-tikara.fun/Blog/categories/Project/">Project</category>
+      
+      
+      <category domain="https://re-tikara.fun/Blog/tags/Project/">Project</category>
+      
+      
+      <comments>https://re-tikara.fun/Blog/posts/6c20921f/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>LaTeX学习日志01-前期准备</title>
+      <link>https://re-tikara.fun/Blog/posts/828fd9e/</link>
+      <guid>https://re-tikara.fun/Blog/posts/828fd9e/</guid>
+      <pubDate>Fri, 26 Dec 2025 23:54:10 GMT</pubDate>
+      
+      <description>LaTeX学习日志01-前期准备 包括安装，环境配置等</description>
+      
+      
+      
+      
+      <category domain="https://re-tikara.fun/Blog/categories/Latex/">Latex</category>
+      
+      
+      <category domain="https://re-tikara.fun/Blog/tags/LaTeX/">LaTeX</category>
+      
+      
+      <comments>https://re-tikara.fun/Blog/posts/828fd9e/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>置顶公告</title>
+      <link>https://re-tikara.fun/Blog/posts/25ad5f96/</link>
+      <guid>https://re-tikara.fun/Blog/posts/25ad5f96/</guid>
+      <pubDate>Mon, 22 Dec 2025 14:44:53 GMT</pubDate>
+      
+      <description>关于新版本网站的一些事情</description>
+      
+      
+      
+      
+      <category domain="https://re-tikara.fun/Blog/categories/Announcement/">Announcement</category>
+      
+      
+      <category domain="https://re-tikara.fun/Blog/tags/Announcement/">Announcement</category>
+      
+      
+      <comments>https://re-tikara.fun/Blog/posts/25ad5f96/#disqus_thread</comments>
+      
+    </item>
+    
+  </channel>
+</rss>
