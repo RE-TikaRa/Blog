@@ -9,8 +9,27 @@
     <atom:link href="https://re-tikara.fun/Blog/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>重构的版本</description>
-    <pubDate>Fri, 02 Jan 2026 19:47:55 GMT</pubDate>
+    <pubDate>Thu, 29 Jan 2026 08:13:39 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>FileLocksmith-单文件版本</title>
+      <link>https://re-tikara.fun/Blog/posts/5d98e7ac/</link>
+      <guid>https://re-tikara.fun/Blog/posts/5d98e7ac/</guid>
+      <pubDate>Thu, 29 Jan 2026 08:10:56 GMT</pubDate>
+      
+      <description>File Locksmith 是用于定位并解除文件/文件夹占用的工具。但是微软是以PowerToys工具集方式提供，直接用的话感觉要下一整个工具集太麻烦。</description>
+      
+      
+      
+      
+      
+      <category domain="https://re-tikara.fun/Blog/tags/project/">project</category>
+      
+      
+      <comments>https://re-tikara.fun/Blog/posts/5d98e7ac/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>DesktopTimer</title>
