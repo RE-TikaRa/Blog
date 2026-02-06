@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="亓翎_Re-Tikara">
+    
+    <meta name="author" content="亓翎_Re-Tikara">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://re-tikara.fun/Blog/posts/d9e67466/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="这是一个很无趣的人写的很无趣的文章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第五章——循环结构 第一节——while语句和do...while结构">
+<meta property="og:url" content="https://re-tikara.fun/Blog/posts/d9e67466/">
+<meta property="og:site_name" content="ALp_Studio Article Library">
+<meta property="og:description" content="这是一个很无趣的人写的很无趣的文章">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png">
+<meta property="article:published_time" content="2026-02-06T18:21:28.000Z">
+<meta property="article:modified_time" content="2026-02-06T18:25:41.499Z">
+<meta property="article:author" content="亓翎_Re-Tikara">
+<meta property="article:tag" content="C Language">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://free.picui.cn/free/2025/12/30/6953f28ba97a0.ico" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://free.picui.cn/free/2025/12/30/6953f28ba97a0.ico">
+    <meta name="theme-color" content="#98B37D">
+    <link rel="shortcut icon" href="https://free.picui.cn/free/2025/12/30/6953f28ba97a0.ico">
+    <!--- Page Info-->
+    
+    <title>
+        
+            第五章——循环结构 第一节——while语句和do...while结构 | ALp_Studio Article Library
+        
+    </title>
+
+    
+<link rel="stylesheet" href="/Blog/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/Blog/css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="/Blog/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/Blog/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+        
+<script src="/Blog/js/build/libs/anime.min.js"></script>
+
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"re-tikara.fun","root":"/Blog/","language":"zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#98B37D","secondary":"#997868","default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":true},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":true,"custom_message":"欢迎进入，实验体"},"side_tools":{"gear_rotation":true,"auto_expand":true},"open_graph":{"enable":true,"image":"https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png","description":"这是一个很无趣的人写的很无趣的文章"},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png","dark":"https://s2.loli.net/2025/12/22/uBnZDzxcI7JHCX3.png"},"title":"ALp_Studio","subtitle":{"text":["欢迎进入，实验体","情感数据记录中……"],"hitokoto":{"enable":true,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#F0EFEB","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/RE-TikaRa","instagram":null,"zhihu":null,"twitter":null,"email":"163mail@re-tikara.fun","bilibili":"https://space.bilibili.com/374412219"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":true,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tag":{"path":"/tags/","icon":"fa-solid fa-tags"},"Categories":{"icon":"fa-solid fa-folder","path":"/categories/"},"Bookmarks":{"icon":"fa-solid fa-bookmark","path":"/bookmarks/"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/RE-TikaRa","BiliBili":"https://space.bilibili.com/374412219","相册":"/masonry","Archives":"/archives","Friends":"/links","Bookmarks":"/bookmarks"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":{"MainWeb":{"path":"https://re-tikara.fun","icon":"fa-solid fa-globe"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023-12-16T14:23:50.000Z"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":true};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/Blog/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/Blog/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/Blog/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/Blog/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/Blog/rss2.xml" title="ALp_Studio Article Library" type="application/rss+xml">
+</head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+	<span class="scroll-progress-bar"></span>
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        欢迎进入，实验体
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({ loop: true })
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [20, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                filter: ['blur(5px)', 'blur(0px)'],
+                easing: "easeOutExpo",
+                duration: 1200,
+                delay: (el, i) => 300 + 20 * i,
+            })
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [0, -20],
+                opacity: [1, 0],
+                filter: ['blur(0px)', 'blur(5px)'],
+                easing: "easeInExpo",
+                duration: 1000,
+                delay: (el, i) => 15 * i,
+                complete: function() {
+                    hidePreloader();
+                }
+            }, '-=700');
+
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+                <a class="logo-image h-8 w-8 sm:w-10 sm:h-10 mr-3" href="/Blog/">
+                    <img src="https://s2.loli.net/2025/12/22/BF6ApZlzjyELX5K.png" class="w-full h-full rounded-xs">
+                </a>
+            
+            <a class="logo-title" href="/Blog/">
+                
+                ALp_Studio Article Library
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/Blog/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/Blog/tags/"
+                                        >
+                                    <i class="fa-solid fa-tags fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/Blog/categories/"
+                                        >
+                                    <i class="fa-solid fa-folder fa-fw"></i>
+                                    分类
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/Blog/bookmarks/"
+                                        >
+                                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                                    BOOKMARKS
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/Blog/about">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://github.com/RE-TikaRa">
+                                                    GITHUB
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://space.bilibili.com/374412219">
+                                                    BILIBILI
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/Blog/masonry">
+                                                    相册
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/Blog/archives">
+                                                    归档
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/Blog/links">
+                                                    友情链接
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/Blog/bookmarks">
+                                                    BOOKMARKS
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/Blog/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/Blog/tags/"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-solid fa-tags fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/Blog/categories/"
+                        >
+                            <span>
+                                分类
+                            </span>
+                            
+                                <i class="fa-solid fa-folder fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/Blog/bookmarks/"
+                        >
+                            <span>
+                                BOOKMARKS
+                            </span>
+                            
+                                <i class="fa-solid fa-bookmark fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/Blog/about">ME</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://github.com/RE-TikaRa">GITHUB</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://space.bilibili.com/374412219">BILIBILI</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/Blog/masonry">相册</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/Blog/archives">归档</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/Blog/links">友情链接</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/Blog/bookmarks">BOOKMARKS</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="https://re-tikara.fun"
+                        >
+                            <span>MainWeb</span>
+                            <i class="fa-solid fa-globe fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/Blog/archives"
+                        >
+                            <span>Archives</span>
+                            <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/Blog/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">5</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">14</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">76</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			
+			
+			<img src="https://s2.loli.net/2025/12/22/uBnZDzxcI7JHCX3.png" alt="第五章——循环结构 第一节——while语句和do...while结构" class="w-full h-60 sm:h-72 md:h-80 object-cover sm:rounded-t-large dark:brightness-75" />
+			
+			<div class="w-full flex items-center absolute bottom-0 justify-start">
+				<h1 class="article-title-cover text-center mx-6 my-6 text-second-text-color bg-background-color-transparent px-4 py-3 text-3xl sm:text-4xl md:text-5xl font-semibold backdrop-blur-lg rounded-xl border border-border-color ">第五章——循环结构 第一节——while语句和do...while结构</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="https://s2.loli.net/2025/12/22/mkWtIYraVxdnTCe.jpg">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">亓翎_Re-Tikara</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv5</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2026-02-07 02:21:28</span>
+        <span class="mobile">2026-02-07 02:21:28</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2026-02-07 02:25:41</span>
+            <span class="mobile">2026-02-07 02:25:41</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/Blog/tags/C-Language/">C Language</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>1.3k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>5 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+		<div class="article-expire mt-4 mx-2 sm:mx-6 md:mx-8 note p-4 rounded-lg red icon hidden" id="expiration-container">
+			<i class="expire-icon fa-solid fa-timer mr-0.5 text-red-600 dark:text-red-400"></i>
+			<span class="expire-label text-red-600 dark:text-red-400 " id="expiration-date">这篇文章最后更新于 some 天前，内容可能已经过时。</span>
+		</div>
+
+		<script data-swup-reload-script>
+			function updateExpirationDate() {
+				try {
+					const expiredDate = new Date("Fri Dec 31 9999 23:59:59 GMT+0800 (中国标准时间)");
+					const updatedDate = new Date("Sat Feb 07 2026 02:25:41 GMT+0800");
+					const now = new Date();
+					const expirationValue = document.getElementById("expiration-date");
+					const expirationContainer = document.getElementById("expiration-container");
+					let daysAgo = Math.floor((now - updatedDate) / (1000 * 60 * 60 * 24));
+					if (expiredDate < now) {
+						expirationContainer.classList.remove("hidden");
+						// console.log(daysAgo)
+						expirationValue.innerHTML = expirationValue.innerHTML.replace("some", daysAgo);
+					}
+				} catch (e) {}
+			}
+			document.addEventListener("DOMContentLoaded", function() {
+				updateExpirationDate();
+			});
+			try {
+				swup.hooks.on("page:view", updateExpirationDate)
+			} catch (e) {}
+		</script>
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<h1 id="一、while语句：谨慎派的「先问路再出发」"><a href="#一、while语句：谨慎派的「先问路再出发」" class="headerlink" title="一、while语句：谨慎派的「先问路再出发」"></a>一、while语句：谨慎派的「先问路再出发」</h1><h2 id="1-1-基本语法与执行逻辑"><a href="#1-1-基本语法与执行逻辑" class="headerlink" title="1.1 基本语法与执行逻辑"></a>1.1 基本语法与执行逻辑</h2><div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(条件表达式) <span class="comment">//此处的表达式不能为空，他是判断循环是否继续的条件</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 循环体语句组（条件为真时反复执行）</span></span><br><span class="line">    <span class="comment">// 无论是单个语句还是多个语句均建议用&#123;&#125;包裹</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p><strong>执行流程图</strong>：<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2025/06/08/TLIck53ZhoqDv2g.png"
+                      alt="while.png"
+                ></p>
+<h2 id="1-2-案例解析：1到100的累加和"><a href="#1-2-案例解析：1到100的累加和" class="headerlink" title="1.2 案例解析：1到100的累加和"></a>1.2 案例解析：1到100的累加和</h2><div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">1</span>, sum = <span class="number">0</span>;  <span class="comment">// 初始化循环变量和累加器</span></span><br><span class="line">    <span class="keyword">while</span>(i &lt;= <span class="number">100</span>) </span><br><span class="line">    &#123;    <span class="comment">// 条件判断</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;第%d次循环：sum=%d + %d\n&quot;</span>, i, sum, i);  <span class="comment">// 调试输出</span></span><br><span class="line">        sum += i;        <span class="comment">// 累加操作</span></span><br><span class="line">        i++;             <span class="comment">// 更新循环变量</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;最终结果：sum=%d\n&quot;</span>, sum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p><strong>调试输出示例</strong>：</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">第1次循环：sum=0 + 1</span><br><span class="line">第2次循环：sum=1 + 2</span><br><span class="line">...</span><br><span class="line">第100次循环：sum=4950 + 100</span><br><span class="line">最终结果：sum=5050</span><br></pre></td></tr></table></figure></div>
+<p><strong>关键点</strong>：</p>
+<ul>
+<li><strong>初始化</strong>：<code>i=1</code> 和 <code>sum=0</code> 必须在循环前完成。</li>
+<li><strong>条件判断</strong>：<code>i &lt;= 100</code> 决定循环是否继续。</li>
+<li><strong>更新变量</strong>：<code>i++</code> 是循环终止的关键，否则会陷入死循环。</li>
+</ul>
+<h2 id="1-3-常见错误与避坑指南"><a href="#1-3-常见错误与避坑指南" class="headerlink" title="1.3 常见错误与避坑指南"></a>1.3 常见错误与避坑指南</h2><table>
+<thead>
+<tr>
+<th><strong>错误类型</strong></th>
+<th><strong>错误代码</strong></th>
+<th><strong>修复方法</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>死循环</strong></td>
+<td><code>while(1) { ... }</code></td>
+<td>添加 <code>break</code> 或更新条件变量</td>
+</tr>
+<tr>
+<td><strong>循环体不执行</strong></td>
+<td><code>int i=2; while(i&lt;=1) {...}</code></td>
+<td>检查初始条件是否合理</td>
+</tr>
+<tr>
+<td><strong>循环变量未更新</strong></td>
+<td><code>while(i&lt;=100) { sum+=i; }</code></td>
+<td>在循环体内添加 <code>i++</code></td>
+</tr>
+</tbody></table>
+<h2 id="1-4-真题实战：理解前置-后置自增"><a href="#1-4-真题实战：理解前置-后置自增" class="headerlink" title="1.4 真题实战：理解前置&#x2F;后置自增"></a>1.4 真题实战：理解前置&#x2F;后置自增</h2><p><strong>题目</strong>：以下代码输出什么？</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> k = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">while</span>(--k) </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, k -= <span class="number">3</span>);</span><br></pre></td></tr></table></figure></div>
+<p><strong>解析步骤</strong>：</p>
+<ol>
+<li><code>--k</code> 先减1 → <code>k=4</code>，非0进入循环。</li>
+<li><code>k -= 3</code> → <code>k=1</code>，输出 <code>1</code>。</li>
+<li>再次 <code>--k</code> → <code>k=0</code>，循环终止。<br><strong>答案</strong>：输出 <code>1</code>。</li>
+</ol>
+<hr>
+<h1 id="几个关键点"><a href="#几个关键点" class="headerlink" title="几个关键点"></a>几个关键点</h1><ul>
+<li>while后的表达式，可以是C语言中任意合法的表达式，通常为关系表达式或逻辑表达式，但也可以是其它运算表达式。<ul>
+<li>当表达式值的值为零时，表示条件为假；</li>
+<li>表达式值为非零时，表示条件为真。</li>
+</ul>
+</li>
+<li>循环体可以是一条简单可执行语句，也可以是复合语句</li>
+<li>如果第一次计算时表达式的值就为0，则循环语句一次也不被执行，流程直接跳过while语句，执行下一条语句。</li>
+</ul>
+<hr>
+<h1 id="二、do-while结构：实践派的「先出发再看路」"><a href="#二、do-while结构：实践派的「先出发再看路」" class="headerlink" title="二、do-while结构：实践派的「先出发再看路」"></a>二、do-while结构：实践派的「先出发再看路」</h1><h2 id="2-1-基本语法与执行逻辑"><a href="#2-1-基本语法与执行逻辑" class="headerlink" title="2.1 基本语法与执行逻辑"></a>2.1 基本语法与执行逻辑</h2><div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 循环体（至少执行一次）</span></span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">while</span>(条件表达式);  <span class="comment">// 注意结尾分号！不能省略！！！！</span></span><br></pre></td></tr></table></figure></div>
+<p><strong>执行流程图</strong>：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://s2.loli.net/2025/06/08/R7dQFHnUqzgrmxa.png"
+                      alt="do-while.png"
+                ></p>
+<h2 id="2-2-案例解析：ATM取款验证"><a href="#2-2-案例解析：ATM取款验证" class="headerlink" title="2.2 案例解析：ATM取款验证"></a>2.2 案例解析：ATM取款验证</h2><div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> pin = <span class="number">1234</span>, input;</span><br><span class="line">    <span class="keyword">do</span> </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;请输入4位数密码：&quot;</span>);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;input);</span><br><span class="line">        <span class="keyword">if</span> (input != pin) </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;密码错误，请重试！\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">while</span>(input != pin);  <span class="comment">// 至少执行一次</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;验证成功！欢迎使用ATM。\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p><strong>运行示例</strong>：</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">请输入4位数密码：1111</span><br><span class="line">密码错误，请重试！</span><br><span class="line">请输入4位数密码：1234</span><br><span class="line">验证成功！欢迎使用ATM。</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="2-3-常见错误与避坑指南"><a href="#2-3-常见错误与避坑指南" class="headerlink" title="2.3 常见错误与避坑指南"></a>2.3 常见错误与避坑指南</h2><table>
+<thead>
+<tr>
+<th><strong>错误类型</strong></th>
+<th><strong>错误代码</strong></th>
+<th><strong>修复方法</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>忘记分号</strong></td>
+<td><code>} while(condition)</code></td>
+<td>补全分号 <code>} while(condition);</code></td>
+</tr>
+<tr>
+<td><strong>条件逻辑错误</strong></td>
+<td><code>} while(1 == 2)</code></td>
+<td>修正条件表达式</td>
+</tr>
+<tr>
+<td><strong>循环体未初始化</strong></td>
+<td><code>int n; do { ... } while(...);</code></td>
+<td>给 <code>n</code> 赋初始值</td>
+</tr>
+</tbody></table>
+<h2 id="2-4-真题实战：后置自增陷阱"><a href="#2-4-真题实战：后置自增陷阱" class="headerlink" title="2.4 真题实战：后置自增陷阱"></a>2.4 真题实战：后置自增陷阱</h2><p><strong>题目</strong>：以下代码输出什么？</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">7</span>;</span><br><span class="line"><span class="keyword">while</span>(a--) </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Loop &quot;</span>);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;a=%d&quot;</span>, a);</span><br></pre></td></tr></table></figure></div>
+<p><strong>解析步骤</strong>：</p>
+<ol>
+<li><code>a=7</code> 进入循环，先执行 <code>printf</code>，后 <code>a--</code> → <code>a=6</code>。</li>
+<li>循环直到 <code>a=0</code> 时，<code>a--</code> 变为 <code>-1</code>，条件为假终止。</li>
+<li>最终 <code>a=-1</code>。<br><strong>答案</strong>：输出8次 <code>Loop </code>，最后输出 <code>a=-1</code>。</li>
+</ol>
+<hr>
+<h1 id="三、对比分析：while-vs-do-while"><a href="#三、对比分析：while-vs-do-while" class="headerlink" title="三、对比分析：while vs do-while"></a>三、对比分析：while vs do-while</h1><table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><strong>while</strong></th>
+<th><strong>do-while</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>执行次数</strong></td>
+<td>可能0次</td>
+<td>至少1次</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>已知边界条件（如读文件EOF）</td>
+<td>需强制初始化（如游戏菜单）</td>
+</tr>
+<tr>
+<td><strong>代码安全性</strong></td>
+<td>需先验证条件</td>
+<td>易因条件错误执行无效操作</td>
+</tr>
+<tr>
+<td><strong>典型比喻</strong></td>
+<td>先查天气再出门</td>
+<td>先出门再看天气</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="四、高级技巧与调试方法"><a href="#四、高级技巧与调试方法" class="headerlink" title="四、高级技巧与调试方法"></a>四、高级技巧与调试方法</h1><h2 id="4-1-使用调试器观察变量变化"><a href="#4-1-使用调试器观察变量变化" class="headerlink" title="4.1 使用调试器观察变量变化"></a>4.1 使用调试器观察变量变化</h2><ul>
+<li><strong>GDB调试命令</strong>：<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gcc -g code.c -o code</span><br><span class="line">gdb ./code</span><br><span class="line"><span class="built_in">break</span> main.c:5  <span class="comment"># 在第5行设置断点</span></span><br><span class="line">run             <span class="comment"># 启动程序</span></span><br><span class="line">step            <span class="comment"># 单步执行</span></span><br><span class="line"><span class="built_in">print</span> i         <span class="comment"># 查看变量i的值</span></span><br></pre></td></tr></table></figure></div></li>
+</ul>
+<h2 id="4-2-用打印法追踪循环流程"><a href="#4-2-用打印法追踪循环流程" class="headerlink" title="4.2 用打印法追踪循环流程"></a>4.2 用打印法追踪循环流程</h2><div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(i &lt;= <span class="number">3</span>) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;[循环开始] i=%d\n&quot;</span>, i);</span><br><span class="line">    <span class="comment">// 模拟复杂操作</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;  执行操作...\n&quot;</span>);</span><br><span class="line">    i++;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;[循环结束] i=%d\n\n&quot;</span>, i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p><strong>输出</strong>：</p>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[循环开始] i=1</span><br><span class="line">  执行操作...</span><br><span class="line">[循环结束] i=2</span><br><span class="line"></span><br><span class="line">[循环开始] i=2</span><br><span class="line">  执行操作...</span><br><span class="line">[循环结束] i=3</span><br><span class="line"></span><br><span class="line">[循环开始] i=3</span><br><span class="line">  执行操作...</span><br><span class="line">[循环结束] i=4</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="4-3-避免无限循环的终极技巧"><a href="#4-3-避免无限循环的终极技巧" class="headerlink" title="4.3 避免无限循环的终极技巧"></a>4.3 避免无限循环的终极技巧</h2><ul>
+<li><strong>添加超限保护</strong>：<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(条件) &#123;</span><br><span class="line">    <span class="comment">// ...循环体...</span></span><br><span class="line">    <span class="keyword">if</span> (count++ &gt; <span class="number">1000</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;循环超限，强制退出！&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></li>
+</ul>
+<hr>
+<h1 id="五、总结：选择的艺术"><a href="#五、总结：选择的艺术" class="headerlink" title="五、总结：选择的艺术"></a>五、总结：选择的艺术</h1><ul>
+<li><strong>选while</strong>：当需要严格控制循环开始条件时（如读取文件直到EOF）。</li>
+<li><strong>选do-while</strong>：当必须执行一次初始化操作时（如游戏菜单系统、输入验证）。</li>
+</ul>
+<blockquote>
+<p>🎯 <strong>记忆口诀</strong>：<br><strong>「先判断用while，保底执行用do-while」</strong><br>就像人生选择——审慎决策用 <code>while</code>，破釜沉舟用 <code>do-while</code>！</p>
+</blockquote>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> 第五章——循环结构 第一节——while语句和do...while结构</li>
+        <li><strong>作者:</strong> 亓翎_Re-Tikara</li>
+        <li><strong>创建于
+                :</strong> 2026-02-07 02:21:28</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2026-02-07 02:25:41
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://re-tikara.fun/Blog/posts/d9e67466/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/Blog/tags/C-Language/">#C Language</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="prev" rel="prev" href="/Blog/posts/9cbf58aa/">
+					<span class="left arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-left"></i>
+					</span>
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">第三章——顺序结构 预读节——程序的三种基本结构</span>
+						<span class="post-nav-item">上一篇</span>
+					</span>
+				</a>
+			</div>
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/Blog/posts/900b5b04/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">第五章——循环结构 第三节——循环的嵌套</span>
+						<span class="post-nav-item">下一篇</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">目录</div>
+		<div class="page-title">第五章——循环结构 第一节——while语句和do...while结构</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81while%E8%AF%AD%E5%8F%A5%EF%BC%9A%E8%B0%A8%E6%85%8E%E6%B4%BE%E7%9A%84%E3%80%8C%E5%85%88%E9%97%AE%E8%B7%AF%E5%86%8D%E5%87%BA%E5%8F%91%E3%80%8D"><span class="nav-text">一、while语句：谨慎派的「先问路再出发」</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%89%A7%E8%A1%8C%E9%80%BB%E8%BE%91"><span class="nav-text">1.1 基本语法与执行逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E6%A1%88%E4%BE%8B%E8%A7%A3%E6%9E%90%EF%BC%9A1%E5%88%B0100%E7%9A%84%E7%B4%AF%E5%8A%A0%E5%92%8C"><span class="nav-text">1.2 案例解析：1到100的累加和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E4%B8%8E%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97"><span class="nav-text">1.3 常见错误与避坑指南</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E7%9C%9F%E9%A2%98%E5%AE%9E%E6%88%98%EF%BC%9A%E7%90%86%E8%A7%A3%E5%89%8D%E7%BD%AE-%E5%90%8E%E7%BD%AE%E8%87%AA%E5%A2%9E"><span class="nav-text">1.4 真题实战：理解前置&#x2F;后置自增</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E5%85%B3%E9%94%AE%E7%82%B9"><span class="nav-text">几个关键点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81do-while%E7%BB%93%E6%9E%84%EF%BC%9A%E5%AE%9E%E8%B7%B5%E6%B4%BE%E7%9A%84%E3%80%8C%E5%85%88%E5%87%BA%E5%8F%91%E5%86%8D%E7%9C%8B%E8%B7%AF%E3%80%8D"><span class="nav-text">二、do-while结构：实践派的「先出发再看路」</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%89%A7%E8%A1%8C%E9%80%BB%E8%BE%91"><span class="nav-text">2.1 基本语法与执行逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E6%A1%88%E4%BE%8B%E8%A7%A3%E6%9E%90%EF%BC%9AATM%E5%8F%96%E6%AC%BE%E9%AA%8C%E8%AF%81"><span class="nav-text">2.2 案例解析：ATM取款验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E4%B8%8E%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97"><span class="nav-text">2.3 常见错误与避坑指南</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-%E7%9C%9F%E9%A2%98%E5%AE%9E%E6%88%98%EF%BC%9A%E5%90%8E%E7%BD%AE%E8%87%AA%E5%A2%9E%E9%99%B7%E9%98%B1"><span class="nav-text">2.4 真题实战：后置自增陷阱</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90%EF%BC%9Awhile-vs-do-while"><span class="nav-text">三、对比分析：while vs do-while</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7%E4%B8%8E%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-text">四、高级技巧与调试方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E4%BD%BF%E7%94%A8%E8%B0%83%E8%AF%95%E5%99%A8%E8%A7%82%E5%AF%9F%E5%8F%98%E9%87%8F%E5%8F%98%E5%8C%96"><span class="nav-text">4.1 使用调试器观察变量变化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E7%94%A8%E6%89%93%E5%8D%B0%E6%B3%95%E8%BF%BD%E8%B8%AA%E5%BE%AA%E7%8E%AF%E6%B5%81%E7%A8%8B"><span class="nav-text">4.2 用打印法追踪循环流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E9%81%BF%E5%85%8D%E6%97%A0%E9%99%90%E5%BE%AA%E7%8E%AF%E7%9A%84%E7%BB%88%E6%9E%81%E6%8A%80%E5%B7%A7"><span class="nav-text">4.3 避免无限循环的终极技巧</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%80%BB%E7%BB%93%EF%BC%9A%E9%80%89%E6%8B%A9%E7%9A%84%E8%89%BA%E6%9C%AF"><span class="nav-text">五、总结：选择的艺术</span></a></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">非常感谢你能坚持到这里！</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2026&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/Blog/">亓翎_Re-Tikara</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 76 篇文章
+                    </span>
+                    
+                        <span>
+                            共 72.1k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="站内搜索您需要的内容..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+
+<script src="/Blog/js/build/libs/Swup.min.js"></script>
+
+<script src="/Blog/js/build/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/Blog/js/build/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/Blog/js/build/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/Blog/js/build/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/Blog/js/build/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	
+<script src="/Blog/js/build/tools/imageViewer.js" type="module"></script>
+
+<script src="/Blog/js/build/utils.js" type="module"></script>
+
+<script src="/Blog/js/build/main.js" type="module"></script>
+
+<script src="/Blog/js/build/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/Blog/js/build/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/Blog/js/build/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/Blog/js/build/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/Blog/js/build/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/Blog/js/build/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/Blog/js/build/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/Blog/js/build/tools/runtime.js"></script>
+
+    
+<script src="/Blog/js/build/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/Blog/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/Blog/js/build/libs/Typed.min.js"></script>
+
+  
+<script src="/Blog/js/build/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+    
+<script src="/Blog/js/build/libs/minimasonry.min.js"></script>
+
+    
+<script src="/Blog/js/build/plugins/masonry.js" type="module"></script>
+
+
+
+
+
+
+
+    
+<script src="/Blog/js/build/tools/tocToggle.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/Blog/js/build/layouts/toc.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/Blog/js/build/plugins/tabs.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+<script src="/Blog/js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+<script src="/Blog/js/build/layouts/essays.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+
+    
+<script src="/Blog/js/build/layouts/bookmarkNav.js" type="module"></script>
+
+
+	
+</body>
+
+</html>

@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="亓翎_Re-Tikara">
+    
+    <meta name="author" content="亓翎_Re-Tikara">
+    
+    <!-- Completely eliminate flash of wrong theme -->
+    <script>
+        (function() {
+            const THEME_KEY = "REDEFINE-THEME-STATUS";
+            const DARK = "dark", LIGHT = "light";
+            
+            // Get preferred theme
+            function getTheme() {
+                try {
+                    const saved = localStorage.getItem(THEME_KEY);
+                    if (saved) {
+                        const { isDark } = JSON.parse(saved);
+                        return isDark ? DARK : LIGHT;
+                    }
+                } catch (e) {}
+                
+                return matchMedia("(prefers-color-scheme: dark)").matches ? DARK : LIGHT;
+            }
+            
+            // Apply theme to document
+            function applyTheme(theme) {
+                const isDark = theme === DARK;
+                const root = document.documentElement;
+                
+                // Set data attribute for CSS variables
+                root.setAttribute("data-theme", theme);
+                
+                // Set classes for compatibility
+                root.classList.add(theme);
+                root.classList.remove(isDark ? LIGHT : DARK);
+                root.style.colorScheme = theme;
+            }
+            
+            // Initial application
+            const theme = getTheme();
+            applyTheme(theme);
+            
+            // Listen for system preference changes
+            matchMedia("(prefers-color-scheme: dark)").addEventListener("change", ({ matches }) => {
+                // Only update if using system preference (no localStorage entry)
+                if (!localStorage.getItem(THEME_KEY)) {
+                    applyTheme(matches ? DARK : LIGHT);
+                }
+            });
+            
+            // Set body classes once DOM is ready
+            if (document.readyState !== "loading") {
+                document.body.classList.add(theme + "-mode");
+            } else {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.classList.add(theme + "-mode");
+                    document.body.classList.remove((theme === DARK ? LIGHT : DARK) + "-mode");
+                });
+            }
+        })();
+    </script>
+    
+    <!-- Critical CSS to prevent flash -->
+    <style>
+        :root[data-theme="dark"] {
+            --background-color: #202124;
+            --background-color-transparent: rgba(32, 33, 36, 0.6);
+            --second-background-color: #2d2e32;
+            --third-background-color: #34353a;
+            --third-background-color-transparent: rgba(32, 33, 36, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #ffffff;
+            --second-text-color: #eeeeee;
+            --third-text-color: #bebec6;
+            --fourth-text-color: #999999;
+            --default-text-color: #bebec6;
+            --invert-text-color: #373D3F;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(255, 255, 255, 0.08);
+            --shadow-color-2: rgba(255, 255, 255, 0.05);
+        }
+        
+        :root[data-theme="light"] {
+            --background-color: #fff;
+            --background-color-transparent: rgba(255, 255, 255, 0.6);
+            --second-background-color: #f8f8f8;
+            --third-background-color: #f2f2f2;
+            --third-background-color-transparent: rgba(241, 241, 241, 0.6);
+            --primary-color: #0066CC;
+            --first-text-color: #16171a;
+            --second-text-color: #2f3037;
+            --third-text-color: #5e5e5e;
+            --fourth-text-color: #eeeeee;
+            --default-text-color: #373D3F;
+            --invert-text-color: #bebec6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --selection-color: #0066CC;
+            --shadow-color-1: rgba(0, 0, 0, 0.08);
+            --shadow-color-2: rgba(0, 0, 0, 0.05);
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+        
+        /* Apply body classes as soon as DOM is ready */
+        :root[data-theme="dark"] body {
+            background-color: var(--background-color);
+            color: var(--default-text-color);
+        }
+    </style>
+    
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://re-tikara.fun/Blog/posts/ae06b0ca/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+    
+    
+        
+        <meta name="description" content="这是一个很无趣的人写的很无趣的文章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四章——选择结构 第二节——逻辑运算">
+<meta property="og:url" content="https://re-tikara.fun/Blog/posts/ae06b0ca/">
+<meta property="og:site_name" content="ALp_Studio Article Library">
+<meta property="og:description" content="这是一个很无趣的人写的很无趣的文章">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png">
+<meta property="article:published_time" content="2026-02-06T18:21:28.000Z">
+<meta property="article:modified_time" content="2026-02-06T18:25:41.521Z">
+<meta property="article:author" content="亓翎_Re-Tikara">
+<meta property="article:tag" content="C Language">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="https://free.picui.cn/free/2025/12/30/6953f28ba97a0.ico" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://free.picui.cn/free/2025/12/30/6953f28ba97a0.ico">
+    <meta name="theme-color" content="#98B37D">
+    <link rel="shortcut icon" href="https://free.picui.cn/free/2025/12/30/6953f28ba97a0.ico">
+    <!--- Page Info-->
+    
+    <title>
+        
+            第四章——选择结构 第二节——逻辑运算 | ALp_Studio Article Library
+        
+    </title>
+
+    
+<link rel="stylesheet" href="/Blog/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+<link rel="stylesheet" href="/Blog/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/Blog/css/build/tailwind.css">
+
+    
+
+    
+<link rel="stylesheet" href="/Blog/fonts/GeistMono/geist-mono.css">
+
+    
+<link rel="stylesheet" href="/Blog/fonts/Geist/geist.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+    
+    
+        
+<script src="/Blog/js/build/libs/anime.min.js"></script>
+
+    
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"re-tikara.fun","root":"/Blog/","language":"zh-CN","path":"search.json"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"delete_mask":false,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","highlight_theme":{"light":"github","dark":"vs2015"},"font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"pangu_js":false,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#98B37D","secondary":"#997868","default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null},"title":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":true},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":{"enable":true,"custom_message":"欢迎进入，实验体"},"side_tools":{"gear_rotation":true,"auto_expand":true},"open_graph":{"enable":true,"image":"https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png","description":"这是一个很无趣的人写的很无趣的文章"},"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png","dark":"https://s2.loli.net/2025/12/22/uBnZDzxcI7JHCX3.png"},"title":"ALp_Studio","subtitle":{"text":["欢迎进入，实验体","情感数据记录中……"],"hitokoto":{"enable":true,"show_author":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#F0EFEB","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/RE-TikaRa","instagram":null,"zhihu":null,"twitter":null,"email":"163mail@re-tikara.fun","bilibili":"https://space.bilibili.com/374412219"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"11.4.1"}},"version":"2.8.5","navbar":{"auto_hide":true,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Tag":{"path":"/tags/","icon":"fa-solid fa-tags"},"Categories":{"icon":"fa-solid fa-folder","path":"/categories/"},"Bookmarks":{"icon":"fa-solid fa-bookmark","path":"/bookmarks/"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/RE-TikaRa","BiliBili":"https://space.bilibili.com/374412219","相册":"/masonry","Archives":"/archives","Friends":"/links","Bookmarks":"/bookmarks"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":{"MainWeb":{"path":"https://re-tikara.fun","icon":"fa-solid fa-globe"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","excerpt_length":200,"categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023-12-16T14:23:50.000Z"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":true};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/Blog/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/Blog/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/Blog/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/Blog/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 8.1.1"><link rel="alternate" href="/Blog/rss2.xml" title="ALp_Studio Article Library" type="application/rss+xml">
+</head>
+
+
+
+<body>
+	<div class="progress-bar-container">
+	
+	<span class="scroll-progress-bar"></span>
+	
+
+	
+	<span class="pjax-progress-bar"></span>
+	<!--        <span class="swup-progress-icon">-->
+	<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+	<!--        </span>-->
+	
+</div>
+
+<style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    <h2 class="ml13">
+        欢迎进入，实验体
+    </h2>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+        var animation = anime.timeline({ loop: true })
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [20, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                filter: ['blur(5px)', 'blur(0px)'],
+                easing: "easeOutExpo",
+                duration: 1200,
+                delay: (el, i) => 300 + 20 * i,
+            })
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [0, -20],
+                opacity: [1, 0],
+                filter: ['blur(0px)', 'blur(5px)'],
+                easing: "easeInExpo",
+                duration: 1000,
+                delay: (el, i) => 15 * i,
+                complete: function() {
+                    hidePreloader();
+                }
+            }, '-=700');
+
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            setTimeout(hidePreloader, 5000); // Call hidePreloader after 5000 milliseconds if not already called by animation
+        });
+
+        function hidePreloader() {
+            var preloader = document.querySelector('.preloader');
+            preloader.style.opacity = '0';
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 200);
+        }
+    </script>
+</div>
+
+<main class="page-container" id="swup">
+
+	
+
+	<div class="main-content-container flex flex-col justify-between min-h-dvh">
+		<div class="main-content-header">
+			<header class="navbar-container px-6 md:px-12">
+    <div class="navbar-content transition-navbar ">
+        <div class="left">
+            
+                <a class="logo-image h-8 w-8 sm:w-10 sm:h-10 mr-3" href="/Blog/">
+                    <img src="https://s2.loli.net/2025/12/22/BF6ApZlzjyELX5K.png" class="w-full h-full rounded-xs">
+                </a>
+            
+            <a class="logo-title" href="/Blog/">
+                
+                ALp_Studio Article Library
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/Blog/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/Blog/tags/"
+                                        >
+                                    <i class="fa-solid fa-tags fa-fw"></i>
+                                    标签
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/Blog/categories/"
+                                        >
+                                    <i class="fa-solid fa-folder fa-fw"></i>
+                                    分类
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/Blog/bookmarks/"
+                                        >
+                                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                                    BOOKMARKS
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/Blog/about">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://github.com/RE-TikaRa">
+                                                    GITHUB
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a target="_blank" rel="noopener" href="https://space.bilibili.com/374412219">
+                                                    BILIBILI
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/Blog/masonry">
+                                                    相册
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/Blog/archives">
+                                                    归档
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/Blog/links">
+                                                    友情链接
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/Blog/bookmarks">
+                                                    BOOKMARKS
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-dvh w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/Blog/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/Blog/tags/"
+                        >
+                            <span>
+                                标签
+                            </span>
+                            
+                                <i class="fa-solid fa-tags fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/Blog/categories/"
+                        >
+                            <span>
+                                分类
+                            </span>
+                            
+                                <i class="fa-solid fa-folder fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/Blog/bookmarks/"
+                        >
+                            <span>
+                                BOOKMARKS
+                            </span>
+                            
+                                <i class="fa-solid fa-bookmark fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
+                            
+                        </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/Blog/about">ME</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://github.com/RE-TikaRa">GITHUB</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           target="_blank" rel="noopener" href="https://space.bilibili.com/374412219">BILIBILI</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/Blog/masonry">相册</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/Blog/archives">归档</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/Blog/links">友情链接</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/Blog/bookmarks">BOOKMARKS</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="https://re-tikara.fun"
+                        >
+                            <span>MainWeb</span>
+                            <i class="fa-solid fa-globe fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/Blog/archives"
+                        >
+                            <span>Archives</span>
+                            <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/Blog/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">5</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">14</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">76</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+		</div>
+
+		<div class="main-content-body transition-fade-up">
+			
+
+			<div class="main-content">
+				<div class="post-page-container flex relative justify-between box-border w-full h-full">
+	<div class="article-content-container">
+
+		<div class="article-title relative w-full">
+			
+			
+			
+			<img src="https://s2.loli.net/2025/12/22/uBnZDzxcI7JHCX3.png" alt="第四章——选择结构 第二节——逻辑运算" class="w-full h-60 sm:h-72 md:h-80 object-cover sm:rounded-t-large dark:brightness-75" />
+			
+			<div class="w-full flex items-center absolute bottom-0 justify-start">
+				<h1 class="article-title-cover text-center mx-6 my-6 text-second-text-color bg-background-color-transparent px-4 py-3 text-3xl sm:text-4xl md:text-5xl font-semibold backdrop-blur-lg rounded-xl border border-border-color ">第四章——选择结构 第二节——逻辑运算</h1>
+			</div>
+			
+		</div>
+
+		
+		<div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+			<div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+				<img src="https://s2.loli.net/2025/12/22/mkWtIYraVxdnTCe.jpg">
+			</div>
+			<div class="info flex flex-col justify-between">
+				<div class="author flex items-center">
+					<span class="name text-default-text-color text-lg font-semibold">亓翎_Re-Tikara</span>
+					
+					<span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">Lv5</span>
+					
+				</div>
+				<div class="meta-info">
+					<div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2026-02-07 02:21:28</span>
+        <span class="mobile">2026-02-07 02:21:28</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2026-02-07 02:25:41</span>
+            <span class="mobile">2026-02-07 02:25:41</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/Blog/tags/C-Language/">C Language</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>2k 字</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>8 分钟</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+				</div>
+			</div>
+		</div>
+		
+
+		
+		<div class="article-expire mt-4 mx-2 sm:mx-6 md:mx-8 note p-4 rounded-lg red icon hidden" id="expiration-container">
+			<i class="expire-icon fa-solid fa-timer mr-0.5 text-red-600 dark:text-red-400"></i>
+			<span class="expire-label text-red-600 dark:text-red-400 " id="expiration-date">这篇文章最后更新于 some 天前，内容可能已经过时。</span>
+		</div>
+
+		<script data-swup-reload-script>
+			function updateExpirationDate() {
+				try {
+					const expiredDate = new Date("Fri Dec 31 9999 23:59:59 GMT+0800 (中国标准时间)");
+					const updatedDate = new Date("Sat Feb 07 2026 02:25:41 GMT+0800");
+					const now = new Date();
+					const expirationValue = document.getElementById("expiration-date");
+					const expirationContainer = document.getElementById("expiration-container");
+					let daysAgo = Math.floor((now - updatedDate) / (1000 * 60 * 60 * 24));
+					if (expiredDate < now) {
+						expirationContainer.classList.remove("hidden");
+						// console.log(daysAgo)
+						expirationValue.innerHTML = expirationValue.innerHTML.replace("some", daysAgo);
+					}
+				} catch (e) {}
+			}
+			document.addEventListener("DOMContentLoaded", function() {
+				updateExpirationDate();
+			});
+			try {
+				swup.hooks.on("page:view", updateExpirationDate)
+			} catch (e) {}
+		</script>
+		
+
+
+		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+			<h1 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h1><p>&emsp;&emsp;在之前的关系表达式中，只能描述单一条件，那如何描述a条件同时b条件之类的呢？此处就要用到逻辑表达式。</p>
+<h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><h3 id="种类"><a href="#种类" class="headerlink" title="种类"></a>种类</h3><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>名称</th>
+<th>功能描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&amp;&amp;</code></td>
+<td>逻辑与</td>
+<td>当两个操作数都为真时，结果才为真；否则为假</td>
+<td><code>int a = 5, b = 10; if(a &gt; 0 &amp;&amp; b &gt; 0)</code></td>
+</tr>
+<tr>
+<td><code>||</code></td>
+<td>逻辑或</td>
+<td>当两个操作数中至少一个为真时，结果为真；都为假时才为假</td>
+<td><code>int x = 3, y = -1; if(x != 0 || y != 0)</code></td>
+</tr>
+<tr>
+<td><code>!</code></td>
+<td>逻辑非（取反）</td>
+<td>单目运算符，将其操作数的真假值取反：真变假，假变真</td>
+<td><code>int flag = 0; if(!flag)</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>💡 在C语言中，<strong>任何非0值</strong>都被视为“真”（true），而只有 <strong>0</strong> 被视为“假”（false）。</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">if</span>(a) &#123;</span><br><span class="line">    <span class="comment">// 会执行，因为5是非0值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>关于if(a)，此处的判断条件是a是否是非0值。</p>
+</blockquote>
+<h3 id="逻辑运算真值表"><a href="#逻辑运算真值表" class="headerlink" title="逻辑运算真值表"></a>逻辑运算真值表</h3><table>
+<thead>
+<tr>
+<th align="center">a</th>
+<th align="center">b</th>
+<th align="center">!a</th>
+<th align="center">!b</th>
+<th align="center">a &amp;&amp; b</th>
+<th align="center">a || b</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">假</td>
+<td align="center">假</td>
+<td align="center">真</td>
+<td align="center">真</td>
+<td align="center">假</td>
+<td align="center">假</td>
+</tr>
+<tr>
+<td align="center">假</td>
+<td align="center">真</td>
+<td align="center">真</td>
+<td align="center">假</td>
+<td align="center">假</td>
+<td align="center">真</td>
+</tr>
+<tr>
+<td align="center">真</td>
+<td align="center">假</td>
+<td align="center">假</td>
+<td align="center">真</td>
+<td align="center">假</td>
+<td align="center">真</td>
+</tr>
+<tr>
+<td align="center">真</td>
+<td align="center">真</td>
+<td align="center">假</td>
+<td align="center">假</td>
+<td align="center">真</td>
+<td align="center">真</td>
+</tr>
+</tbody></table>
+<h3 id="逻辑运算符的优先级"><a href="#逻辑运算符的优先级" class="headerlink" title="逻辑运算符的优先级"></a>逻辑运算符的优先级</h3><p>&emsp;&emsp;在C语言中，！、&amp;&amp;，||的优先级依次降低。</p>
+<h4 id="示例：优先级的影响"><a href="#示例：优先级的影响" class="headerlink" title="示例：优先级的影响"></a>示例：优先级的影响</h4><div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 优先级最高：逻辑非!</span></span><br><span class="line"><span class="type">int</span> a = <span class="number">1</span>, b = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (!a &amp;&amp; b) &#123;</span><br><span class="line">    <span class="comment">// 等价于 (!a) &amp;&amp; b</span></span><br><span class="line">    <span class="comment">// 先计算 !a=0，再 0 &amp;&amp; 0 → 0，不执行</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 优先级其次：逻辑与&amp;&amp;</span></span><br><span class="line"><span class="type">int</span> x = <span class="number">1</span>, y = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (x &amp;&amp; y || <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="comment">// 先计算 x &amp;&amp; y → 0，再 0 || 1 → 1，执行</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 优先级最低：逻辑或||</span></span><br><span class="line"><span class="type">int</span> m = <span class="number">0</span>, n = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">if</span> (m || n &amp;&amp; !m) &#123;</span><br><span class="line">    <span class="comment">// 先计算 n &amp;&amp; !m → 1 &amp;&amp; 1 → 1，再 m || 1 → 1，执行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<table>
+<thead>
+<tr>
+<th align="center">逻辑运算符</th>
+<th align="center">优先级</th>
+<th>示例说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">!</td>
+<td align="center">最高</td>
+<td><code>!a &amp;&amp; b</code> 先计算 <code>\!a</code> 再计算 <code>&amp;&amp;</code></td>
+</tr>
+<tr>
+<td align="center">&amp;&amp;</td>
+<td align="center">其次</td>
+<td><code>a &amp;&amp; b || c</code> 先计算 <code>&amp;&amp;</code> 再计算 <code>||</code></td>
+</tr>
+<tr>
+<td align="center">||</td>
+<td align="center">最低</td>
+<td><code>a || b &amp;&amp; c</code> 先计算 <code>b &amp;&amp; c</code> 再计算 <code>||</code></td>
+</tr>
+</tbody></table>
+<h3 id="逻辑运算符的结合方向"><a href="#逻辑运算符的结合方向" class="headerlink" title="逻辑运算符的结合方向"></a>逻辑运算符的结合方向</h3><h4 id="示例：结合方向的影响"><a href="#示例：结合方向的影响" class="headerlink" title="示例：结合方向的影响"></a>示例：结合方向的影响</h4><div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从右向左结合：逻辑非!</span></span><br><span class="line"><span class="type">int</span> flag = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (!flag &amp;&amp; <span class="number">5</span>) &#123;</span><br><span class="line">    <span class="comment">// 等价于 (!flag) &amp;&amp; 5 → 1 &amp;&amp; 1 → 执行</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从左向右结合：逻辑与&amp;&amp;</span></span><br><span class="line"><span class="type">int</span> a = <span class="number">1</span>, b = <span class="number">1</span>, c = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (a &amp;&amp; b &amp;&amp; c) &#123;</span><br><span class="line">    <span class="comment">// 等价于 ((a &amp;&amp; b) &amp;&amp; c) → (1 &amp;&amp; 1) &amp;&amp; 0 → 0，不执行</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从左向右结合：逻辑或||</span></span><br><span class="line"><span class="type">int</span> x = <span class="number">0</span>, y = <span class="number">1</span>, z = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (x || y || z) &#123;</span><br><span class="line">    <span class="comment">// 等价于 ((x || y) || z) → (0 || 1) || 0 → 1，执行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<table>
+<thead>
+<tr>
+<th align="center">逻辑运算符</th>
+<th align="center">结合方向</th>
+<th>示例说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">!</td>
+<td align="center">从右向左</td>
+<td><code>!flag &amp;&amp; x</code> 等价于 <code>(!flag) &amp;&amp; x</code></td>
+</tr>
+<tr>
+<td align="center">&amp;&amp;</td>
+<td align="center">从左向右</td>
+<td><code>a &amp;&amp; b &amp;&amp; c</code> 等价于 <code>(a &amp;&amp; b) &amp;&amp; c</code></td>
+</tr>
+<tr>
+<td align="center">||</td>
+<td align="center">从左向右</td>
+<td><code>x || y || z</code> 等价于 <code>(x || y) || z</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="短路特性："><a href="#短路特性：" class="headerlink" title="短路特性："></a>短路特性：</h1><p>&emsp;&emsp;短路特性（Short-circuit Evaluation）是逻辑运算符（<code>&amp;&amp;</code> 和 <code>||</code>）在C语言中的行为规则：<br>&emsp;&emsp;<strong>当逻辑运算的结果已经可以确定时，跳过后续操作数的计算</strong>。这种机制提高了程序效率，并能避免潜在错误。</p>
+<hr>
+<h2 id="1-短路特性的工作原理"><a href="#1-短路特性的工作原理" class="headerlink" title="1. 短路特性的工作原理"></a>1. 短路特性的工作原理</h2><h3 id="1-逻辑与（-）"><a href="#1-逻辑与（-）" class="headerlink" title="(1) 逻辑与（&amp;&amp;）"></a>(1) 逻辑与（<code>&amp;&amp;</code>）</h3><ul>
+<li><strong>规则</strong>：  <ul>
+<li>如果<strong>第一个操作数为假（0）</strong>，整个表达式的结果必为假，<strong>跳过第二个操作数的计算</strong>。</li>
+</ul>
+</li>
+<li><strong>真值表</strong>：<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>a &amp;&amp; b</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>任意</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h3 id="2-逻辑或（-）"><a href="#2-逻辑或（-）" class="headerlink" title="(2) 逻辑或（||）"></a>(2) 逻辑或（<code>||</code>）</h3><ul>
+<li><strong>规则</strong>：  <ul>
+<li>如果<strong>第一个操作数为真（非0）</strong>，整个表达式的结果必为真，<strong>跳过第二个操作数的计算</strong>。</li>
+</ul>
+</li>
+<li><strong>真值表</strong>：<br>| a    | b    | a || b |<br>|——|——|——–|<br>| 1    | 任意 | 1      |<br>| 0    | 0    | 0      |<br>| 0    | 1    | 1      |</li>
+</ul>
+<hr>
+<h2 id="2-短路特性的应用场景"><a href="#2-短路特性的应用场景" class="headerlink" title="2. 短路特性的应用场景"></a>2. 短路特性的应用场景</h2><h3 id="1-避免运行时错误"><a href="#1-避免运行时错误" class="headerlink" title="(1) 避免运行时错误"></a>(1) 避免运行时错误</h3><h4 id="空指针检查"><a href="#空指针检查" class="headerlink" title="空指针检查"></a>空指针检查</h4><div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">process</span><span class="params">(<span class="type">int</span> *ptr)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (ptr &amp;&amp; *ptr &gt; <span class="number">0</span>) &#123;  <span class="comment">// 先检查 ptr 是否为 NULL</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;值为 %d\n&quot;</span>, *ptr);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;指针为空或值无效\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> *p = <span class="literal">NULL</span>;</span><br><span class="line">    process(p);  <span class="comment">// 输出：指针为空或值无效</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li><strong>原理</strong>：<code>ptr &amp;&amp; *ptr &gt; 0</code> 中，如果 <code>ptr</code> 为 <code>NULL</code>，<code>&amp;&amp;</code> 会短路，跳过 <code>*ptr</code> 的解引用，避免崩溃。</li>
+</ul>
+<h4 id="避免除零"><a href="#避免除零" class="headerlink" title="避免除零"></a>避免除零</h4><div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">5</span>;</span><br><span class="line">    <span class="type">int</span> b = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (b != <span class="number">0</span> &amp;&amp; a / b &gt; <span class="number">1</span>) &#123;  <span class="comment">// 如果 b 为 0，直接跳过除法</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;结果有效\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;除数不能为 0\n&quot;</span>);  <span class="comment">// 输出：除数不能为 0</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="2-优化性能"><a href="#2-优化性能" class="headerlink" title="(2) 优化性能"></a>(2) 优化性能</h3><div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">expensive_check</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// 模拟耗时计算</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000000</span>; ++i);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  <span class="comment">// 返回 false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">clock_t</span> start = clock();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> &amp;&amp; expensive_check()) &#123;  <span class="comment">// 短路跳过 expensive_check()</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="type">double</span> duration = (<span class="type">double</span>)(clock() - start) / CLOCKS_PER_SEC;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;耗时: %.6f 秒\n&quot;</span>, duration);  <span class="comment">// 耗时极低</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="3-默认值赋值"><a href="#3-默认值赋值" class="headerlink" title="(3) 默认值赋值"></a>(3) 默认值赋值</h3><div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> *ptr = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="type">int</span> value = (ptr != <span class="literal">NULL</span>) ? *ptr : <span class="number">0</span>;  <span class="comment">// 安全获取值</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;value = %d\n&quot;</span>, value);  <span class="comment">// 输出：0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<hr>
+<h2 id="4-短路特性的注意事项"><a href="#4-短路特性的注意事项" class="headerlink" title="4. 短路特性的注意事项"></a>4. 短路特性的注意事项</h2><h3 id="1-条件顺序的重要性"><a href="#1-条件顺序的重要性" class="headerlink" title="(1) 条件顺序的重要性"></a>(1) 条件顺序的重要性</h3><ul>
+<li><p><strong>逻辑与（<code>&amp;&amp;</code>）</strong>：将更可能为 <strong>假</strong> 的条件放在左侧。</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (is_valid &amp;&amp; is_ready) &#123; ... &#125;  <span class="comment">// 如果 is_valid 为假，直接跳过 is_ready</span></span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>逻辑或（<code>||</code>）</strong>：将更可能为 <strong>真</strong> 的条件放在左侧。</p>
+<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (is_cached || fetch_from_database()) &#123; ... &#125;  <span class="comment">// 如果缓存存在，直接跳过数据库查询</span></span><br></pre></td></tr></table></figure></div></li>
+</ul>
+<h3 id="2-副作用的影响"><a href="#2-副作用的影响" class="headerlink" title="(2) 副作用的影响"></a>(2) 副作用的影响</h3><div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> result = (i++ &gt; <span class="number">0</span>) &amp;&amp; (i++ &gt; <span class="number">1</span>);  <span class="comment">// i 最终为 1</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, i);  <span class="comment">// 输出 1</span></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li><strong>解释</strong>：<code>i++ &gt; 0</code> 为假，<code>i++ &gt; 1</code> 不会被执行，因此 <code>i</code> 只自增一次。</li>
+</ul>
+<h3 id="3-优先级问题"><a href="#3-优先级问题" class="headerlink" title="(3) 优先级问题"></a>(3) 优先级问题</h3><div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (a || b &amp;&amp; c) &#123; ... &#125;  <span class="comment">// 等价于 if (a || (b &amp;&amp; c))</span></span><br></pre></td></tr></table></figure></div>
+<ul>
+<li><strong>建议</strong>：使用括号明确优先级：<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((a || b) &amp;&amp; c) &#123; ... &#125;</span><br></pre></td></tr></table></figure></div></li>
+</ul>
+<hr>
+<h2 id="5-C语言与其他语言的差异"><a href="#5-C语言与其他语言的差异" class="headerlink" title="5. C语言与其他语言的差异"></a>5. C语言与其他语言的差异</h2><table>
+<thead>
+<tr>
+<th>语言</th>
+<th>逻辑与</th>
+<th>逻辑或</th>
+<th>特性说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>C</strong></td>
+<td><code>&amp;&amp;</code></td>
+<td>&#96;</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Python</strong></td>
+<td><code>and</code></td>
+<td><code>or</code></td>
+<td>返回实际值（非布尔值）</td>
+</tr>
+<tr>
+<td><strong>JavaScript</strong></td>
+<td><code>&amp;&amp;</code></td>
+<td>&#96;</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>C++</strong></td>
+<td><code>&amp;&amp;</code></td>
+<td>&#96;</td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li><strong>提高性能</strong>：跳过不必要的计算。</li>
+<li><strong>防止错误</strong>：避免空指针、除零等运行时异常。</li>
+<li><strong>简化代码</strong>：如默认值赋值（<code>value = a || b</code>）。</li>
+</ul>
+<h3 id="潜在问题"><a href="#潜在问题" class="headerlink" title="潜在问题"></a>潜在问题</h3><ul>
+<li><strong>副作用</strong>：依赖短路跳过的表达式可能导致逻辑错误。</li>
+<li><strong>可读性</strong>：复杂条件可能导致代码难以理解。</li>
+</ul>
+<h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><ol>
+<li><strong>显式括号</strong>：明确逻辑运算的优先级。</li>
+<li><strong>避免副作用</strong>：不依赖短路跳过的表达式中的副作用。</li>
+<li><strong>条件顺序优化</strong>：将更可能触发短路的条件放在左侧。</li>
+</ol>
+<hr>
+<h1 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h1><h2 id="按位异或运算符"><a href="#按位异或运算符" class="headerlink" title="按位异或运算符"></a>按位异或运算符</h2><h3 id="运算符种类"><a href="#运算符种类" class="headerlink" title="运算符种类"></a>运算符种类</h3><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>名称</th>
+<th>功能描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&amp;</code></td>
+<td>按位与</td>
+<td>对两个操作数的每一位执行逻辑000与操作</td>
+<td><code>int a = 5 &amp; 3; // 1</code></td>
+</tr>
+<tr>
+<td><code>|</code></td>
+<td>按位或</td>
+<td>对两个操作数的每一位执行逻辑或操作</td>
+<td><code>int b = 5 | 3; // 7</code></td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>按位异或</td>
+<td>当两个操作数的对应位不同时为1，相同时为0</td>
+<td><code>int c = 5 ^ 3; // 6</code></td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>按位取反</td>
+<td>单目运算符，将操作数的每一位取反</td>
+<td><code>int d = ~5; // 依赖于系统位数</code></td>
+</tr>
+<tr>
+<td><code>&lt;&lt;</code></td>
+<td>左移</td>
+<td>将操作数的二进制位向左移动指定的位数</td>
+<td><code>int e = 5 &lt;&lt; 1; // 10</code></td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code></td>
+<td>右移</td>
+<td>将操作数的二进制位向右移动指定的位数</td>
+<td><code>int f = 5 &gt;&gt; 1; // 2</code></td>
+</tr>
+</tbody></table>
+<h3 id="按位异或特性"><a href="#按位异或特性" class="headerlink" title="按位异或特性"></a>按位异或特性</h3><div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 交换两个变量的值（不使用临时变量）</span><br><span class="line">int a = 10, b = 20;</span><br><span class="line">a = a ^ b;  // a becomes 26 (11010)</span><br><span class="line">b = a ^ b;  // b becomes 10 (1010)</span><br><span class="line">a = a ^ b;  // a becomes 20 (10100)</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="典型应用场景"><a href="#典型应用场景" class="headerlink" title="典型应用场景"></a>典型应用场景</h3><ol>
+<li><strong>数据加密</strong>：使用异或进行简单加密</li>
+</ol>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">char data = &#x27;A&#x27;;</span><br><span class="line">char key = &#x27;K&#x27;;</span><br><span class="line">data = data ^ key;  // 加密</span><br><span class="line">// 重复异或操作可解密</span><br><span class="line">data = data ^ key;  // 恢复为&#x27;A&#x27;</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li><strong>位掩码操作</strong></li>
+</ol>
+<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 提取第3位和第1位（从0开始计数）</span><br><span class="line">int flags = 0b101010;</span><br><span class="line">int mask = 0b1010;  // 二进制掩码</span><br><span class="line">int result = flags &amp; mask;  // 保留指定位置</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li><strong>逻辑运算 vs 位运算</strong>：<ul>
+<li><code>&amp;&amp;</code> 和 <code>||</code> 返回布尔值（0或1）</li>
+<li><code>&amp;</code> 和 <code>|</code> 返回整数值</li>
+</ul>
+</li>
+<li><strong>移位陷阱</strong>：<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">-1</span>;</span><br><span class="line"><span class="type">int</span> y = x &gt;&gt; <span class="number">1</span>;  <span class="comment">// 取决于系统实现（算术右移或逻辑右移）</span></span><br></pre></td></tr></table></figure></div></li>
+<li><strong>结合性问题</strong>：<div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">5</span> ^ <span class="number">3</span> &amp; <span class="number">0x0F</span>;  <span class="comment">// 等价于 5 ^ (3 &amp; 0x0F) 因为&amp;优先级高于^</span></span><br></pre></td></tr></table></figure></div></li>
+</ul>
+
+		</div>
+
+		
+		<div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+			<div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> 第四章——选择结构 第二节——逻辑运算</li>
+        <li><strong>作者:</strong> 亓翎_Re-Tikara</li>
+        <li><strong>创建于
+                :</strong> 2026-02-07 02:21:28</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2026-02-07 02:25:41
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://re-tikara.fun/Blog/posts/ae06b0ca/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+		</div>
+		
+
+		
+		<ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+			
+			<li class="tag-item mx-0.5">
+				<a href="/Blog/tags/C-Language/">#C Language</a>&nbsp;
+			</li>
+			
+		</ul>
+		
+
+		
+
+		
+		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+			
+			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="prev" rel="prev" href="/Blog/posts/e89b5a91/">
+					<span class="left arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-left"></i>
+					</span>
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">第六章——字符型数据 第零节——前言</span>
+						<span class="post-nav-item">上一篇</span>
+					</span>
+				</a>
+			</div>
+			
+			
+			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+				<a class="next" rel="next" href="/Blog/posts/ee89cbc6/">
+					<span class="title flex justify-center items-center">
+						<span class="post-nav-title-item truncate max-w-48">第四章——选择结构 第一节——关系运算</span>
+						<span class="post-nav-item">下一篇</span>
+					</span>
+					<span class="right arrow-icon flex justify-center items-center">
+						<i class="fa-solid fa-chevron-right"></i>
+					</span>
+				</a>
+			</div>
+			
+		</div>
+		
+
+
+		
+	</div>
+
+	
+	<div class="toc-content-container">
+		<div class="post-toc-wrap">
+	<div class="post-toc">
+		<div class="toc-title">目录</div>
+		<div class="page-title">第四章——选择结构 第二节——逻辑运算</div>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97"><span class="nav-text">逻辑运算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">逻辑运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%8D%E7%B1%BB"><span class="nav-text">种类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%9C%9F%E5%80%BC%E8%A1%A8"><span class="nav-text">逻辑运算真值表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-text">逻辑运算符的优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E7%BB%93%E5%90%88%E6%96%B9%E5%90%91"><span class="nav-text">逻辑运算符的结合方向</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%AD%E8%B7%AF%E7%89%B9%E6%80%A7%EF%BC%9A"><span class="nav-text">短路特性：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%9F%AD%E8%B7%AF%E7%89%B9%E6%80%A7%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-text">1. 短路特性的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%80%BB%E8%BE%91%E4%B8%8E%EF%BC%88-%EF%BC%89"><span class="nav-text">(1) 逻辑与（&amp;&amp;）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%80%BB%E8%BE%91%E6%88%96%EF%BC%88-%EF%BC%89"><span class="nav-text">(2) 逻辑或（||）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%9F%AD%E8%B7%AF%E7%89%B9%E6%80%A7%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">2. 短路特性的应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%81%BF%E5%85%8D%E8%BF%90%E8%A1%8C%E6%97%B6%E9%94%99%E8%AF%AF"><span class="nav-text">(1) 避免运行时错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD"><span class="nav-text">(2) 优化性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%BB%98%E8%AE%A4%E5%80%BC%E8%B5%8B%E5%80%BC"><span class="nav-text">(3) 默认值赋值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%9F%AD%E8%B7%AF%E7%89%B9%E6%80%A7%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">4. 短路特性的注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9D%A1%E4%BB%B6%E9%A1%BA%E5%BA%8F%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7"><span class="nav-text">(1) 条件顺序的重要性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%89%AF%E4%BD%9C%E7%94%A8%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-text">(2) 副作用的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BC%98%E5%85%88%E7%BA%A7%E9%97%AE%E9%A2%98"><span class="nav-text">(3) 优先级问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-C%E8%AF%AD%E8%A8%80%E4%B8%8E%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="nav-text">5. C语言与其他语言的差异</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%80%BB%E7%BB%93"><span class="nav-text">6. 总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BD%9C%E5%9C%A8%E9%97%AE%E9%A2%98"><span class="nav-text">潜在问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-text">最佳实践</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">位运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%89%E4%BD%8D%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-text">按位异或运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E7%A7%8D%E7%B1%BB"><span class="nav-text">运算符种类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E4%BD%8D%E5%BC%82%E6%88%96%E7%89%B9%E6%80%A7"><span class="nav-text">按位异或特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">典型应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">注意事项</span></a></li></ol></li></ol></li></ol>
+
+	</div>
+</div>
+	</div>
+	
+</div>
+			</div>
+
+			
+		</div>
+
+		<div class="main-content-footer">
+			<footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+            <div class="customize-info my-1">非常感谢你能坚持到这里！</div>
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2026&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/Blog/">亓翎_Re-Tikara</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共撰写了 76 篇文章
+                    </span>
+                    
+                        <span>
+                            共 72.1k 字
+                        </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://cn.vercount.one/js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.8.5</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+		</div>
+	</div>
+
+	
+	<div class="post-tools">
+		<div class="post-tools-container">
+	<ul class="article-tools-list">
+		<!-- TOC aside toggle -->
+		
+		<li class="right-bottom-tools page-aside-toggle">
+			<i class="fa-regular fa-outdent"></i>
+		</li>
+		
+
+		<!-- go comment -->
+		
+	</ul>
+</div>
+	</div>
+	
+
+	<div class="right-side-tools-container">
+		<div class="side-tools-container">
+	<ul class="hidden-tools-list">
+		<li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-plus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+			<i class="fa-regular fa-magnifying-glass-minus"></i>
+		</li>
+
+		<li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+			<i class="fa-regular fa-moon"></i>
+		</li>
+
+		<!-- rss -->
+		
+
+		
+
+		<li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+			<i class="fa-regular fa-arrow-down"></i>
+		</li>
+	</ul>
+
+	<ul class="visible-tools-list">
+		<li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+			<i class="fa-regular fa-cog fa-spin"></i>
+		</li>
+		
+		<li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+			<i class="arrow-up fas fa-arrow-up"></i>
+			<span class="percent"></span>
+		</li>
+		
+		
+	</ul>
+</div>
+	</div>
+
+	<div class="image-viewer-container">
+	<img src="">
+</div>
+
+	
+	<div class="search-pop-overlay">
+	<div class="popup search-popup">
+		<div class="search-header">
+			<span class="search-input-field-pre">
+				<i class="fa-solid fa-keyboard"></i>
+			</span>
+			<div class="search-input-container">
+				<input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="站内搜索您需要的内容..." spellcheck="false" type="search" class="search-input">
+			</div>
+			<span class="popup-btn-close">
+				<i class="fa-solid fa-times"></i>
+			</span>
+		</div>
+		<div id="search-result">
+			<div id="no-result">
+				<i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+	
+
+</main>
+
+
+
+<script src="/Blog/js/build/libs/Swup.min.js"></script>
+
+<script src="/Blog/js/build/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/Blog/js/build/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/Blog/js/build/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/Blog/js/build/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/Blog/js/build/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+	
+<script src="/Blog/js/build/tools/imageViewer.js" type="module"></script>
+
+<script src="/Blog/js/build/utils.js" type="module"></script>
+
+<script src="/Blog/js/build/main.js" type="module"></script>
+
+<script src="/Blog/js/build/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/Blog/js/build/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/Blog/js/build/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/Blog/js/build/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/Blog/js/build/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/Blog/js/build/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/Blog/js/build/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/Blog/js/build/tools/runtime.js"></script>
+
+    
+<script src="/Blog/js/build/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/Blog/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/Blog/js/build/libs/Typed.min.js"></script>
+
+  
+<script src="/Blog/js/build/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+    
+<script src="/Blog/js/build/libs/minimasonry.min.js"></script>
+
+    
+<script src="/Blog/js/build/plugins/masonry.js" type="module"></script>
+
+
+
+
+
+
+
+    
+<script src="/Blog/js/build/tools/tocToggle.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/Blog/js/build/layouts/toc.js" type="module" data-swup-reload-script=""></script>
+
+<script src="/Blog/js/build/plugins/tabs.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+<script src="/Blog/js/build/libs/moment-with-locales.min.js" data-swup-reload-script=""></script>
+
+
+<script src="/Blog/js/build/layouts/essays.js" type="module" data-swup-reload-script=""></script>
+
+
+
+
+
+    
+<script src="/Blog/js/build/layouts/bookmarkNav.js" type="module"></script>
+
+
+	
+</body>
+
+</html>
