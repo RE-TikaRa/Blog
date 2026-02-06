@@ -9,39 +9,18 @@
     <atom:link href="https://re-tikara.fun/Blog/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>重构的版本</description>
-    <pubDate>Thu, 29 Jan 2026 08:14:14 GMT</pubDate>
+    <pubDate>Sun, 08 Jun 2025 06:34:55 GMT</pubDate>
     <generator>http://hexo.io/</generator>
-    
-    <item>
-      <title>FileLocksmith-单文件版本</title>
-      <link>https://re-tikara.fun/Blog/posts/5d98e7ac/</link>
-      <guid>https://re-tikara.fun/Blog/posts/5d98e7ac/</guid>
-      <pubDate>Thu, 29 Jan 2026 08:10:56 GMT</pubDate>
-      
-      <description>File Locksmith 是用于定位并解除文件/文件夹占用的工具。但是微软是以PowerToys工具集方式提供，直接用的话感觉要下一整个工具集太麻烦。</description>
-      
-      
-      
-      
-      <category domain="https://re-tikara.fun/Blog/categories/Project/">Project</category>
-      
-      
-      <category domain="https://re-tikara.fun/Blog/tags/project/">project</category>
-      
-      
-      <comments>https://re-tikara.fun/Blog/posts/5d98e7ac/#disqus_thread</comments>
-      
-    </item>
     
     <item>
       <title></title>
       <link>https://re-tikara.fun/Blog/posts/0/</link>
       <guid>https://re-tikara.fun/Blog/posts/0/</guid>
-      <pubDate>Fri, 02 Jan 2026 19:45:49 GMT</pubDate>
+      <pubDate>Fri, 06 Feb 2026 18:00:57 GMT</pubDate>
       
         
         
-      <description>&lt;h1 id=&quot;DesktopTimer-桌面计时器&quot;&gt;&lt;a href=&quot;#DesktopTimer-桌面计时器&quot; class=&quot;headerlink&quot; title=&quot;DesktopTimer | 桌面计时器&quot;&gt;&lt;/a&gt;DesktopTimer | 桌面计时器&lt;/h1&gt;&lt;p al</description>
+      <description>&lt;h1 id=&quot;第一章-前言&quot;&gt;&lt;a href=&quot;#第一章-前言&quot; class=&quot;headerlink&quot; title=&quot;第一章 前言&quot;&gt;&lt;/a&gt;第一章 前言&lt;/h1&gt;&lt;p&gt;第一章的内容，我们先来了解一下C语言基础。想象一下，计算机就像个超级听话的机器人，它能按照我们写的指令一步步</description>
         
       
       
@@ -54,65 +33,189 @@
     </item>
     
     <item>
-      <title>Certificate-Management</title>
-      <link>https://re-tikara.fun/Blog/posts/6c20921f/</link>
-      <guid>https://re-tikara.fun/Blog/posts/6c20921f/</guid>
-      <pubDate>Fri, 02 Jan 2026 16:01:16 GMT</pubDate>
+      <title></title>
+      <link>https://re-tikara.fun/Blog/posts/0/</link>
+      <guid>https://re-tikara.fun/Blog/posts/0/</guid>
+      <pubDate>Fri, 06 Feb 2026 18:00:57 GMT</pubDate>
       
-      <description>奖项管理平台</description>
-      
-      
-      
-      
-      <category domain="https://re-tikara.fun/Blog/categories/Project/">Project</category>
-      
-      
-      <category domain="https://re-tikara.fun/Blog/tags/Project/">Project</category>
-      
-      
-      <comments>https://re-tikara.fun/Blog/posts/6c20921f/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>LaTeX学习日志01-前期准备</title>
-      <link>https://re-tikara.fun/Blog/posts/828fd9e/</link>
-      <guid>https://re-tikara.fun/Blog/posts/828fd9e/</guid>
-      <pubDate>Fri, 26 Dec 2025 23:54:10 GMT</pubDate>
-      
-      <description>LaTeX学习日志01-前期准备 包括安装，环境配置等</description>
+        
+        
+      <description>&lt;h1 id=&quot;一、什么是算法？&quot;&gt;&lt;a href=&quot;#一、什么是算法？&quot; class=&quot;headerlink&quot; title=&quot;一、什么是算法？&quot;&gt;&lt;/a&gt;一、什么是算法？&lt;/h1&gt;&lt;p&gt;&amp;emsp;&amp;emsp; 说到算法，比较陌生。那要是说起解题思路，会不会比较好理解一点？假设</description>
+        
       
       
       
       
-      <category domain="https://re-tikara.fun/Blog/categories/Latex/">Latex</category>
       
       
-      <category domain="https://re-tikara.fun/Blog/tags/LaTeX/">LaTeX</category>
-      
-      
-      <comments>https://re-tikara.fun/Blog/posts/828fd9e/#disqus_thread</comments>
+      <comments>https://re-tikara.fun/Blog/posts/0/#disqus_thread</comments>
       
     </item>
     
     <item>
-      <title>置顶公告</title>
-      <link>https://re-tikara.fun/Blog/posts/25ad5f96/</link>
-      <guid>https://re-tikara.fun/Blog/posts/25ad5f96/</guid>
-      <pubDate>Mon, 22 Dec 2025 14:44:53 GMT</pubDate>
+      <title></title>
+      <link>https://re-tikara.fun/Blog/posts/0/</link>
+      <guid>https://re-tikara.fun/Blog/posts/0/</guid>
+      <pubDate>Fri, 06 Feb 2026 18:00:57 GMT</pubDate>
       
-      <description>关于新版本网站的一些事情</description>
-      
-      
-      
-      
-      <category domain="https://re-tikara.fun/Blog/categories/Announcement/">Announcement</category>
-      
-      
-      <category domain="https://re-tikara.fun/Blog/tags/Announcement/">Announcement</category>
+        
+        
+      <description>&lt;h1 id=&quot;一、三大模块化结构&quot;&gt;&lt;a href=&quot;#一、三大模块化结构&quot; class=&quot;headerlink&quot; title=&quot;一、三大模块化结构&quot;&gt;&lt;/a&gt;一、三大模块化结构&lt;/h1&gt;&lt;p&gt;&amp;emsp;&amp;emsp; 在 C 语言中，我们主要学习使用如下几种结构：&lt;/p&gt;
+&lt;</description>
+        
       
       
-      <comments>https://re-tikara.fun/Blog/posts/25ad5f96/#disqus_thread</comments>
+      
+      
+      
+      
+      <comments>https://re-tikara.fun/Blog/posts/0/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://re-tikara.fun/Blog/posts/0/</link>
+      <guid>https://re-tikara.fun/Blog/posts/0/</guid>
+      <pubDate>Fri, 06 Feb 2026 18:00:57 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;一、程序&quot;&gt;&lt;a href=&quot;#一、程序&quot; class=&quot;headerlink&quot; title=&quot;一、程序&quot;&gt;&lt;/a&gt;一、程序&lt;/h1&gt;&lt;p&gt;&amp;emsp;&amp;emsp; 什么是程序？人们常说，我们仿佛是上帝创造的 NPC，只会机械的重复着毫无意义的动作, 毫无思想的执</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://re-tikara.fun/Blog/posts/0/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://re-tikara.fun/Blog/posts/0/</link>
+      <guid>https://re-tikara.fun/Blog/posts/0/</guid>
+      <pubDate>Fri, 06 Feb 2026 18:00:57 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;第五章-循环之道——驾驭程序的永动机&quot;&gt;&lt;a href=&quot;#第五章-循环之道——驾驭程序的永动机&quot; class=&quot;headerlink&quot; title=&quot;第五章 循环之道——驾驭程序的永动机&quot;&gt;&lt;/a&gt;第五章 循环之道——驾驭程序的永动机&lt;/h1&gt;&lt;h2 id=&quot;核</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://re-tikara.fun/Blog/posts/0/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://re-tikara.fun/Blog/posts/0/</link>
+      <guid>https://re-tikara.fun/Blog/posts/0/</guid>
+      <pubDate>Fri, 06 Feb 2026 18:00:57 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;第四章-选择结构程序设计——让程序学会思考&quot;&gt;&lt;a href=&quot;#第四章-选择结构程序设计——让程序学会思考&quot; class=&quot;headerlink&quot; title=&quot;第四章 选择结构程序设计——让程序学会思考&quot;&gt;&lt;/a&gt;第四章 选择结构程序设计——让程序学会思考&lt;/</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://re-tikara.fun/Blog/posts/0/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://re-tikara.fun/Blog/posts/0/</link>
+      <guid>https://re-tikara.fun/Blog/posts/0/</guid>
+      <pubDate>Fri, 06 Feb 2026 18:00:57 GMT</pubDate>
+      
+        
+        
+      <description>&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&quot;center&quot;&gt;&lt;strong&gt;优先级&lt;/strong&gt;&lt;/th&gt;
+&lt;th align=&quot;center&quot;&gt;&lt;strong&gt;运算符&lt;/strong&gt;&lt;/th&gt;
+&lt;th align=&quot;center&quot;&gt;&lt;strong&gt;名称</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://re-tikara.fun/Blog/posts/0/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://re-tikara.fun/Blog/posts/0/</link>
+      <guid>https://re-tikara.fun/Blog/posts/0/</guid>
+      <pubDate>Fri, 06 Feb 2026 18:00:57 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;程序的三种基本结构&quot;&gt;&lt;a href=&quot;#程序的三种基本结构&quot; class=&quot;headerlink&quot; title=&quot;程序的三种基本结构&quot;&gt;&lt;/a&gt;程序的三种基本结构&lt;/h1&gt;&lt;h2 id=&quot;1-结构化程序设计&quot;&gt;&lt;a href=&quot;#1-结构化程序设计&quot; class</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://re-tikara.fun/Blog/posts/0/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://re-tikara.fun/Blog/posts/0/</link>
+      <guid>https://re-tikara.fun/Blog/posts/0/</guid>
+      <pubDate>Fri, 06 Feb 2026 18:00:57 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;第三章-前言&quot;&gt;&lt;a href=&quot;#第三章-前言&quot; class=&quot;headerlink&quot; title=&quot;第三章 前言&quot;&gt;&lt;/a&gt;第三章 前言&lt;/h1&gt;&lt;p&gt;这一章咱们要掌握程序的“基本功”——就像学功夫要先练马步一样重要。&lt;/p&gt;
+&lt;h2 id=&quot;程序的三大招式&quot;</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://re-tikara.fun/Blog/posts/0/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://re-tikara.fun/Blog/posts/0/</link>
+      <guid>https://re-tikara.fun/Blog/posts/0/</guid>
+      <pubDate>Fri, 06 Feb 2026 18:00:57 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;赋值语句&quot;&gt;&lt;a href=&quot;#赋值语句&quot; class=&quot;headerlink&quot; title=&quot;赋值语句&quot;&gt;&lt;/a&gt;赋值语句&lt;/h1&gt;&lt;p&gt;&amp;emsp;&amp;emsp;在赋值表达式的尾部加上一个“&lt;font color=&quot;red&quot;&gt;；&lt;/font&gt;”，又称为表达式语句</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://re-tikara.fun/Blog/posts/0/#disqus_thread</comments>
       
     </item>
     
