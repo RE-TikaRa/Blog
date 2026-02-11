@@ -140,7 +140,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png">
 <meta property="article:published_time" content="2026-02-10T15:40:18.000Z">
-<meta property="article:modified_time" content="2026-02-10T16:13:52.243Z">
+<meta property="article:modified_time" content="2026-02-11T11:38:21.039Z">
 <meta property="article:author" content="亓翎_Re-Tikara">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="VIM">
@@ -809,8 +809,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2026-02-11 00:13:52</span>
-            <span class="mobile">2026-02-11 00:13:52</span>
+            <span class="desktop">2026-02-11 19:38:21</span>
+            <span class="mobile">2026-02-11 19:38:21</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -852,12 +852,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>658 字</span>
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>2.1k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fa-regular fa-clock"></i>&nbsp;<span>2 分钟</span>
+            <i class="fa-regular fa-clock"></i>&nbsp;<span>8 分钟</span>
         </span>
     
     
@@ -882,7 +882,7 @@
 			function updateExpirationDate() {
 				try {
 					const expiredDate = new Date("10000-01-01 07:59:59");
-					const updatedDate = new Date("Wed Feb 11 2026 00:13:52 GMT+0800");
+					const updatedDate = new Date("Wed Feb 11 2026 19:38:21 GMT+0800");
 					const now = new Date();
 					const expirationValue = document.getElementById("expiration-date");
 					const expirationContainer = document.getElementById("expiration-container");
@@ -905,71 +905,696 @@
 
 
 		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-			<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Vim 是一个基于模式的终端文本编辑器。它通过模式切换来区分浏览、编辑和命令输入。掌握 Vim 的关键在于理解不同模式的职责以及常用快捷键的组合方式。</p>
-<div style="width:70%;margin:48px auto;display:flex;align-items:center;justify-content:center;"><span style="flex:1;height:2px;background:linear-gradient(90deg,transparent,#b8a998 20%,#afa89f 50%,#b8a998 80%,transparent);opacity:0.5;"></span><span style="margin:0 10px;font-size:16px;color:#c9bfb3;">◆</span><span style="margin:0 20px;font-size:24px;color:#b8a998;">❖</span><span style="margin:0 10px;font-size:16px;color:#c9bfb3;">◆</span><span style="flex:1;height:2px;background:linear-gradient(90deg,transparent,#b8a998 20%,#afa89f 50%,#b8a998 80%,transparent);opacity:0.5;"></span></div>
+			<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>Vim</strong> 是从 vi 演化而来的文本编辑器，核心设计基于<strong>模式切换</strong>与<strong>组合命令</strong>。通过少量按键可以完成复杂文本操作，广泛用于终端开发与系统维护。</p>
+<p>理解 Vim 的关键在于掌握其模式体系，而非单独记忆命令。</p>
+<hr>
+<h2 id="模式概览"><a href="#模式概览" class="headerlink" title="模式概览"></a>模式概览</h2><p>Vim 主要包含三种核心模式，以及一个扩展的取代模式。</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>进入方式</th>
+<th>主要用途</th>
+<th>退出方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>普通模式（Normal）</strong></td>
+<td>打开文件默认进入，或按 <code>Esc</code></td>
+<td>光标移动、复制删除、搜索跳转</td>
+<td><code>i/a/o</code> 进入输入模式，<code>:</code> 进入命令行模式</td>
+</tr>
+<tr>
+<td><strong>输入模式（Insert）</strong></td>
+<td><code>i I a A o O</code></td>
+<td>输入文本</td>
+<td><code>Esc</code> 返回普通模式</td>
+</tr>
+<tr>
+<td><strong>取代模式（Replace）</strong></td>
+<td><code>r</code> 或 <code>R</code></td>
+<td>覆盖替换文本</td>
+<td><code>Esc</code> 返回普通模式</td>
+</tr>
+<tr>
+<td><strong>命令行模式（Command-line）</strong></td>
+<td>普通模式下输入 <code>:</code></td>
+<td>保存、退出、批量替换、配置</td>
+<td>回车执行或 <code>Esc</code> 取消</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="快速上手流程"><a href="#快速上手流程" class="headerlink" title="快速上手流程"></a>快速上手流程</h2><h3 id="打开或新建文件"><a href="#打开或新建文件" class="headerlink" title="打开或新建文件"></a>打开或新建文件</h3><div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim 文件名</span><br></pre></td></tr></table></figure></div>
 
-<h2 id="基本模式"><a href="#基本模式" class="headerlink" title="基本模式"></a>基本模式</h2><p>Vim 的核心由三种常用模式构成。</p>
-<h3 id="普通模式"><a href="#普通模式" class="headerlink" title="普通模式"></a>普通模式</h3><p>启动 Vim 后默认进入普通模式。该模式用于移动光标和执行编辑命令。</p>
-<p>常用移动操作：</p>
-<div class="code-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">h  左移</span><br><span class="line">j  下移</span><br><span class="line">k  上移</span><br><span class="line">l  右移</span><br><span class="line">w  跳到下一个单词</span><br><span class="line">b  回到上一个单词</span><br><span class="line">0  跳到行首</span><br><span class="line">$  跳到行尾</span><br></pre></td></tr></table></figure></div>
+<p>例如：</p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim runoob.txt</span><br></pre></td></tr></table></figure></div>
 
-<p>普通模式下所有编辑命令都可以和数字组合。例如：</p>
-<div class="code-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">3j   向下移动三行</span><br><span class="line">5w   前进五个单词</span><br></pre></td></tr></table></figure></div>
+<h3 id="编辑基本流程"><a href="#编辑基本流程" class="headerlink" title="编辑基本流程"></a>编辑基本流程</h3><ol>
+<li>按 <code>i</code> 进入输入模式开始编辑</li>
+<li>按 <code>Esc</code> 返回普通模式</li>
+<li>输入 <code>:wq</code> 保存并退出</li>
+<li>输入 <code>:q!</code> 放弃修改并退出</li>
+</ol>
+<hr>
+<h2 id="普通模式"><a href="#普通模式" class="headerlink" title="普通模式"></a>普通模式</h2><p>普通模式是 Vim 的核心操作环境，绝大多数编辑行为都从这里发起。</p>
+<h3 id="光标移动"><a href="#光标移动" class="headerlink" title="光标移动"></a>光标移动</h3><h4 id="基本移动"><a href="#基本移动" class="headerlink" title="基本移动"></a>基本移动</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>h</code></td>
+<td>向左移动一个字符</td>
+</tr>
+<tr>
+<td><code>j</code></td>
+<td>向下移动一行</td>
+</tr>
+<tr>
+<td><code>k</code></td>
+<td>向上移动一行</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>向右移动一个字符</td>
+</tr>
+</tbody></table>
+<p>支持数字前缀：</p>
+<div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">30</span><span class="keyword">j</span></span><br></pre></td></tr></table></figure></div>
 
-<h3 id="插入模式"><a href="#插入模式" class="headerlink" title="插入模式"></a>插入模式</h3><p>插入模式用于输入文本。</p>
-<p>进入插入模式的常用命令：</p>
-<div class="code-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">i  在光标前插入</span><br><span class="line">a  在光标后插入</span><br><span class="line">o  在下方新建一行并插入</span><br><span class="line">I  在行首插入</span><br><span class="line">A  在行尾插入</span><br></pre></td></tr></table></figure></div>
+<p>表示向下移动 30 行。</p>
+<h4 id="跳转与定位"><a href="#跳转与定位" class="headerlink" title="跳转与定位"></a>跳转与定位</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>w</code> &#x2F; <code>b</code></td>
+<td>下一个 &#x2F; 上一个单词</td>
+</tr>
+<tr>
+<td><code>0</code> &#x2F; <code>$</code></td>
+<td>行首 &#x2F; 行尾</td>
+</tr>
+<tr>
+<td><code>gg</code> &#x2F; <code>G</code></td>
+<td>文件首行 &#x2F; 末行</td>
+</tr>
+<tr>
+<td><code>nG</code></td>
+<td>跳到第 n 行</td>
+</tr>
+<tr>
+<td><code>H</code> &#x2F; <code>M</code> &#x2F; <code>L</code></td>
+<td>屏幕顶部 &#x2F; 中部 &#x2F; 底部</td>
+</tr>
+<tr>
+<td><code>+</code> &#x2F; <code>-</code></td>
+<td>下一行 &#x2F; 上一行非空字符</td>
+</tr>
+<tr>
+<td><code>Ctrl+f</code> &#x2F; <code>Ctrl+b</code></td>
+<td>下翻页 &#x2F; 上翻页</td>
+</tr>
+<tr>
+<td><code>Ctrl+d</code> &#x2F; <code>Ctrl+u</code></td>
+<td>下翻半页 &#x2F; 上翻半页</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h3><p>删除命令通常以 <code>d</code> 开头，可与移动命令组合。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>x</code> &#x2F; <code>X</code></td>
+<td>删除后一个 &#x2F; 前一个字符</td>
+</tr>
+<tr>
+<td><code>nx</code></td>
+<td>删除 n 个字符</td>
+</tr>
+<tr>
+<td><code>dd</code></td>
+<td>删除当前行</td>
+</tr>
+<tr>
+<td><code>ndd</code></td>
+<td>删除 n 行</td>
+</tr>
+<tr>
+<td><code>d$</code></td>
+<td>删除到行尾</td>
+</tr>
+<tr>
+<td><code>d0</code></td>
+<td>删除到行首</td>
+</tr>
+<tr>
+<td><code>dG</code></td>
+<td>删除到文件末尾</td>
+</tr>
+<tr>
+<td><code>d1G</code></td>
+<td>删除到文件开头</td>
+</tr>
+</tbody></table>
+<p>删除内容进入剪贴缓冲区，可直接粘贴。</p>
+<hr>
+<h3 id="复制与粘贴"><a href="#复制与粘贴" class="headerlink" title="复制与粘贴"></a>复制与粘贴</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>yy</code></td>
+<td>复制当前行</td>
+</tr>
+<tr>
+<td><code>nyy</code></td>
+<td>复制 n 行</td>
+</tr>
+<tr>
+<td><code>y$</code> &#x2F; <code>y0</code></td>
+<td>复制到行尾 &#x2F; 行首</td>
+</tr>
+<tr>
+<td><code>yG</code> &#x2F; <code>y1G</code></td>
+<td>复制到文件末尾 &#x2F; 开头</td>
+</tr>
+<tr>
+<td><code>p</code> &#x2F; <code>P</code></td>
+<td>在后方 &#x2F; 前方粘贴</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="修改与替换"><a href="#修改与替换" class="headerlink" title="修改与替换"></a>修改与替换</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cw</code></td>
+<td>修改单词</td>
+</tr>
+<tr>
+<td><code>cc</code></td>
+<td>修改整行</td>
+</tr>
+<tr>
+<td><code>J</code></td>
+<td>合并下一行</td>
+</tr>
+<tr>
+<td><code>r</code></td>
+<td>替换单字符</td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>连续覆盖替换</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="撤销与重复"><a href="#撤销与重复" class="headerlink" title="撤销与重复"></a>撤销与重复</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>u</code></td>
+<td>撤销</td>
+</tr>
+<tr>
+<td><code>Ctrl+r</code></td>
+<td>重做</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>重复上一次操作</td>
+</tr>
+</tbody></table>
+<p>重复命令适合批量编辑，例如连续删除多个相似结构。</p>
+<hr>
+<h3 id="搜索与替换"><a href="#搜索与替换" class="headerlink" title="搜索与替换"></a>搜索与替换</h3><h4 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h4><div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/word</span><br></pre></td></tr></table></figure></div>
 
+<p>向下搜索字符串。</p>
+<div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?word</span><br></pre></td></tr></table></figure></div>
+
+<p>向上搜索字符串。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>n</code></td>
+<td>跳到下一个匹配</td>
+</tr>
+<tr>
+<td><code>N</code></td>
+<td>反向跳转匹配</td>
+</tr>
+</tbody></table>
+<h4 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h4><p>全文替换：</p>
+<div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%s/old/<span class="keyword">new</span>/g</span><br></pre></td></tr></table></figure></div>
+
+<p>确认式替换：</p>
+<div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%s/old/<span class="keyword">new</span>/gc</span><br></pre></td></tr></table></figure></div>
+
+<p>指定范围替换：</p>
+<div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:<span class="number">100</span>,<span class="number">200</span>s/old/<span class="keyword">new</span>/g</span><br></pre></td></tr></table></figure></div>
+
+<hr>
+<h2 id="输入模式"><a href="#输入模式" class="headerlink" title="输入模式"></a>输入模式</h2><p>输入模式用于直接录入文本。</p>
+<h3 id="进入方式"><a href="#进入方式" class="headerlink" title="进入方式"></a>进入方式</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>i</code> &#x2F; <code>I</code></td>
+<td>光标处插入 &#x2F; 行首插入</td>
+</tr>
+<tr>
+<td><code>a</code> &#x2F; <code>A</code></td>
+<td>光标后插入 &#x2F; 行尾插入</td>
+</tr>
+<tr>
+<td><code>o</code> &#x2F; <code>O</code></td>
+<td>下方 &#x2F; 上方新建行</td>
+</tr>
+</tbody></table>
+<p>输入模式支持常规键盘操作：</p>
+<ul>
+<li>字符输入</li>
+<li>回车换行</li>
+<li>删除键</li>
+<li>方向键移动</li>
+<li>Home &#x2F; End</li>
+<li>Page Up &#x2F; Page Down</li>
+</ul>
 <p>按 <code>Esc</code> 返回普通模式。</p>
-<h3 id="命令行模式"><a href="#命令行模式" class="headerlink" title="命令行模式"></a>命令行模式</h3><p>在普通模式输入 <code>:</code> 进入命令行模式。该模式用于保存、退出和执行高级操作。</p>
-<p>常用命令：</p>
-<div class="code-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:w      保存文件</span><br><span class="line">:q      退出 Vim</span><br><span class="line">:wq     保存并退出</span><br><span class="line">:q!     强制退出不保存</span><br><span class="line">:w 新名 保存为新文件</span><br></pre></td></tr></table></figure></div>
+<hr>
+<h2 id="取代模式"><a href="#取代模式" class="headerlink" title="取代模式"></a>取代模式</h2><p>取代模式用于覆盖已有文本。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>r</code></td>
+<td>替换单个字符</td>
+</tr>
+<tr>
+<td><code>R</code></td>
+<td>连续覆盖替换</td>
+</tr>
+</tbody></table>
+<p>按 <code>Esc</code> 结束取代。</p>
+<hr>
+<h2 id="命令行模式"><a href="#命令行模式" class="headerlink" title="命令行模式"></a>命令行模式</h2><p>在普通模式输入 <code>:</code> 进入命令行模式。</p>
+<h3 id="保存与退出"><a href="#保存与退出" class="headerlink" title="保存与退出"></a>保存与退出</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>:w</code></td>
+<td>保存文件</td>
+</tr>
+<tr>
+<td><code>:w!</code></td>
+<td>强制保存</td>
+</tr>
+<tr>
+<td><code>:q</code></td>
+<td>退出</td>
+</tr>
+<tr>
+<td><code>:q!</code></td>
+<td>强制退出</td>
+</tr>
+<tr>
+<td><code>:wq</code></td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td><code>ZZ</code></td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td><code>ZQ</code></td>
+<td>不保存退出</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>:w 文件名</code></td>
+<td>另存为</td>
+</tr>
+<tr>
+<td><code>:r 文件名</code></td>
+<td>读入文件内容</td>
+</tr>
+<tr>
+<td><code>:n1,n2 w 文件名</code></td>
+<td>导出指定行</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="环境设置"><a href="#环境设置" class="headerlink" title="环境设置"></a>环境设置</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>:set nu</code></td>
+<td>显示行号</td>
+</tr>
+<tr>
+<td><code>:set nonu</code></td>
+<td>取消行号</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="执行外部命令"><a href="#执行外部命令" class="headerlink" title="执行外部命令"></a>执行外部命令</h3><div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:!command</span><br></pre></td></tr></table></figure></div>
 
-<div style="width:70%;margin:48px auto;display:flex;align-items:center;justify-content:center;"><span style="flex:1;height:2px;background:linear-gradient(90deg,transparent,#b8a998 20%,#afa89f 50%,#b8a998 80%,transparent);opacity:0.5;"></span><span style="margin:0 10px;font-size:16px;color:#c9bfb3;">◆</span><span style="margin:0 20px;font-size:24px;color:#b8a998;">❖</span><span style="margin:0 10px;font-size:16px;color:#c9bfb3;">◆</span><span style="flex:1;height:2px;background:linear-gradient(90deg,transparent,#b8a998 20%,#afa89f 50%,#b8a998 80%,transparent);opacity:0.5;"></span></div>
+<p>示例：</p>
+<div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:!ls</span><br></pre></td></tr></table></figure></div>
 
-<h2 id="编辑操作"><a href="#编辑操作" class="headerlink" title="编辑操作"></a>编辑操作</h2><h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><div class="code-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x    删除字符</span><br><span class="line">dd   删除整行</span><br><span class="line">dw   删除一个单词</span><br><span class="line">D    删除到行尾</span><br></pre></td></tr></table></figure></div>
+<p>在 Vim 内查看系统命令输出。</p>
+<hr>
+<h2 id="数字前缀机制"><a href="#数字前缀机制" class="headerlink" title="数字前缀机制"></a>数字前缀机制</h2><p>Vim 支持数字前缀与命令组合，用于批量操作。</p>
+<p>示例：</p>
+<div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">50</span>dd</span><br></pre></td></tr></table></figure></div>
 
-<h3 id="复制与粘贴"><a href="#复制与粘贴" class="headerlink" title="复制与粘贴"></a>复制与粘贴</h3><div class="code-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yy   复制整行</span><br><span class="line">yw   复制一个单词</span><br><span class="line">p    在光标后粘贴</span><br><span class="line">P    在光标前粘贴</span><br></pre></td></tr></table></figure></div>
+<p>删除 50 行。</p>
+<div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">20</span><span class="keyword">j</span></span><br></pre></td></tr></table></figure></div>
 
-<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><div class="code-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cw   修改单词</span><br><span class="line">cc   修改整行</span><br><span class="line">r    替换单个字符</span><br></pre></td></tr></table></figure></div>
+<p>向下移动 20 行。</p>
+<hr>
+<h2 id="高频操作示例"><a href="#高频操作示例" class="headerlink" title="高频操作示例"></a>高频操作示例</h2><p>全文替换：</p>
+<div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%s/foo/bar/g</span><br></pre></td></tr></table></figure></div>
 
-<p>修改命令执行后自动进入插入模式。</p>
-<div style="width:70%;margin:48px auto;display:flex;align-items:center;justify-content:center;"><span style="flex:1;height:2px;background:linear-gradient(90deg,transparent,#b8a998 20%,#afa89f 50%,#b8a998 80%,transparent);opacity:0.5;"></span><span style="margin:0 10px;font-size:16px;color:#c9bfb3;">◆</span><span style="margin:0 20px;font-size:24px;color:#b8a998;">❖</span><span style="margin:0 10px;font-size:16px;color:#c9bfb3;">◆</span><span style="flex:1;height:2px;background:linear-gradient(90deg,transparent,#b8a998 20%,#afa89f 50%,#b8a998 80%,transparent);opacity:0.5;"></span></div>
+<p>确认式替换：</p>
+<div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%s/foo/bar/gc</span><br></pre></td></tr></table></figure></div>
 
-<h2 id="可视模式"><a href="#可视模式" class="headerlink" title="可视模式"></a>可视模式</h2><p>可视模式用于选择文本区域。</p>
-<div class="code-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">v  字符选择模式</span><br><span class="line">V  行选择模式</span><br><span class="line">Ctrl+v  块选择模式</span><br></pre></td></tr></table></figure></div>
+<p>删除到行尾：</p>
+<div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d$</span><br></pre></td></tr></table></figure></div>
 
-<p>选中内容后可以直接执行删除、复制或替换。</p>
-<div style="width:70%;margin:48px auto;display:flex;align-items:center;justify-content:center;"><span style="flex:1;height:2px;background:linear-gradient(90deg,transparent,#b8a998 20%,#afa89f 50%,#b8a998 80%,transparent);opacity:0.5;"></span><span style="margin:0 10px;font-size:16px;color:#c9bfb3;">◆</span><span style="margin:0 20px;font-size:24px;color:#b8a998;">❖</span><span style="margin:0 10px;font-size:16px;color:#c9bfb3;">◆</span><span style="flex:1;height:2px;background:linear-gradient(90deg,transparent,#b8a998 20%,#afa89f 50%,#b8a998 80%,transparent);opacity:0.5;"></span></div>
+<p>复制到文件末尾：</p>
+<div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yG</span><br></pre></td></tr></table></figure></div>
 
-<h2 id="查找与替换"><a href="#查找与替换" class="headerlink" title="查找与替换"></a>查找与替换</h2><h3 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h3><div class="code-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/关键词</span><br></pre></td></tr></table></figure></div>
+<hr>
+<h2 id="可视模式（Visual）"><a href="#可视模式（Visual）" class="headerlink" title="可视模式（Visual）"></a>可视模式（Visual）</h2><p>可视模式用于“先选中，再操作”，对块状编辑和批量缩进非常高效。</p>
+<h3 id="进入方式-1"><a href="#进入方式-1" class="headerlink" title="进入方式"></a>进入方式</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>v</code></td>
+<td>字符级可视模式</td>
+</tr>
+<tr>
+<td><code>V</code></td>
+<td>行级可视模式</td>
+</tr>
+<tr>
+<td><code>Ctrl+v</code></td>
+<td>块级可视模式（列编辑）</td>
+</tr>
+</tbody></table>
+<p>常用组合：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&gt;</code> &#x2F; <code>&lt;</code></td>
+<td>缩进 &#x2F; 反缩进选中内容</td>
+</tr>
+<tr>
+<td><code>d</code> &#x2F; <code>y</code></td>
+<td>删除 &#x2F; 复制选中内容</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td>删除选中内容并进入输入模式</td>
+</tr>
+<tr>
+<td><code>I</code></td>
+<td>块模式下在多行行首插入</td>
+</tr>
+<tr>
+<td><code>A</code></td>
+<td>块模式下在多行行尾追加</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="文本对象与操作符组合"><a href="#文本对象与操作符组合" class="headerlink" title="文本对象与操作符组合"></a>文本对象与操作符组合</h2><p>Vim 的高效率来自“操作符 + 文本对象&#x2F;移动命令”。</p>
+<h3 id="常见操作符"><a href="#常见操作符" class="headerlink" title="常见操作符"></a>常见操作符</h3><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>d</code></td>
+<td>删除</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td>修改（删除后进入输入模式）</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>复制</td>
+</tr>
+</tbody></table>
+<h3 id="常见文本对象"><a href="#常见文本对象" class="headerlink" title="常见文本对象"></a>常见文本对象</h3><table>
+<thead>
+<tr>
+<th>文本对象</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>iw</code> &#x2F; <code>aw</code></td>
+<td>单词内部 &#x2F; 包含空格的单词</td>
+</tr>
+<tr>
+<td><code>i&quot;</code> &#x2F; <code>a&quot;</code></td>
+<td>双引号内部 &#x2F; 包含引号</td>
+</tr>
+<tr>
+<td><code>i)</code> &#x2F; <code>a)</code></td>
+<td>圆括号内部 &#x2F; 包含括号</td>
+</tr>
+<tr>
+<td><code>ip</code> &#x2F; <code>ap</code></td>
+<td>段落内部 &#x2F; 包含空行边界</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">diw      <span class="comment">&quot; 删除当前单词</span></span><br><span class="line">ci<span class="string">&quot;      &quot;</span> 修改双引号内文本</span><br><span class="line">da)      <span class="comment">&quot; 删除一对括号及内容</span></span><br><span class="line">yip      <span class="comment">&quot; 复制当前段落</span></span><br></pre></td></tr></table></figure></div>
 
-<p>回车后跳转到匹配位置。</p>
-<div class="code-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">n  下一个匹配</span><br><span class="line">N  上一个匹配</span><br></pre></td></tr></table></figure></div>
+<hr>
+<h2 id="寄存器与系统剪贴板"><a href="#寄存器与系统剪贴板" class="headerlink" title="寄存器与系统剪贴板"></a>寄存器与系统剪贴板</h2><p>Vim 的复制删除内容默认进入寄存器（register），并不总是系统剪贴板。</p>
+<h3 id="常见寄存器"><a href="#常见寄存器" class="headerlink" title="常见寄存器"></a>常见寄存器</h3><table>
+<thead>
+<tr>
+<th>寄存器</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&quot;</code></td>
+<td>默认寄存器</td>
+</tr>
+<tr>
+<td><code>0</code></td>
+<td>最近一次复制（<code>y</code>）内容</td>
+</tr>
+<tr>
+<td><code>a-z</code></td>
+<td>命名寄存器</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>系统剪贴板（需 Vim 编译启用 clipboard）</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;ayy     &quot;</span> 复制当前行到寄存器 <span class="keyword">a</span></span><br><span class="line"><span class="string">&quot;ap      &quot;</span> 粘贴寄存器 <span class="keyword">a</span> 内容</span><br><span class="line"><span class="string">&quot;+y      &quot;</span> 复制到系统剪贴板</span><br><span class="line"><span class="string">&quot;+p      &quot;</span> 从系统剪贴板粘贴</span><br></pre></td></tr></table></figure></div>
 
-<h3 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h3><div class="code-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%s/旧内容/新内容/g</span><br></pre></td></tr></table></figure></div>
+<p>可用以下命令检查是否支持系统剪贴板：</p>
+<div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:<span class="keyword">version</span></span><br></pre></td></tr></table></figure></div>
 
-<p>含义如下：</p>
-<div class="code-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%  整个文件</span><br><span class="line">s  替换命令</span><br><span class="line">g  全局替换</span><br></pre></td></tr></table></figure></div>
+<p>若输出中包含 <code>+clipboard</code>，即可使用 <code>&quot;+</code> 寄存器。</p>
+<hr>
+<h2 id="宏录制与回放"><a href="#宏录制与回放" class="headerlink" title="宏录制与回放"></a>宏录制与回放</h2><p>宏适合处理重复格式化任务。</p>
+<h3 id="基础流程"><a href="#基础流程" class="headerlink" title="基础流程"></a>基础流程</h3><ol>
+<li><code>qa</code>：开始录制到寄存器 <code>a</code></li>
+<li>执行一组编辑动作</li>
+<li><code>q</code>：结束录制</li>
+<li><code>@a</code>：执行一次宏</li>
+<li><code>10@a</code>：执行 10 次</li>
+</ol>
+<hr>
+<h2 id="多窗口、分屏与标签页"><a href="#多窗口、分屏与标签页" class="headerlink" title="多窗口、分屏与标签页"></a>多窗口、分屏与标签页</h2><h3 id="分屏"><a href="#分屏" class="headerlink" title="分屏"></a>分屏</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>:split</code> &#x2F; <code>:sp</code></td>
+<td>水平分屏</td>
+</tr>
+<tr>
+<td><code>:vsplit</code> &#x2F; <code>:vs</code></td>
+<td>垂直分屏</td>
+</tr>
+<tr>
+<td><code>Ctrl+w w</code></td>
+<td>在窗口间切换</td>
+</tr>
+<tr>
+<td><code>Ctrl+w h/j/k/l</code></td>
+<td>按方向切换窗口</td>
+</tr>
+<tr>
+<td><code>Ctrl+w q</code></td>
+<td>关闭当前窗口</td>
+</tr>
+<tr>
+<td><code>Ctrl+w =</code></td>
+<td>平衡窗口尺寸</td>
+</tr>
+</tbody></table>
+<h3 id="标签页"><a href="#标签页" class="headerlink" title="标签页"></a>标签页</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>:tabnew</code></td>
+<td>新建标签页</td>
+</tr>
+<tr>
+<td><code>:tabnext</code> &#x2F; <code>gt</code></td>
+<td>下一个标签页</td>
+</tr>
+<tr>
+<td><code>:tabprevious</code> &#x2F; <code>gT</code></td>
+<td>上一个标签页</td>
+</tr>
+<tr>
+<td><code>:tabclose</code></td>
+<td>关闭当前标签页</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="多文件编辑（参数列表）"><a href="#多文件编辑（参数列表）" class="headerlink" title="多文件编辑（参数列表）"></a>多文件编辑（参数列表）</h2><p>同时打开多个文件：</p>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim file1.txt file2.txt file3.txt</span><br></pre></td></tr></table></figure></div>
 
-<p>只替换当前行时可以省略 <code>%</code>。</p>
-<div style="width:70%;margin:48px auto;display:flex;align-items:center;justify-content:center;"><span style="flex:1;height:2px;background:linear-gradient(90deg,transparent,#b8a998 20%,#afa89f 50%,#b8a998 80%,transparent);opacity:0.5;"></span><span style="margin:0 10px;font-size:16px;color:#c9bfb3;">◆</span><span style="margin:0 20px;font-size:24px;color:#b8a998;">❖</span><span style="margin:0 10px;font-size:16px;color:#c9bfb3;">◆</span><span style="flex:1;height:2px;background:linear-gradient(90deg,transparent,#b8a998 20%,#afa89f 50%,#b8a998 80%,transparent);opacity:0.5;"></span></div>
+<p>切换文件：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>:args</code></td>
+<td>查看参数列表</td>
+</tr>
+<tr>
+<td><code>:next</code> &#x2F; <code>:n</code></td>
+<td>下一个文件</td>
+</tr>
+<tr>
+<td><code>:prev</code> &#x2F; <code>:N</code></td>
+<td>上一个文件</td>
+</tr>
+<tr>
+<td><code>:first</code></td>
+<td>第一个文件</td>
+</tr>
+<tr>
+<td><code>:last</code></td>
+<td>最后一个文件</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="实用配置（-vimrc）"><a href="#实用配置（-vimrc）" class="headerlink" title="实用配置（~/.vimrc）"></a>实用配置（<code>~/.vimrc</code>）</h2><p>以下配置适合作为基础起点：</p>
+<div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">number</span></span><br><span class="line"><span class="keyword">set</span> relativenumber</span><br><span class="line"><span class="keyword">set</span> tabstop=<span class="number">4</span></span><br><span class="line"><span class="keyword">set</span> <span class="built_in">shiftwidth</span>=<span class="number">4</span></span><br><span class="line"><span class="keyword">set</span> expandtab</span><br><span class="line"><span class="keyword">set</span> autoindent</span><br><span class="line"><span class="keyword">set</span> hlsearch</span><br><span class="line"><span class="keyword">set</span> incsearch</span><br><span class="line"><span class="keyword">set</span> ignorecase</span><br><span class="line"><span class="keyword">set</span> smartcase</span><br><span class="line"><span class="keyword">set</span> cursorline</span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></span><br></pre></td></tr></table></figure></div>
 
-<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><p>启动 Vim：</p>
-<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim 文件名</span><br></pre></td></tr></table></figure></div>
-
-<p>打开多个文件：</p>
-<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim 文件1 文件2</span><br></pre></td></tr></table></figure></div>
-
-<p>在文件之间切换：</p>
-<div class="code-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:n  下一个文件</span><br><span class="line">:p  上一个文件</span><br></pre></td></tr></table></figure></div>
-
-<div style="width:70%;margin:48px auto;display:flex;align-items:center;justify-content:center;"><span style="flex:1;height:2px;background:linear-gradient(90deg,transparent,#b8a998 20%,#afa89f 50%,#b8a998 80%,transparent);opacity:0.5;"></span><span style="margin:0 10px;font-size:16px;color:#c9bfb3;">◆</span><span style="margin:0 20px;font-size:24px;color:#b8a998;">❖</span><span style="margin:0 10px;font-size:16px;color:#c9bfb3;">◆</span><span style="flex:1;height:2px;background:linear-gradient(90deg,transparent,#b8a998 20%,#afa89f 50%,#b8a998 80%,transparent);opacity:0.5;"></span></div>
-
-<h2 id="常用配置"><a href="#常用配置" class="headerlink" title="常用配置"></a>常用配置</h2><p>Vim 配置文件为 <code>~/.vimrc</code>。示例配置：</p>
-<div class="code-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">number</span></span><br><span class="line"><span class="keyword">syntax</span> <span class="keyword">on</span></span><br><span class="line"><span class="keyword">set</span> tabstop=<span class="number">4</span></span><br><span class="line"><span class="keyword">set</span> <span class="built_in">shiftwidth</span>=<span class="number">4</span></span><br><span class="line"><span class="keyword">set</span> expandtab</span><br></pre></td></tr></table></figure></div>
-
-<p>这些配置分别表示显示行号、启用语法高亮、设置缩进宽度和使用空格代替制表符。</p>
+<p>说明：</p>
+<ul>
+<li><code>number</code>：显示绝对行号</li>
+<li><code>relativenumber</code>：显示相对行号，配合 <code>j/k</code> 高效跳转</li>
+<li><code>expandtab</code>：将 Tab 转为空格</li>
+<li><code>ignorecase + smartcase</code>：默认忽略大小写，但含大写时精确匹配</li>
+</ul>
+<hr>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><ol>
+<li><strong>退出时提示 swap 文件</strong>：通常是异常退出留下的 <code>.swp</code>，确认无误后可删除。</li>
+<li><strong>粘贴代码缩进错乱</strong>：先执行 <code>:set paste</code>，粘贴后再 <code>:set nopaste</code>。</li>
+<li><strong>方向键表现异常</strong>：检查终端类型与 <code>TERM</code> 配置，优先使用 <code>hjkl</code>。</li>
+<li><strong>中文显示乱码</strong>：确认终端与文件编码为 UTF-8，可执行 <code>:set encoding?</code> 查看。</li>
+</ol>
+<hr>
+<h2 id="建议记忆顺序"><a href="#建议记忆顺序" class="headerlink" title="建议记忆顺序"></a>建议记忆顺序</h2><p>如果刚开始用 Vim，按这个顺序练习会更顺手：</p>
+<ol>
+<li><code>i</code> &#x2F; <code>Esc</code> &#x2F; <code>:wq</code>（进出编辑与保存退出）</li>
+<li><code>hjkl</code>、<code>w/b</code>、<code>0/$</code>、<code>gg/G</code>（移动）</li>
+<li><code>dd</code>、<code>yy</code>、<code>p</code>、<code>u</code>、<code>.</code>（编辑与撤销）</li>
+<li><code>/</code>、<code>n</code>、<code>:%s/.../.../g</code>（搜索替换）</li>
+<li><code>v</code>、<code>diw</code>、<code>ci&quot;</code>、宏 <code>qa ... q</code>（提效操作）</li>
+</ol>
 
 		</div>
 
@@ -984,7 +1609,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2026-02-11 00:13:52
+                    :</strong> 2026-02-11 19:38:21
             </li>
         
         <li>
@@ -1063,7 +1688,7 @@
 	<div class="post-toc">
 		<div class="toc-title">目录</div>
 		<div class="page-title">Linux基础-VIM使用方法</div>
-		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%BC%8F"><span class="nav-text">基本模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F"><span class="nav-text">普通模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%A8%A1%E5%BC%8F"><span class="nav-text">插入模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="nav-text">命令行模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E6%93%8D%E4%BD%9C"><span class="nav-text">编辑操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-text">删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E4%B8%8E%E7%B2%98%E8%B4%B4"><span class="nav-text">复制与粘贴</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9"><span class="nav-text">修改</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E6%A8%A1%E5%BC%8F"><span class="nav-text">可视模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E4%B8%8E%E6%9B%BF%E6%8D%A2"><span class="nav-text">查找与替换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE"><span class="nav-text">查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%BF%E6%8D%A2"><span class="nav-text">替换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="nav-text">文件操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE"><span class="nav-text">常用配置</span></a></li></ol>
+		<ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%BC%8F%E6%A6%82%E8%A7%88"><span class="nav-text">模式概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%E6%B5%81%E7%A8%8B"><span class="nav-text">快速上手流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%BC%80%E6%88%96%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6"><span class="nav-text">打开或新建文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%BE%91%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B"><span class="nav-text">编辑基本流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E6%A8%A1%E5%BC%8F"><span class="nav-text">普通模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%89%E6%A0%87%E7%A7%BB%E5%8A%A8"><span class="nav-text">光标移动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C"><span class="nav-text">删除操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E4%B8%8E%E7%B2%98%E8%B4%B4"><span class="nav-text">复制与粘贴</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%8E%E6%9B%BF%E6%8D%A2"><span class="nav-text">修改与替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%92%A4%E9%94%80%E4%B8%8E%E9%87%8D%E5%A4%8D"><span class="nav-text">撤销与重复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E4%B8%8E%E6%9B%BF%E6%8D%A2"><span class="nav-text">搜索与替换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E6%A8%A1%E5%BC%8F"><span class="nav-text">输入模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E6%96%B9%E5%BC%8F"><span class="nav-text">进入方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%96%E4%BB%A3%E6%A8%A1%E5%BC%8F"><span class="nav-text">取代模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="nav-text">命令行模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E4%B8%8E%E9%80%80%E5%87%BA"><span class="nav-text">保存与退出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="nav-text">文件操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E8%AE%BE%E7%BD%AE"><span class="nav-text">环境设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4"><span class="nav-text">执行外部命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E5%89%8D%E7%BC%80%E6%9C%BA%E5%88%B6"><span class="nav-text">数字前缀机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E9%A2%91%E6%93%8D%E4%BD%9C%E7%A4%BA%E4%BE%8B"><span class="nav-text">高频操作示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E6%A8%A1%E5%BC%8F%EF%BC%88Visual%EF%BC%89"><span class="nav-text">可视模式（Visual）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E6%96%B9%E5%BC%8F-1"><span class="nav-text">进入方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E5%AF%B9%E8%B1%A1%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%AC%A6%E7%BB%84%E5%90%88"><span class="nav-text">文本对象与操作符组合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-text">常见操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E6%96%87%E6%9C%AC%E5%AF%B9%E8%B1%A1"><span class="nav-text">常见文本对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E4%B8%8E%E7%B3%BB%E7%BB%9F%E5%89%AA%E8%B4%B4%E6%9D%BF"><span class="nav-text">寄存器与系统剪贴板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-text">常见寄存器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8F%E5%BD%95%E5%88%B6%E4%B8%8E%E5%9B%9E%E6%94%BE"><span class="nav-text">宏录制与回放</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%B5%81%E7%A8%8B"><span class="nav-text">基础流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%AA%97%E5%8F%A3%E3%80%81%E5%88%86%E5%B1%8F%E4%B8%8E%E6%A0%87%E7%AD%BE%E9%A1%B5"><span class="nav-text">多窗口、分屏与标签页</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%B1%8F"><span class="nav-text">分屏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E9%A1%B5"><span class="nav-text">标签页</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91%EF%BC%88%E5%8F%82%E6%95%B0%E5%88%97%E8%A1%A8%EF%BC%89"><span class="nav-text">多文件编辑（参数列表）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%94%A8%E9%85%8D%E7%BD%AE%EF%BC%88-vimrc%EF%BC%89"><span class="nav-text">实用配置（~&#x2F;.vimrc）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-text">常见问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E8%AE%AE%E8%AE%B0%E5%BF%86%E9%A1%BA%E5%BA%8F"><span class="nav-text">建议记忆顺序</span></a></li></ol>
 
 	</div>
 </div>
@@ -1096,7 +1721,7 @@
                     </span>
                     
                         <span>
-                            共 74.4k 字
+                            共 75.9k 字
                         </span>
                     
                 </p>
