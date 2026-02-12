@@ -9,7 +9,7 @@
     <atom:link href="https://re-tikara.fun/Blog/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>重构的版本</description>
-    <pubDate>Thu, 12 Feb 2026 17:45:34 GMT</pubDate>
+    <pubDate>Thu, 12 Feb 2026 18:12:14 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -22,6 +22,8 @@
       
       
       
+      
+      <category domain="https://re-tikara.fun/Blog/categories/VMware/">VMware</category>
       
       
       <category domain="https://re-tikara.fun/Blog/tags/VMware/">VMware</category>
@@ -103,9 +105,9 @@
     </item>
     
     <item>
-      <title>第七章——函数 第一节——函数定义和返回值</title>
-      <link>https://re-tikara.fun/Blog/posts/4049614e/</link>
-      <guid>https://re-tikara.fun/Blog/posts/4049614e/</guid>
+      <title>第一章——程序设计基本概念 第三节——结构化程序设计和模块化结构</title>
+      <link>https://re-tikara.fun/Blog/posts/bf2a0d0e/</link>
+      <guid>https://re-tikara.fun/Blog/posts/bf2a0d0e/</guid>
       <pubDate>Fri, 06 Feb 2026 18:21:28 GMT</pubDate>
       
       <description>这是文章摘要 This is the excerpt of the post</description>
@@ -115,20 +117,20 @@
       
       <category domain="https://re-tikara.fun/Blog/categories/C-Language/">C_Language</category>
       
-      <category domain="https://re-tikara.fun/Blog/categories/C-Language/%E7%AC%AC%E4%B8%83%E7%AB%A0%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0/">第七章——函数</category>
+      <category domain="https://re-tikara.fun/Blog/categories/C-Language/%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">第一章——程序设计基本概念</category>
       
       
       <category domain="https://re-tikara.fun/Blog/tags/C-Language/">C Language</category>
       
       
-      <comments>https://re-tikara.fun/Blog/posts/4049614e/#disqus_thread</comments>
+      <comments>https://re-tikara.fun/Blog/posts/bf2a0d0e/#disqus_thread</comments>
       
     </item>
     
     <item>
-      <title>第七章——函数 第三节——无返回值的函数的一般调用形式</title>
-      <link>https://re-tikara.fun/Blog/posts/d0d12044/</link>
-      <guid>https://re-tikara.fun/Blog/posts/d0d12044/</guid>
+      <title>第一章——程序设计基本概念 第一节——各种“程序”的概念</title>
+      <link>https://re-tikara.fun/Blog/posts/a942ac92/</link>
+      <guid>https://re-tikara.fun/Blog/posts/a942ac92/</guid>
       <pubDate>Fri, 06 Feb 2026 18:21:28 GMT</pubDate>
       
       <description>这是文章摘要 This is the excerpt of the post</description>
@@ -138,36 +140,13 @@
       
       <category domain="https://re-tikara.fun/Blog/categories/C-Language/">C_Language</category>
       
-      <category domain="https://re-tikara.fun/Blog/categories/C-Language/%E7%AC%AC%E4%B8%83%E7%AB%A0%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0/">第七章——函数</category>
+      <category domain="https://re-tikara.fun/Blog/categories/C-Language/%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">第一章——程序设计基本概念</category>
       
       
       <category domain="https://re-tikara.fun/Blog/tags/C-Language/">C Language</category>
       
       
-      <comments>https://re-tikara.fun/Blog/posts/d0d12044/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>第七章——函数 第六节——调用函数和被调用函数之间的数据传递</title>
-      <link>https://re-tikara.fun/Blog/posts/abddebca/</link>
-      <guid>https://re-tikara.fun/Blog/posts/abddebca/</guid>
-      <pubDate>Fri, 06 Feb 2026 18:21:28 GMT</pubDate>
-      
-      <description>这是文章摘要 This is the excerpt of the post</description>
-      
-      
-      
-      
-      <category domain="https://re-tikara.fun/Blog/categories/C-Language/">C_Language</category>
-      
-      <category domain="https://re-tikara.fun/Blog/categories/C-Language/%E7%AC%AC%E4%B8%83%E7%AB%A0%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0/">第七章——函数</category>
-      
-      
-      <category domain="https://re-tikara.fun/Blog/tags/C-Language/">C Language</category>
-      
-      
-      <comments>https://re-tikara.fun/Blog/posts/abddebca/#disqus_thread</comments>
+      <comments>https://re-tikara.fun/Blog/posts/a942ac92/#disqus_thread</comments>
       
     </item>
     
@@ -195,6 +174,52 @@
     </item>
     
     <item>
+      <title>第七章——函数 第三节——无返回值的函数的一般调用形式</title>
+      <link>https://re-tikara.fun/Blog/posts/d0d12044/</link>
+      <guid>https://re-tikara.fun/Blog/posts/d0d12044/</guid>
+      <pubDate>Fri, 06 Feb 2026 18:21:28 GMT</pubDate>
+      
+      <description>这是文章摘要 This is the excerpt of the post</description>
+      
+      
+      
+      
+      <category domain="https://re-tikara.fun/Blog/categories/C-Language/">C_Language</category>
+      
+      <category domain="https://re-tikara.fun/Blog/categories/C-Language/%E7%AC%AC%E4%B8%83%E7%AB%A0%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0/">第七章——函数</category>
+      
+      
+      <category domain="https://re-tikara.fun/Blog/tags/C-Language/">C Language</category>
+      
+      
+      <comments>https://re-tikara.fun/Blog/posts/d0d12044/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>第一章——程序设计基本概念 第二节——算法的特性</title>
+      <link>https://re-tikara.fun/Blog/posts/bf46c037/</link>
+      <guid>https://re-tikara.fun/Blog/posts/bf46c037/</guid>
+      <pubDate>Fri, 06 Feb 2026 18:21:28 GMT</pubDate>
+      
+      <description>这是文章摘要 This is the excerpt of the post</description>
+      
+      
+      
+      
+      <category domain="https://re-tikara.fun/Blog/categories/C-Language/">C_Language</category>
+      
+      <category domain="https://re-tikara.fun/Blog/categories/C-Language/%E7%AC%AC%E4%B8%80%E7%AB%A0%E2%80%94%E2%80%94%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">第一章——程序设计基本概念</category>
+      
+      
+      <category domain="https://re-tikara.fun/Blog/tags/C-Language/">C Language</category>
+      
+      
+      <comments>https://re-tikara.fun/Blog/posts/bf46c037/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
       <title>第七章——函数 第五节——函数的声明</title>
       <link>https://re-tikara.fun/Blog/posts/88d469c7/</link>
       <guid>https://re-tikara.fun/Blog/posts/88d469c7/</guid>
@@ -214,29 +239,6 @@
       
       
       <comments>https://re-tikara.fun/Blog/posts/88d469c7/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>第七章——函数 预读节——C程序结构函数</title>
-      <link>https://re-tikara.fun/Blog/posts/e38903bc/</link>
-      <guid>https://re-tikara.fun/Blog/posts/e38903bc/</guid>
-      <pubDate>Fri, 06 Feb 2026 18:21:28 GMT</pubDate>
-      
-      <description>这是文章摘要 This is the excerpt of the post</description>
-      
-      
-      
-      
-      <category domain="https://re-tikara.fun/Blog/categories/C-Language/">C_Language</category>
-      
-      <category domain="https://re-tikara.fun/Blog/categories/C-Language/%E7%AC%AC%E4%B8%83%E7%AB%A0%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0/">第七章——函数</category>
-      
-      
-      <category domain="https://re-tikara.fun/Blog/tags/C-Language/">C Language</category>
-      
-      
-      <comments>https://re-tikara.fun/Blog/posts/e38903bc/#disqus_thread</comments>
       
     </item>
     
