@@ -94,7 +94,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png">
 <meta property="article:published_time" content="2026-03-15T10:25:13.000Z">
-<meta property="article:modified_time" content="2026-03-15T11:08:01.961Z">
+<meta property="article:modified_time" content="2026-03-15T12:07:53.061Z">
 <meta property="article:author" content="亓翎_Re-Tikara">
 <meta property="article:tag" content="亓翎_Re-Tikara">
 <meta name="twitter:card" content="summary">
@@ -762,8 +762,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2026-03-15 19:08:01</span>
-            <span class="mobile">2026-03-15 19:08:01</span>
+            <span class="desktop">2026-03-15 20:07:53</span>
+            <span class="mobile">2026-03-15 20:07:53</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -811,7 +811,7 @@
 		
 
 		
-		<div class="article-expire hidden mt-4 mx-2 sm:mx-6 md:mx-8 callout callout--simple red mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center" id="expiration-container" data-expires="10000-01-01 07:59:59" data-updated="Sun Mar 15 2026 19:08:01 GMT+0800">
+		<div class="article-expire hidden mt-4 mx-2 sm:mx-6 md:mx-8 callout callout--simple red mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center" id="expiration-container" data-expires="10000-01-01 07:59:59" data-updated="Sun Mar 15 2026 20:07:53 GMT+0800">
 			<div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) opacity-60 shrink-0"></div>
 			<i class="expire-icon callout__icon fa-solid fa-timer text-(--callout-primary-color) text-base shrink-0"></i>
 			<div class="callout__content markdown-body flex-1 min-w-0">
@@ -822,39 +822,39 @@
 
 
 		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-			<h1 id="工作空间"><a href="#工作空间" class="headerlink" title="工作空间"></a>工作空间</h1><p>工作空间（WorkSpace)是一个<strong>文件夹结构</strong>，用于<strong>组织、构建和管理 ROS 项目中的软件包</strong>。每个工作空间可以包含多个独立的包（packages），这些包之间可以相互依赖。它是 ROS 开发的基础环境，类似于其他编程语言中的“项目目录”。而在本次比赛中，我们将使用<strong>Catkin 工作空间</strong>（基于 CMake 构建系统）。具体项目结构可以参考下图：</p>
+			<h1 id="工作空间"><a href="#工作空间" class="headerlink" title="工作空间"></a>工作空间</h1><p>工作空间（WorkSpace)是一个 <strong>文件夹结构</strong> ，用于 <strong>组织、构建和管理 ROS 项目中的软件包</strong> 。每个工作空间可以包含多个独立的包（packages），这些包之间可以相互依赖。它是 ROS 开发的基础环境，类似于其他编程语言中的“项目目录”。而在本次比赛中，我们将使用 <strong>Catkin 工作空间</strong> （基于 CMake 构建系统）。具体项目结构可以参考下图：</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="https://s2.loli.net/2025/10/03/eDjJWv4KawdBFRo.png"
                       alt="catkin workspace"
                 ></p>
-<div class="callout callout--simple tip mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>注：<code>build/</code> 和 <code>devel/</code> 目录是在你首次运行 <code>catkin_make</code> 或 <code>catkin build</code> 命令后自动生成的，不需要手动创建。 </p></div></div>
+<div class="callout callout--simple tip mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>注： <code>build/</code> 和 <code>devel/</code> 目录是在你首次运行 <code>catkin_make</code> 或 <code>catkin build</code> 命令后自动生成的，不需要手动创建。 </p></div></div>
 
 <h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><blockquote>
 <ul>
-<li><strong>标准化</strong>：让所有开发者遵循统一的项目结构。</li>
-<li><strong>模块化</strong>：每个包独立，便于复用和管理。</li>
-<li><strong>依赖管理</strong>：通过 <code>package.xml</code> 管理包之间的依赖关系。</li>
-<li><strong>构建自动化</strong>：使用 <code>CMakeLists.txt</code> 和 Catkin 工具链自动编译代码。</li>
+<li><strong>标准化</strong> ：让所有开发者遵循统一的项目结构。</li>
+<li><strong>模块化</strong> ：每个包独立，便于复用和管理。</li>
+<li><strong>依赖管理</strong> ：通过 <code>package.xml</code> 管理包之间的依赖关系。</li>
+<li><strong>构建自动化</strong> ：使用 <code>CMakeLists.txt</code> 和 Catkin 工具链自动编译代码。</li>
 </ul>
 </blockquote>
 <hr>
 <h1 id="工作空间常见文件与文件夹及其作用"><a href="#工作空间常见文件与文件夹及其作用" class="headerlink" title="工作空间常见文件与文件夹及其作用"></a>工作空间常见文件与文件夹及其作用</h1><h2 id="工作空间根目录下的三个核心文件夹"><a href="#工作空间根目录下的三个核心文件夹" class="headerlink" title="工作空间根目录下的三个核心文件夹"></a>工作空间根目录下的三个核心文件夹</h2><h3 id="src-——-源码目录"><a href="#src-——-源码目录" class="headerlink" title="src/ —— 源码目录"></a><code>src/</code> —— 源码目录</h3><ul>
-<li><strong>作用</strong>：存放所有 ROS 包（packages）的源代码。</li>
-<li><strong>内容</strong>：<ul>
+<li><strong>作用</strong> ：存放所有 ROS 包（packages）的源代码。</li>
+<li><strong>内容</strong> ：<ul>
 <li>所有你自己创建或从别人那里克隆来的 ROS 包都放在这里。</li>
-<li>包含 <code>CMakeLists.txt</code>、<code>package.xml</code> 等配置文件。</li>
-<li>也包含 <code>.cpp</code>、<code>.py</code>、<code>.msg</code>、<code>.launch</code> 等实际代码文件。</li>
+<li>包含 <code>CMakeLists.txt</code> 、 <code>package.xml</code> 等配置文件。</li>
+<li>也包含 <code>.cpp</code> 、 <code>.py</code> 、 <code>.msg</code> 、 <code>.launch</code> 等实际代码文件。</li>
 </ul>
 </li>
 </ul>
-<div class="callout callout--simple warning mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p><strong>注意</strong>：不要手动修改 <code>build/</code> 和 <code>devel/</code>，它们是构建过程自动生成的。</p></div></div>
+<div class="callout callout--simple warning mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p><strong>注意</strong> ：不要手动修改 <code>build/</code> 和 <code>devel/</code> ，它们是构建过程自动生成的。</p></div></div>
 
 
 <h3 id="build-——-构建中间文件目录"><a href="#build-——-构建中间文件目录" class="headerlink" title="build/ —— 构建中间文件目录"></a><code>build/</code> —— 构建中间文件目录</h3><ul>
-<li><strong>作用</strong>：存放编译过程中生成的中间文件（如 Makefile、对象文件等）。</li>
-<li><strong>特点</strong>：<ul>
+<li><strong>作用</strong> ：存放编译过程中生成的中间文件（如 Makefile、对象文件等）。</li>
+<li><strong>特点</strong> ：<ul>
 <li>由 <code>catkin_make</code> 或 <code>catkin build</code> 自动生成。</li>
 <li>不需要你手动编辑或管理。</li>
 <li>可以安全删除后重新构建。</li>
@@ -862,49 +862,49 @@
 </li>
 </ul>
 <h3 id="devel-——-开发环境输出目录"><a href="#devel-——-开发环境输出目录" class="headerlink" title="devel/ —— 开发环境输出目录"></a><code>devel/</code> —— 开发环境输出目录</h3><ul>
-<li><p><strong>作用</strong>：存放编译后的可执行文件、库文件、脚本以及环境设置文件。</p>
+<li><p><strong>作用</strong> ：存放编译后的可执行文件、库文件、脚本以及环境设置文件。</p>
 </li>
-<li><p><strong>关键文件</strong>：</p>
+<li><p><strong>关键文件</strong> ：</p>
 <ul>
-<li><code>setup.bash</code> &#x2F; <code>setup.sh</code> &#x2F; <code>setup.zsh</code> —— 设置当前终端环境变量（如 <code>ROS_PACKAGE_PATH</code>, <code>PYTHONPATH</code>），让系统能找到你刚编译的包。</li>
+<li><code>setup.bash</code> &#x2F; <code>setup.sh</code> &#x2F; <code>setup.zsh</code> —— 设置当前终端环境变量（如 <code>ROS_PACKAGE_PATH</code> , <code>PYTHONPATH</code> ），让系统能找到你刚编译的包。</li>
 </ul>
 </li>
 </ul>
-<div class="callout callout--simple warning mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p><strong>重要命令</strong>：</p>
+<div class="callout callout--simple warning mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p><strong>重要命令</strong> ：</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> devel/setup.bash</span><br></pre></td></tr></table></figure></div>
 <p>这条命令必须在每次打开新终端后运行，才能使用你编译的包。</p></div></div>
 
-<h2 id="每个-ROS-包（如-package2）内部的常见结构"><a href="#每个-ROS-包（如-package2）内部的常见结构" class="headerlink" title="每个 ROS 包（如 package2）内部的常见结构"></a>每个 ROS 包（如 <code>package2</code>）内部的常见结构</h2><h3 id="CMakeLists-txt"><a href="#CMakeLists-txt" class="headerlink" title="CMakeLists.txt"></a>CMakeLists.txt</h3><ul>
-<li><strong>作用</strong>：CMake 构建系统的配置文件，告诉编译器如何编译你的代码。</li>
-<li><strong>内容包括</strong>：<ul>
+<h2 id="每个-ROS-包（如-package2-）内部的常见结构"><a href="#每个-ROS-包（如-package2-）内部的常见结构" class="headerlink" title="每个 ROS 包（如 package2 ）内部的常见结构"></a>每个 ROS 包（如 <code>package2</code> ）内部的常见结构</h2><h3 id="CMakeLists-txt"><a href="#CMakeLists-txt" class="headerlink" title="CMakeLists.txt"></a>CMakeLists.txt</h3><ul>
+<li><strong>作用</strong> ：CMake 构建系统的配置文件，告诉编译器如何编译你的代码。</li>
+<li><strong>内容包括</strong> ：<ul>
 <li>项目名称、版本</li>
-<li>需要的依赖库（如 <code>roscpp</code>, <code> rospy</code>）</li>
-<li>编译哪些源文件（<code>.cpp</code>）</li>
+<li>需要的依赖库（如 <code>roscpp</code> , <code> rospy</code> ）</li>
+<li>编译哪些源文件（ <code>.cpp</code> ）</li>
 <li>生成哪些可执行文件或库</li>
 </ul>
 </li>
 </ul>
-<div class="callout callout--simple tip mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>类似于 Python 的 <code>setup.py</code> 或 C++ 项目的 <code>Makefile</code>。</p></div></div>
+<div class="callout callout--simple tip mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>类似于 Python 的 <code>setup.py</code> 或 C++ 项目的 <code>Makefile</code> 。</p></div></div>
 
 
 <h3 id="package-xml"><a href="#package-xml" class="headerlink" title="package.xml"></a>package.xml</h3><ul>
-<li><strong>作用</strong>：包的元数据描述文件，定义包的基本信息和依赖关系。</li>
-<li><strong>内容包括</strong>：<ul>
+<li><strong>作用</strong> ：包的元数据描述文件，定义包的基本信息和依赖关系。</li>
+<li><strong>内容包括</strong> ：<ul>
 <li>包名、版本、作者、许可证</li>
-<li>运行时依赖（<code>&lt;run_depend&gt;</code>）</li>
-<li>编译时依赖（<code>&lt;build_depend&gt;</code>）</li>
+<li>运行时依赖（ <code>&lt;run_depend&gt;</code> ）</li>
+<li>编译时依赖（ <code>&lt;build_depend&gt;</code> ）</li>
 <li>导出信息（如插件、消息类型等）</li>
 </ul>
 </li>
 </ul>
-<div class="callout callout--simple warning mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>✅ <strong>必须存在</strong>，否则 ROS 无法识别这个包。</p></div></div>
+<div class="callout callout--simple warning mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>✅ <strong>必须存在</strong> ，否则 ROS 无法识别这个包。</p></div></div>
 
 <div class="callout callout--simple tip mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>类似于 Python 的 <code>requirements.txt</code> + <code>setup.py</code> 的结合体。</p></div></div>
 
 
 <h2 id="包内的功能子目录"><a href="#包内的功能子目录" class="headerlink" title="包内的功能子目录"></a>包内的功能子目录</h2><h3 id="scripts"><a href="#scripts" class="headerlink" title="scripts&#x2F;"></a>scripts&#x2F;</h3><ul>
-<li><strong>作用</strong>：存放可直接运行的脚本文件（通常是 Python 或 Shell 脚本）。</li>
-<li><strong>文件扩展名</strong>：<ul>
+<li><strong>作用</strong> ：存放可直接运行的脚本文件（通常是 Python 或 Shell 脚本）。</li>
+<li><strong>文件扩展名</strong> ：<ul>
 <li><code>.py</code> —— Python 脚本（常用）</li>
 <li><code>.sh</code> —— Shell 脚本（用于启动程序、设置环境等）</li>
 </ul>
@@ -915,27 +915,27 @@
 
 
 <h3 id="msg"><a href="#msg" class="headerlink" title="msg&#x2F;"></a>msg&#x2F;</h3><ul>
-<li><strong>作用</strong>：存放自定义的 <strong>消息（Message）</strong> 定义文件。</li>
-<li><strong>文件扩展名</strong>：<code>.msg</code></li>
-<li><strong>示例</strong>：<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># MyMessage.msg</span><br><span class="line">int32 id</span><br><span class="line">string name</span><br><span class="line">float64[] scores</span><br></pre></td></tr></table></figure></div></li>
+<li><strong>作用</strong> ：存放自定义的 <strong>消息（Message）</strong> 定义文件。</li>
+<li><strong>文件扩展名</strong> ： <code>.msg</code></li>
+<li><strong>示例</strong> ：<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># MyMessage.msg</span><br><span class="line">int32 id</span><br><span class="line">string name</span><br><span class="line">float64[] scores</span><br></pre></td></tr></table></figure></div></li>
 <li>用于在不同节点之间传递结构化数据。不同的package之间可以通过msg及其文件来沟通，交换数据。每个package相互独立，又彼此沟通。</li>
 </ul>
 <div class="callout callout--simple warning mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>使用前需在 <code>CMakeLists.txt</code> 和 <code>package.xml</code> 中声明并生成代码。</p></div></div>
 
 
 <h3 id="srv"><a href="#srv" class="headerlink" title="srv&#x2F;"></a>srv&#x2F;</h3><ul>
-<li><strong>作用</strong>：存放自定义的 <strong>服务（Service）</strong> 定义文件。</li>
-<li><strong>文件扩展名</strong>：<code>.srv</code></li>
-<li><strong>结构</strong>：分为请求（request）和响应（response）两部分。</li>
-<li><strong>示例</strong>：<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># AddTwoInts.srv</span><br><span class="line">int32 a</span><br><span class="line">int32 b</span><br><span class="line">---</span><br><span class="line">int32 sum</span><br></pre></td></tr></table></figure></div></li>
+<li><strong>作用</strong> ：存放自定义的 <strong>服务（Service）</strong> 定义文件。</li>
+<li><strong>文件扩展名</strong> ： <code>.srv</code></li>
+<li><strong>结构</strong> ：分为请求（request）和响应（response）两部分。</li>
+<li><strong>示例</strong> ：<div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># AddTwoInts.srv</span><br><span class="line">int32 a</span><br><span class="line">int32 b</span><br><span class="line">---</span><br><span class="line">int32 sum</span><br></pre></td></tr></table></figure></div></li>
 <li>用于实现“请求-响应”式通信（如调用一个服务计算两个数之和）。</li>
 </ul>
 <div class="callout callout--simple warning mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>使用前同样需在 <code>CMakeLists.txt</code> 声明并生成代码。</p></div></div>
 
 
 <h3 id="include"><a href="#include" class="headerlink" title="include&#x2F;"></a>include&#x2F;</h3><ul>
-<li><strong>作用</strong>：存放 C++ 头文件（<code>.h</code> 或 <code>.hpp</code>）。</li>
-<li><strong>用途</strong>：<ul>
+<li><strong>作用</strong> ：存放 C++ 头文件（ <code>.h</code> 或 <code>.hpp</code> ）。</li>
+<li><strong>用途</strong> ：<ul>
 <li>声明类、函数、常量等供其他 <code>.cpp</code> 文件引用。</li>
 <li>通常与 <code>src/</code> 目录配合使用。</li>
 </ul>
@@ -943,8 +943,8 @@
 <li>在 <code>CMakeLists.txt</code> 中通过 <code>include_directories()</code> 告诉编译器头文件位置。</li>
 </ul>
 <h3 id="src-（包内的-src）"><a href="#src-（包内的-src）" class="headerlink" title="src&#x2F;（包内的 src）"></a>src&#x2F;（包内的 src）</h3><ul>
-<li><strong>作用</strong>：存放 C++ 源代码文件（<code>.cpp</code>）。</li>
-<li><strong>用途</strong>：<ul>
+<li><strong>作用</strong> ：存放 C++ 源代码文件（ <code>.cpp</code> ）。</li>
+<li><strong>用途</strong> ：<ul>
 <li>实现节点的主要逻辑。</li>
 <li>通常会包含 <code>main()</code> 函数，作为可执行程序的入口。</li>
 </ul>
@@ -954,13 +954,13 @@
 
 
 <h3 id="launch"><a href="#launch" class="headerlink" title="launch&#x2F;"></a>launch&#x2F;</h3><ul>
-<li><p><strong>作用</strong>：存放 <strong>启动文件（Launch Files）</strong>，用于一次性启动多个节点、设置参数、加载机器人模型等。</p>
+<li><p><strong>作用</strong> ：存放 <strong>启动文件（Launch Files）</strong> ，用于一次性启动多个节点、设置参数、加载机器人模型等。</p>
 </li>
-<li><p><strong>文件扩展名</strong>：<code>.launch</code></p>
+<li><p><strong>文件扩展名</strong> ： <code>.launch</code></p>
 </li>
-<li><p><strong>语言</strong>：XML 格式。</p>
+<li><p><strong>语言</strong> ：XML 格式。</p>
 </li>
-<li><p><strong>示例</strong>：</p>
+<li><p><strong>示例</strong> ：</p>
 <div class="code-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">launch</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">node</span> <span class="attr">name</span>=<span class="string">&quot;talker&quot;</span> <span class="attr">pkg</span>=<span class="string">&quot; beginner_tutorials&quot;</span> <span class="attr">type</span>=<span class="string">&quot;talker.py&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">node</span> <span class="attr">name</span>=<span class="string">&quot;listener&quot;</span> <span class="attr">pkg</span>=<span class="string">&quot;beginner_tutorials&quot;</span> <span class="attr">type</span>=<span class="string">&quot;listener.py&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">launch</span>&gt;</span></span><br></pre></td></tr></table></figure></div></li>
 </ul>
 <div class="callout callout--simple tip mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>使用方式：</p>
@@ -1021,7 +1021,7 @@
 <td>C++ 头文件（.h）</td>
 </tr>
 <tr>
-<td><code>src/</code>（包内）</td>
+<td><code>src/</code> （包内）</td>
 <td>目录</td>
 <td>C++ 源代码文件（.cpp）</td>
 </tr>
@@ -1032,27 +1032,27 @@
 </tr>
 </tbody></table>
 <h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><ul>
-<li>所有这些文件和目录都是 <strong>约定俗成的标准结构</strong>，遵循它能让你的代码更容易被他人理解和复用。</li>
-<li>初学者建议先从官方教程（如 <code>ros_tutorials</code>）开始，观察标准包的结构。</li>
+<li>所有这些文件和目录都是 <strong>约定俗成的标准结构</strong> ，遵循它能让你的代码更容易被他人理解和复用。</li>
+<li>初学者建议先从官方教程（如 <code>ros_tutorials</code> ）开始，观察标准包的结构。</li>
 <li>使用 <code>catkin_create_pkg</code> 命令可以快速创建符合规范的新包：<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/catkin_ws/src</span><br><span class="line">catkin_create_pkg my_package rospy std_msgs geometry_msgs</span><br></pre></td></tr></table></figure></div></li>
 </ul>
 <hr>
-<h1 id="创建一个工作空间"><a href="#创建一个工作空间" class="headerlink" title="创建一个工作空间"></a>创建一个工作空间</h1><h2 id="创建工程根目录"><a href="#创建工程根目录" class="headerlink" title="创建工程根目录"></a>创建工程根目录</h2><h3 id="方法一：分层创建"><a href="#方法一：分层创建" class="headerlink" title="方法一：分层创建"></a>方法一：分层创建</h3><p>首先在系统主文件夹或任意一个你可以全局运行代码的路径下，使用<code>mkdir</code>来创建工程根目录，此处我以主文件夹下创建为例，在主文件夹下运行以下命令：</p>
+<h1 id="创建一个工作空间"><a href="#创建一个工作空间" class="headerlink" title="创建一个工作空间"></a>创建一个工作空间</h1><h2 id="创建工程根目录"><a href="#创建工程根目录" class="headerlink" title="创建工程根目录"></a>创建工程根目录</h2><h3 id="方法一：分层创建"><a href="#方法一：分层创建" class="headerlink" title="方法一：分层创建"></a>方法一：分层创建</h3><p>首先在系统主文件夹或任意一个你可以全局运行代码的路径下，使用 <code>mkdir</code> 来创建工程根目录，此处我以主文件夹下创建为例，在主文件夹下运行以下命令：</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> Tika_ws</span><br></pre></td></tr></table></figure></div>
 
 <p>此时，主文件夹下便出现一个名为Tika_ws的文件夹，之后的工程都是基于这个文件夹为根目录，故称为工程根目录</p>
 <p>接下来进入该文件夹</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> Tika_ws</span><br></pre></td></tr></table></figure></div>
 
-<p>进入之后我们创建存放ROS源代码的<code>src</code>文件夹</p>
+<p>进入之后我们创建存放ROS源代码的 <code>src</code> 文件夹</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> src</span><br></pre></td></tr></table></figure></div>
 
 <p>此时我们的工程根目录创建完毕</p>
-<h3 id="方法二：多层一次创建"><a href="#方法二：多层一次创建" class="headerlink" title="方法二：多层一次创建"></a>方法二：多层一次创建</h3><p>首先在系统主文件夹或任意一个你可以全局运行代码的路径下，使用<code>mkdir</code>来创建工程根目录，此处我以主文件夹下创建为例，在主文件夹下运行以下命令：</p>
+<h3 id="方法二：多层一次创建"><a href="#方法二：多层一次创建" class="headerlink" title="方法二：多层一次创建"></a>方法二：多层一次创建</h3><p>首先在系统主文件夹或任意一个你可以全局运行代码的路径下，使用 <code>mkdir</code> 来创建工程根目录，此处我以主文件夹下创建为例，在主文件夹下运行以下命令：</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p Tika_ws/src</span><br></pre></td></tr></table></figure></div>
 
 <p>此时我们Tika_ws和src便可以一次创建</p>
-<div class="callout callout--simple tip mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>多层建设必须要加入<code>-p</code>参数</p></div></div>
+<div class="callout callout--simple tip mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>多层建设必须要加入 <code>-p</code> 参数</p></div></div>
 
 <hr>
 <h1 id="声明工作空间"><a href="#声明工作空间" class="headerlink" title="声明工作空间"></a>声明工作空间</h1><h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><p>我们需要在工程根目录下src（Tika_ws&#x2F;src）路径下运行以下命令以声明工作空间</p>
@@ -1060,7 +1060,7 @@
 
 <h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>这个命令会：</p>
 <ul>
-<li>在 <code>src/</code> 目录下生成一个 <strong><code>CMakeLists.txt</code> 文件</strong>（实际上是一个指向 Catkin 系统 CMake 文件的符号链接）。</li>
+<li>在 <code>src/</code> 目录下生成一个 <strong><code>CMakeLists.txt</code> 文件</strong> （实际上是一个指向 Catkin 系统 CMake 文件的符号链接）。</li>
 <li>这个 <code>CMakeLists.txt</code> 的作用是告诉 CMake：“这个目录下包含多个 ROS 包，请遍历所有子目录并构建它们”。</li>
 </ul>
 <blockquote>
@@ -1069,13 +1069,13 @@
 </code></pre>
 </blockquote>
 <p>这样，当你回到工作空间根目录运行 <code>catkin_make</code> 时，CMake 就知道如何处理整个 <code>src/</code> 目录下的包。</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>从 <strong>ROS Kinetic（2016 年）之后的版本开始</strong>，<code>catkin_make</code> 命令已经<strong>内置了自动初始化功能</strong>。也就是说：</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>从 <strong>ROS Kinetic（2016 年）之后的版本开始</strong> ， <code>catkin_make</code> 命令已经 <strong>内置了自动初始化功能</strong> 。也就是说：</p>
 <blockquote>
 <p><strong>只需要这样做即可：</strong></p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ~/Tika_ws/src</span><br><span class="line"><span class="built_in">cd</span> ~/Tika_ws</span><br><span class="line">catkin_make</span><br></pre></td></tr></table></figure></div>
 </blockquote>
-<p><code>catkin_make</code> 会自动检测 <code>src/</code> 是否为空，并在必要时自动完成 <code>catkin_init_workspace</code> 的工作（即生成顶层 <code>CMakeLists.txt</code>）。</p>
-<div class="callout callout--simple warning mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>这样做的前提是：ROS 版本是 <strong>Kinetic、Melodic 或 Noetic</strong>（ROS Hydro &#x2F; Indigo（较老版本不适用）；Kinetic 及以后可省略）</p></div></div>
+<p><code>catkin_make</code> 会自动检测 <code>src/</code> 是否为空，并在必要时自动完成 <code>catkin_init_workspace</code> 的工作（即生成顶层 <code>CMakeLists.txt</code> ）。</p>
+<div class="callout callout--simple warning mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>这样做的前提是：ROS 版本是 <strong>Kinetic、Melodic 或 Noetic</strong> （ROS Hydro &#x2F; Indigo（较老版本不适用）；Kinetic 及以后可省略）</p></div></div>
 
 <hr>
 <h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><h2 id="命令-1"><a href="#命令-1" class="headerlink" title="命令"></a>命令</h2><p>我们需要在项目更目录（Tika_ws）文件夹下运行如下命令：</p>
@@ -1088,24 +1088,24 @@
 <li>在 <code>build/</code> 目录中生成编译中间文件；</li>
 <li>在 <code>devel/</code> 目录中生成可执行文件和环境配置。</li>
 </ul>
-<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p><strong>使新构建的包生效</strong>（每次打开新终端都需要）：<br>   <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> devel/setup.bash</span><br></pre></td></tr></table></figure></div></p>
+<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p><strong>使新构建的包生效</strong> （每次打开新终端都需要）：<br>   <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> devel/setup.bash</span><br></pre></td></tr></table></figure></div></p>
 <h2 id="常用选项"><a href="#常用选项" class="headerlink" title="常用选项"></a><strong>常用选项</strong></h2><ul>
-<li><p><strong>只编译某个特定包</strong>：</p>
+<li><p><strong>只编译某个特定包</strong> ：</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">catkin_make --pkg 包名</span><br></pre></td></tr></table></figure></div>
 </li>
-<li><p><strong>显示详细编译信息（调试用）</strong>：</p>
+<li><p><strong>显示详细编译信息（调试用）</strong> ：</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">catkin_make VERBOSE=1</span><br></pre></td></tr></table></figure></div>
 </li>
-<li><p><strong>使用多线程加速编译</strong>（例如使用 4 个 CPU 核心）：</p>
+<li><p><strong>使用多线程加速编译</strong> （例如使用 4 个 CPU 核心）：</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">catkin_make -j4</span><br></pre></td></tr></table></figure></div>
 </li>
-<li><p><strong>清理编译结果</strong>（重新编译前可选）：</p>
+<li><p><strong>清理编译结果</strong> （重新编译前可选）：</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">catkin_make clean</span><br></pre></td></tr></table></figure></div></li>
 </ul>
 <h2 id="首次创建工作空间"><a href="#首次创建工作空间" class="headerlink" title="首次创建工作空间"></a><strong>首次创建工作空间</strong></h2><p>如果你是第一次创建 Catkin 工作空间：</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ~/Tika_ws/src</span><br><span class="line"><span class="built_in">cd</span> ~/Tika_ws</span><br><span class="line">catkin_make</span><br><span class="line"><span class="built_in">source</span> devel/setup.bash</span><br></pre></td></tr></table></figure></div>
 
-<div class="callout callout--simple info mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p><strong>建议</strong>：将环境变量自动加载到终端中，避免每次手动 <code>source</code>：</p>
+<div class="callout callout--simple info mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p><strong>建议</strong> ：将环境变量自动加载到终端中，避免每次手动 <code>source</code> ：</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;source ~/Tika_ws/devel/setup.bash&quot;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></div></div></div>
 
 
@@ -1117,20 +1117,20 @@
 <li><p><strong>编译报错（如缺少依赖）</strong><br>可使用 <code>rosdep</code> 自动安装依赖：</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosdep install --from-paths src --ignore-src -r -y</span><br></pre></td></tr></table></figure></div>
 </li>
-<li><p><strong>修改了 CMakeLists.txt 或 package.xml 后不生效</strong><br>通常需要重新运行 <code>catkin_make</code>，有时需先清理：</p>
+<li><p><strong>修改了 CMakeLists.txt 或 package.xml 后不生效</strong><br>通常需要重新运行 <code>catkin_make</code> ，有时需先清理：</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">catkin_make clean</span><br><span class="line">catkin_make</span><br></pre></td></tr></table></figure></div></li>
 </ul>
 <hr>
-<h1 id="创建功能包"><a href="#创建功能包" class="headerlink" title="创建功能包"></a>创建功能包</h1><h2 id="命令-2"><a href="#命令-2" class="headerlink" title="命令"></a>命令</h2><p>在根目录源代码文件夹下（Tika_ws&#x2F;src）文件夹下运行如下命令即可创建一个名为<code>name_pkg</code>的功能包，同时该包依赖为<code>msgs rospy roscpp</code></p>
+<h1 id="创建功能包"><a href="#创建功能包" class="headerlink" title="创建功能包"></a>创建功能包</h1><h2 id="命令-2"><a href="#命令-2" class="headerlink" title="命令"></a>命令</h2><p>在根目录源代码文件夹下（Tika_ws&#x2F;src）文件夹下运行如下命令即可创建一个名为 <code>name_pkg</code> 的功能包，同时该包依赖为 <code>msgs rospy roscpp</code></p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">catkin_create_pkg name_pkg std_msgs rospy roscpp</span><br></pre></td></tr></table></figure></div>
 
 <h2 id="参数解析"><a href="#参数解析" class="headerlink" title="参数解析"></a>参数解析</h2><ul>
 <li><strong><code>catkin_create_pkg</code></strong><br> 创建一个新的 catkin 功能包。</li>
 <li><strong><code>name_pkg</code></strong><br> 你要新建的包的名字（包名必须是小写字母、数字和下划线，不能有大写字母）。</li>
 <li><strong><code>std_msgs</code> <code>rospy</code> <code>roscpp</code></strong><br> 表示这个新包在 <code>package.xml</code> 和 <code>CMakeLists.txt</code> 里会声明对这些依赖的需求。<ul>
-<li><code>std_msgs</code>：标准消息类型包</li>
-<li><code>rospy</code>：Python 版 ROS 客户端库</li>
-<li><code>roscpp</code>：C++ 版 ROS 客户端库</li>
+<li><code>std_msgs</code> ：标准消息类型包</li>
+<li><code>rospy</code> ：Python 版 ROS 客户端库</li>
+<li><code>roscpp</code> ：C++ 版 ROS 客户端库</li>
 </ul>
 </li>
 </ul>
@@ -1146,7 +1146,7 @@
 
 
 
-<h2 id="补充依赖"><a href="#补充依赖" class="headerlink" title="补充依赖"></a>补充依赖</h2><h3 id="需要补充依赖的两个地方"><a href="#需要补充依赖的两个地方" class="headerlink" title="需要补充依赖的两个地方"></a>需要补充依赖的两个地方</h3><h4 id="package-xml-1"><a href="#package-xml-1" class="headerlink" title="package.xml"></a><strong>package.xml</strong></h4><p>这是 ROS 包的“说明书”，里面列出依赖。<br> 找到 <code>&lt;depend&gt;</code> 标签位置，添加缺失的依赖，比如要加 <code>sensor_msgs</code>：</p>
+<h2 id="补充依赖"><a href="#补充依赖" class="headerlink" title="补充依赖"></a>补充依赖</h2><h3 id="需要补充依赖的两个地方"><a href="#需要补充依赖的两个地方" class="headerlink" title="需要补充依赖的两个地方"></a>需要补充依赖的两个地方</h3><h4 id="package-xml-1"><a href="#package-xml-1" class="headerlink" title="package.xml"></a><strong>package.xml</strong></h4><p>这是 ROS 包的“说明书”，里面列出依赖。<br> 找到 <code>&lt;depend&gt;</code> 标签位置，添加缺失的依赖，比如要加 <code>sensor_msgs</code> ：</p>
 <div class="code-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">depend</span>&gt;</span>sensor_msgs<span class="tag">&lt;/<span class="name">depend</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
 
 <p>常见依赖写法：</p>
@@ -1181,8 +1181,8 @@
 
 <hr>
 <h1 id="配置文件-bashrc"><a href="#配置文件-bashrc" class="headerlink" title="配置文件 .bashrc"></a>配置文件 .bashrc</h1><h2 id="bashrc-的基本作用"><a href="#bashrc-的基本作用" class="headerlink" title=".bashrc 的基本作用"></a>.bashrc 的基本作用</h2><ul>
-<li>位置：<code>~/.bashrc</code> （<code>~</code> 就是你的 home 目录）</li>
-<li>作用：<strong>每次启动一个新的 bash 终端时</strong>，这个文件里的命令都会被执行。</li>
+<li>位置： <code>~/.bashrc</code> （ <code>~</code> 就是你的 home 目录）</li>
+<li>作用： <strong>每次启动一个新的 bash 终端时</strong> ，这个文件里的命令都会被执行。</li>
 <li>常见用途：<ol>
 <li>设置环境变量（比如 PATH、ROS 环境）</li>
 <li>定义别名（alias）</li>
@@ -1215,8 +1215,8 @@
 <h2 id="ROS-工作空间和-bashrc-的关系"><a href="#ROS-工作空间和-bashrc-的关系" class="headerlink" title="ROS 工作空间和 .bashrc 的关系"></a>ROS 工作空间和 .bashrc 的关系</h2><div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">%%&#123;init: &#123;&#x27;theme&#x27;:&#x27;handDrawn&#x27;&#125;&#125;%%</span><br><span class="line">flowchart TD</span><br><span class="line">    subgraph Terminal[&quot;终端 (bash shell)&quot;]</span><br><span class="line">        A[打开新终端] --&gt; B[自动读取 ~/.bashrc]</span><br><span class="line">    end</span><br><span class="line"></span><br><span class="line">    subgraph BASHRC[&quot;~/.bashrc&quot;]</span><br><span class="line">        B --&gt; C1[source /opt/ros/noetic/setup.bash&lt;br&gt;加载ROS主环境]</span><br><span class="line">        B --&gt; C2[source ~/lx_ws/devel/setup.bash&lt;br&gt;加载工作空间环境]</span><br><span class="line">    end</span><br><span class="line"></span><br><span class="line">    subgraph ROSENV[&quot;ROS 环境变量&quot;]</span><br><span class="line">        C1 --&gt; D1[ROS_MASTER_URI]</span><br><span class="line">        C1 --&gt; D2[ROS_PACKAGE_PATH]</span><br><span class="line">        C1 --&gt; D3[PYTHONPATH]</span><br><span class="line">        C2 --&gt; D4[覆盖或追加本地工作空间路径]</span><br><span class="line">    end</span><br><span class="line"></span><br><span class="line">    ROSENV --&gt; E[用户运行ROS节点/程序]</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
 <hr>
 <h1 id="launch文件"><a href="#launch文件" class="headerlink" title="launch文件"></a>launch文件</h1><h2 id="什么是-launch-文件？"><a href="#什么是-launch-文件？" class="headerlink" title="什么是 launch 文件？"></a>什么是 launch 文件？</h2><ul>
-<li>后缀：<code>.launch</code></li>
-<li>格式：<strong>XML</strong></li>
+<li>后缀： <code>.launch</code></li>
+<li>格式： <strong>XML</strong></li>
 <li>功能：批量启动 ROS 节点、设置参数、加载配置</li>
 <li>用途：<ul>
 <li>一次性启动多个节点</li>
@@ -1226,7 +1226,7 @@
 </ul>
 </li>
 </ul>
-<p>相当于 <strong>一键启动脚本</strong>。</p>
+<p>相当于 <strong>一键启动脚本</strong> 。</p>
 <h2 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h2><p>launch 文件放在功能包（package）的 <code>launch/</code> 文件夹里。<br> 一个最小例子：</p>
 <div class="code-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">launch</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 启动 talker 节点 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;roscpp_tutorials&quot;</span> <span class="attr">type</span>=<span class="string">&quot;talker&quot;</span> <span class="attr">name</span>=<span class="string">&quot;talker_node&quot;</span> <span class="attr">output</span>=<span class="string">&quot;screen&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 启动 listener 节点 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;roscpp_tutorials&quot;</span> <span class="attr">type</span>=<span class="string">&quot;listener&quot;</span> <span class="attr">name</span>=<span class="string">&quot;listener_node&quot;</span> <span class="attr">output</span>=<span class="string">&quot;screen&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">launch</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
 
@@ -1235,10 +1235,10 @@
 <ul>
 <li>启动一个节点</li>
 <li>参数：<ul>
-<li><code>pkg</code>：功能包名字</li>
-<li><code>type</code>：节点可执行文件名</li>
-<li><code>name</code>：节点运行时的名字</li>
-<li><code>output=&quot;screen&quot;</code>：日志打印到终端</li>
+<li><code>pkg</code> ：功能包名字</li>
+<li><code>type</code> ：节点可执行文件名</li>
+<li><code>name</code> ：节点运行时的名字</li>
+<li><code>output=&quot;screen&quot;</code> ：日志打印到终端</li>
 </ul>
 </li>
 </ul>
@@ -1278,7 +1278,7 @@
 <h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><p>创建一个 <code>launch/</code> 文件夹（如果没有的话）：</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/Tika_ws/src/my_robot   <span class="comment"># 假设你的包叫 my_robot</span></span><br><span class="line"><span class="built_in">mkdir</span> launch</span><br></pre></td></tr></table></figure></div>
 
-<p>在里面新建 <code>turtle_demo.launch</code>：</p>
+<p>在里面新建 <code>turtle_demo.launch</code> ：</p>
 <div class="code-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">launch</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 启动小乌龟画图窗口 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;turtlesim&quot;</span> <span class="attr">type</span>=<span class="string">&quot;turtlesim_node&quot;</span> <span class="attr">name</span>=<span class="string">&quot;turtle_sim&quot;</span> <span class="attr">output</span>=<span class="string">&quot;screen&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- 启动键盘控制小乌龟 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;turtlesim&quot;</span> <span class="attr">type</span>=<span class="string">&quot;turtle_teleop_key&quot;</span> <span class="attr">name</span>=<span class="string">&quot;turtle_teleop&quot;</span> <span class="attr">output</span>=<span class="string">&quot;screen&quot;</span> <span class="attr">launch-prefix</span>=<span class="string">&quot;xterm -e&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">launch</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
 
 <h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><ul>
@@ -1287,7 +1287,7 @@
 <li><code>type=&quot;turtle_teleop_key&quot;</code><br> 键盘控制节点</li>
 <li><code>launch-prefix=&quot;xterm -e&quot;</code><br> 强制在新终端打开键盘控制，不然你没法同时动键盘和看乌龟窗口。</li>
 </ul>
-<div class="callout callout--simple warning mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>如果你机器上没装 <code>xterm</code>，先装一下：</p>
+<div class="callout callout--simple warning mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>如果你机器上没装 <code>xterm</code> ，先装一下：</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install xterm</span><br></pre></td></tr></table></figure></div></div></div>
 
 
@@ -1298,7 +1298,7 @@
 <p>你会看到：</p>
 <ol>
 <li>一个小乌龟窗口弹出来（乌龟在里面）</li>
-<li>另一个终端窗口运行 <code>turtle_teleop_key</code>，你可以用键盘 <code>↑ ↓ ← →</code> 控制乌龟画图</li>
+<li>另一个终端窗口运行 <code>turtle_teleop_key</code> ，你可以用键盘 <code>↑ ↓ ← →</code> 控制乌龟画图</li>
 </ol>
 
 		</div>
@@ -1314,7 +1314,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2026-03-15 19:08:01
+                    :</strong> 2026-03-15 20:07:53
             </li>
         
         <li>
@@ -1381,7 +1381,7 @@
 	<div class="post-toc">
 		<div class="toc-title">目录</div>
 		<div class="page-title">ROS实践系列02-工作空间以及功能包</div>
-		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4"><span class="nav-text">工作空间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8A%BF"><span class="nav-text">优势</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8F%8A%E5%85%B6%E4%BD%9C%E7%94%A8"><span class="nav-text">工作空间常见文件与文件夹及其作用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E4%B8%89%E4%B8%AA%E6%A0%B8%E5%BF%83%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-text">工作空间根目录下的三个核心文件夹</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#src-%E2%80%94%E2%80%94-%E6%BA%90%E7%A0%81%E7%9B%AE%E5%BD%95"><span class="nav-text">src&#x2F; —— 源码目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#build-%E2%80%94%E2%80%94-%E6%9E%84%E5%BB%BA%E4%B8%AD%E9%97%B4%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="nav-text">build&#x2F; —— 构建中间文件目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#devel-%E2%80%94%E2%80%94-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E8%BE%93%E5%87%BA%E7%9B%AE%E5%BD%95"><span class="nav-text">devel&#x2F; —— 开发环境输出目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%8F%E4%B8%AA-ROS-%E5%8C%85%EF%BC%88%E5%A6%82-package2%EF%BC%89%E5%86%85%E9%83%A8%E7%9A%84%E5%B8%B8%E8%A7%81%E7%BB%93%E6%9E%84"><span class="nav-text">每个 ROS 包（如 package2）内部的常见结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CMakeLists-txt"><span class="nav-text">CMakeLists.txt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#package-xml"><span class="nav-text">package.xml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%85%E5%86%85%E7%9A%84%E5%8A%9F%E8%83%BD%E5%AD%90%E7%9B%AE%E5%BD%95"><span class="nav-text">包内的功能子目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scripts"><span class="nav-text">scripts&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#msg"><span class="nav-text">msg&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#srv"><span class="nav-text">srv&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#include"><span class="nav-text">include&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#src-%EF%BC%88%E5%8C%85%E5%86%85%E7%9A%84-src%EF%BC%89"><span class="nav-text">src&#x2F;（包内的 src）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#launch"><span class="nav-text">launch&#x2F;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E5%8A%9F%E8%83%BD%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-text">各文件&#x2F;目录功能速查表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-text">后记</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4"><span class="nav-text">创建一个工作空间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B7%A5%E7%A8%8B%E6%A0%B9%E7%9B%AE%E5%BD%95"><span class="nav-text">创建工程根目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E5%88%86%E5%B1%82%E5%88%9B%E5%BB%BA"><span class="nav-text">方法一：分层创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E5%A4%9A%E5%B1%82%E4%B8%80%E6%AC%A1%E5%88%9B%E5%BB%BA"><span class="nav-text">方法二：多层一次创建</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4"><span class="nav-text">声明工作空间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4"><span class="nav-text">命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-text">工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-text">补充</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-text">编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4-1"><span class="nav-text">命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8"><span class="nav-text">作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD"><span class="nav-text">后续</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9"><span class="nav-text">常用选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A6%96%E6%AC%A1%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4"><span class="nav-text">首次创建工作空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5"><span class="nav-text">常见问题排查</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%8A%9F%E8%83%BD%E5%8C%85"><span class="nav-text">创建功能包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4-2"><span class="nav-text">命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90"><span class="nav-text">参数解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-text">运行流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-text">文件结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E4%BE%9D%E8%B5%96"><span class="nav-text">补充依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E8%A1%A5%E5%85%85%E4%BE%9D%E8%B5%96%E7%9A%84%E4%B8%A4%E4%B8%AA%E5%9C%B0%E6%96%B9"><span class="nav-text">需要补充依赖的两个地方</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E7%BC%96%E8%AF%91"><span class="nav-text">重新编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E5%90%8E%E6%AF%94%E5%AF%B9"><span class="nav-text">前后比对</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-bashrc"><span class="nav-text">配置文件 .bashrc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bashrc-%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%9C%E7%94%A8"><span class="nav-text">.bashrc 的基本作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8C-ROS-%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-text">和 ROS 的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E4%B8%8E%E7%BC%96%E8%BE%91"><span class="nav-text">查看与编辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ROS-%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E5%92%8C-bashrc-%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-text">ROS 工作空间和 .bashrc 的关系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#launch%E6%96%87%E4%BB%B6"><span class="nav-text">launch文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-launch-%E6%96%87%E4%BB%B6%EF%BC%9F"><span class="nav-text">什么是 launch 文件？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="nav-text">基本结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE%E8%AF%B4%E6%98%8E"><span class="nav-text">常用标签说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-text">代码示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-text">说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F"><span class="nav-text">启动方式</span></a></li></ol></li></ol></li></ol>
+		<ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4"><span class="nav-text">工作空间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8A%BF"><span class="nav-text">优势</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E5%B8%B8%E8%A7%81%E6%96%87%E4%BB%B6%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8F%8A%E5%85%B6%E4%BD%9C%E7%94%A8"><span class="nav-text">工作空间常见文件与文件夹及其作用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E4%B8%89%E4%B8%AA%E6%A0%B8%E5%BF%83%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-text">工作空间根目录下的三个核心文件夹</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#src-%E2%80%94%E2%80%94-%E6%BA%90%E7%A0%81%E7%9B%AE%E5%BD%95"><span class="nav-text">src&#x2F; —— 源码目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#build-%E2%80%94%E2%80%94-%E6%9E%84%E5%BB%BA%E4%B8%AD%E9%97%B4%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="nav-text">build&#x2F; —— 构建中间文件目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#devel-%E2%80%94%E2%80%94-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E8%BE%93%E5%87%BA%E7%9B%AE%E5%BD%95"><span class="nav-text">devel&#x2F; —— 开发环境输出目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%8F%E4%B8%AA-ROS-%E5%8C%85%EF%BC%88%E5%A6%82-package2-%EF%BC%89%E5%86%85%E9%83%A8%E7%9A%84%E5%B8%B8%E8%A7%81%E7%BB%93%E6%9E%84"><span class="nav-text">每个 ROS 包（如 package2 ）内部的常见结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CMakeLists-txt"><span class="nav-text">CMakeLists.txt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#package-xml"><span class="nav-text">package.xml</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%85%E5%86%85%E7%9A%84%E5%8A%9F%E8%83%BD%E5%AD%90%E7%9B%AE%E5%BD%95"><span class="nav-text">包内的功能子目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#scripts"><span class="nav-text">scripts&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#msg"><span class="nav-text">msg&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#srv"><span class="nav-text">srv&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#include"><span class="nav-text">include&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#src-%EF%BC%88%E5%8C%85%E5%86%85%E7%9A%84-src%EF%BC%89"><span class="nav-text">src&#x2F;（包内的 src）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#launch"><span class="nav-text">launch&#x2F;</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%84%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E5%8A%9F%E8%83%BD%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="nav-text">各文件&#x2F;目录功能速查表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-text">后记</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4"><span class="nav-text">创建一个工作空间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%B7%A5%E7%A8%8B%E6%A0%B9%E7%9B%AE%E5%BD%95"><span class="nav-text">创建工程根目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E5%88%86%E5%B1%82%E5%88%9B%E5%BB%BA"><span class="nav-text">方法一：分层创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E5%A4%9A%E5%B1%82%E4%B8%80%E6%AC%A1%E5%88%9B%E5%BB%BA"><span class="nav-text">方法二：多层一次创建</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4"><span class="nav-text">声明工作空间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4"><span class="nav-text">命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-text">工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85"><span class="nav-text">补充</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-text">编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4-1"><span class="nav-text">命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8"><span class="nav-text">作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD"><span class="nav-text">后续</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9"><span class="nav-text">常用选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A6%96%E6%AC%A1%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4"><span class="nav-text">首次创建工作空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5"><span class="nav-text">常见问题排查</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%8A%9F%E8%83%BD%E5%8C%85"><span class="nav-text">创建功能包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4-2"><span class="nav-text">命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90"><span class="nav-text">参数解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="nav-text">运行流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-text">文件结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E4%BE%9D%E8%B5%96"><span class="nav-text">补充依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E8%A1%A5%E5%85%85%E4%BE%9D%E8%B5%96%E7%9A%84%E4%B8%A4%E4%B8%AA%E5%9C%B0%E6%96%B9"><span class="nav-text">需要补充依赖的两个地方</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E7%BC%96%E8%AF%91"><span class="nav-text">重新编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E5%90%8E%E6%AF%94%E5%AF%B9"><span class="nav-text">前后比对</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-bashrc"><span class="nav-text">配置文件 .bashrc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bashrc-%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%9C%E7%94%A8"><span class="nav-text">.bashrc 的基本作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%92%8C-ROS-%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-text">和 ROS 的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E4%B8%8E%E7%BC%96%E8%BE%91"><span class="nav-text">查看与编辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ROS-%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%E5%92%8C-bashrc-%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-text">ROS 工作空间和 .bashrc 的关系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#launch%E6%96%87%E4%BB%B6"><span class="nav-text">launch文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-launch-%E6%96%87%E4%BB%B6%EF%BC%9F"><span class="nav-text">什么是 launch 文件？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="nav-text">基本结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE%E8%AF%B4%E6%98%8E"><span class="nav-text">常用标签说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-text">代码示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-text">说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F"><span class="nav-text">启动方式</span></a></li></ol></li></ol></li></ol>
 
 	</div>
 </div>

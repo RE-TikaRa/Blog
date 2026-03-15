@@ -94,7 +94,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png">
 <meta property="article:published_time" content="2026-03-15T10:27:11.000Z">
-<meta property="article:modified_time" content="2026-03-15T11:52:43.014Z">
+<meta property="article:modified_time" content="2026-03-15T12:13:40.149Z">
 <meta property="article:author" content="亓翎_Re-Tikara">
 <meta property="article:tag" content="亓翎_Re-Tikara">
 <meta name="twitter:card" content="summary">
@@ -762,8 +762,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2026-03-15 19:52:43</span>
-            <span class="mobile">2026-03-15 19:52:43</span>
+            <span class="desktop">2026-03-15 20:13:40</span>
+            <span class="mobile">2026-03-15 20:13:40</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -811,7 +811,7 @@
 		
 
 		
-		<div class="article-expire hidden mt-4 mx-2 sm:mx-6 md:mx-8 callout callout--simple red mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center" id="expiration-container" data-expires="10000-01-01 07:59:59" data-updated="Sun Mar 15 2026 19:52:43 GMT+0800">
+		<div class="article-expire hidden mt-4 mx-2 sm:mx-6 md:mx-8 callout callout--simple red mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center" id="expiration-container" data-expires="10000-01-01 07:59:59" data-updated="Sun Mar 15 2026 20:13:40 GMT+0800">
 			<div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) opacity-60 shrink-0"></div>
 			<i class="expire-icon callout__icon fa-solid fa-timer text-(--callout-primary-color) text-base shrink-0"></i>
 			<div class="callout__content markdown-body flex-1 min-w-0">
@@ -824,35 +824,35 @@
 		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
 			<hr>
 <h1 id="ROS消息与服务基础"><a href="#ROS消息与服务基础" class="headerlink" title="ROS消息与服务基础"></a>ROS消息与服务基础</h1><h2 id="消息（Message）"><a href="#消息（Message）" class="headerlink" title="消息（Message）"></a>消息（Message）</h2><ul>
-<li><strong>作用</strong>：ROS节点间通信的“数据载体”，把数据从一个节点传递到另一个节点（比如控制指令、传感器数据等）。 </li>
-<li><strong>定义位置</strong>：写在**<code>.msg</code>文件**中，例如 <code>geometry_msgs/Twist</code>（常用于控制机器人的线速度、角速度）。 </li>
-<li><strong>数据类型</strong>：支持基础类型（<code>int32</code>、<code>float64</code>、<code>string</code>等）、<strong>数组</strong>（如保存多个相同类型的数据）、<strong>嵌套消息</strong>（自定义消息中嵌套其他消息，形成“结构体”般的复杂结构）。</li>
+<li><strong>作用</strong> ：ROS节点间通信的“数据载体”，把数据从一个节点传递到另一个节点（比如控制指令、传感器数据等）。 </li>
+<li><strong>定义位置</strong> ：写在 <strong><code>.msg</code>文件</strong> 中，例如 <code>geometry_msgs/Twist</code> （常用于控制机器人的线速度、角速度）。 </li>
+<li><strong>数据类型</strong> ：支持基础类型（ <code>int32</code> 、 <code>float64</code> 、 <code>string</code> 等）、 <strong>数组</strong> （如保存多个相同类型的数据）、 <strong>嵌套消息</strong> （自定义消息中嵌套其他消息，形成“结构体”般的复杂结构）。</li>
 </ul>
 <h2 id="服务（Service）"><a href="#服务（Service）" class="headerlink" title="服务（Service）"></a>服务（Service）</h2><ul>
-<li><strong>通信模式</strong>：<strong>请求 - 响应</strong>机制，类似“发请求→等待处理→拿结果”的流程（同步通信）。 </li>
-<li><strong>定义位置</strong>：写在**<code>.srv</code>文件**中，例如 <code>std_srvs/Trigger</code>（常用于“触发操作并返回状态”，比如让机器人执行某个动作后，返回“成功&#x2F;失败”）。 </li>
-<li><strong>结构</strong>：分为<strong>请求</strong>（可携带参数，告诉服务端“怎么执行”）和<strong>响应</strong>（返回操作结果、状态信息，比如成功&#x2F;失败、错误原因等）。</li>
+<li><strong>通信模式</strong> ： <strong>请求 - 响应</strong> 机制，类似“发请求→等待处理→拿结果”的流程（同步通信）。 </li>
+<li><strong>定义位置</strong> ：写在 <strong><code>.srv</code>文件</strong> 中，例如 <code>std_srvs/Trigger</code> （常用于“触发操作并返回状态”，比如让机器人执行某个动作后，返回“成功&#x2F;失败”）。 </li>
+<li><strong>结构</strong> ：分为 <strong>请求</strong> （可携带参数，告诉服务端“怎么执行”）和 <strong>响应</strong> （返回操作结果、状态信息，比如成功&#x2F;失败、错误原因等）。</li>
 </ul>
 <h2 id="话题与服务的对比"><a href="#话题与服务的对比" class="headerlink" title="话题与服务的对比"></a>话题与服务的对比</h2><ul>
-<li><p><strong>话题（基于消息的通信）</strong>： </p>
+<li><p><strong>话题（基于消息的通信）</strong> ： </p>
 <ul>
-<li>特点：<strong>异步通信</strong>（“广播式”）。 </li>
-<li>场景：适合<strong>数据流传输</strong>（如摄像头持续发布图像、激光雷达发布点云、传感器持续采集数据），订阅节点按自身节奏处理数据，不强求“实时响应”。</li>
+<li>特点： <strong>异步通信</strong> （“广播式”）。 </li>
+<li>场景：适合 <strong>数据流传输</strong> （如摄像头持续发布图像、激光雷达发布点云、传感器持续采集数据），订阅节点按自身节奏处理数据，不强求“实时响应”。</li>
 </ul>
 </li>
-<li><p><strong>服务</strong>： </p>
+<li><p><strong>服务</strong> ： </p>
 <ul>
-<li>特点：<strong>同步通信</strong>（“点对点打电话要结果”）。 </li>
-<li>场景：适合<strong>请求 - 响应场景</strong>（如让机械臂运动到目标位置、查询传感器当前状态），必须等“结果返回”后再执行下一步。</li>
+<li>特点： <strong>同步通信</strong> （“点对点打电话要结果”）。 </li>
+<li>场景：适合 <strong>请求 - 响应场景</strong> （如让机械臂运动到目标位置、查询传感器当前状态），必须等“结果返回”后再执行下一步。</li>
 </ul>
 </li>
 </ul>
-<h2 id="核心区别总结"><a href="#核心区别总结" class="headerlink" title="核心区别总结"></a>核心区别总结</h2><p>话题像“持续发广播”，适合“数据流式”的持续传输；服务像“打电话问事情”，适合“我要结果再继续”的请求 - 响应场景。两者的<strong>通信模式</strong>和<strong>适用场景</strong>完全不同，是ROS中实现节点间协作的两大核心机制~</p>
+<h2 id="核心区别总结"><a href="#核心区别总结" class="headerlink" title="核心区别总结"></a>核心区别总结</h2><p>话题像“持续发广播”，适合“数据流式”的持续传输；服务像“打电话问事情”，适合“我要结果再继续”的请求 - 响应场景。两者的 <strong>通信模式</strong> 和 <strong>适用场景</strong> 完全不同，是ROS中实现节点间协作的两大核心机制~</p>
 <hr>
 <h1 id="消息文件-msg的编写"><a href="#消息文件-msg的编写" class="headerlink" title="消息文件.msg的编写"></a>消息文件.msg的编写</h1><h2 id="消息文件格式规范"><a href="#消息文件格式规范" class="headerlink" title="消息文件格式规范"></a><strong>消息文件格式规范</strong></h2><h3 id="基本结构与数据类型"><a href="#基本结构与数据类型" class="headerlink" title="基本结构与数据类型"></a><strong>基本结构与数据类型</strong></h3><ul>
-<li><p><strong>字段定义格式</strong>：<br><code>数据类型 变量名</code>（<strong>无逗号，空格分隔</strong>）<br><strong>✅ 正确</strong>：<code>int32 id</code><br><strong>❌ 错误</strong>：<code>int32 id,</code>（类似 C 语法，ROS 不支持）  </p>
+<li><p><strong>字段定义格式</strong> ：<br><code>数据类型 变量名</code> （ <strong>无逗号，空格分隔</strong> ）<br><strong>✅ 正确</strong> ： <code>int32 id</code><br><strong>❌ 错误</strong> ： <code>int32 id,</code> （类似 C 语法，ROS 不支持）  </p>
 </li>
-<li><p><strong>支持的数据类型</strong>（ROS 内置）：  </p>
+<li><p><strong>支持的数据类型</strong> （ROS 内置）：  </p>
 <table>
 <thead>
 <tr>
@@ -908,20 +908,20 @@
 </tr>
 </tbody></table>
 </li>
-<li><p><strong>数组类型</strong>（<strong>ROS 1 仅支持固定长度数组</strong>）：<br><strong>✅ 正确</strong>：<code>float64 data[10]</code>（10 个浮点数）<br><strong>❌ 错误</strong>：<code>float64[] data</code>（ROS 1 不支持动态数组）  </p>
+<li><p><strong>数组类型</strong> （ <strong>ROS 1 仅支持固定长度数组</strong> ）：<br><strong>✅ 正确</strong> ： <code>float64 data[10]</code> （10 个浮点数）<br><strong>❌ 错误</strong> ： <code>float64[] data</code> （ROS 1 不支持动态数组）  </p>
 <blockquote>
-<p><strong>ROS 2 补充</strong>：ROS 2 支持动态数组，写法为 <code>float64[] data</code>。</p>
+<p><strong>ROS 2 补充</strong> ：ROS 2 支持动态数组，写法为 <code>float64[] data</code> 。</p>
 </blockquote>
 </li>
 </ul>
 <h3 id="依赖声明（关键修正）"><a href="#依赖声明（关键修正）" class="headerlink" title="依赖声明（关键修正）"></a><strong>依赖声明（关键修正）</strong></h3><ul>
-<li><strong>ROS 1</strong>：<br><strong>无需在 <code>.msg</code> 文件中声明依赖</strong>！依赖通过 <code>package.xml</code> 和 <code>CMakeLists.txt</code> 管理。  <blockquote>
-<p>示例：若需使用 <code>std_msgs/String</code>，在包的 <code>package.xml</code> 中添加 <code>&lt;depend&gt;std_msgs&lt;/depend&gt;</code>。</p>
+<li><strong>ROS 1</strong> ：<br><strong>无需在 <code>.msg</code> 文件中声明依赖</strong> ！依赖通过 <code>package.xml</code> 和 <code>CMakeLists.txt</code> 管理。  <blockquote>
+<p>示例：若需使用 <code>std_msgs/String</code> ，在包的 <code>package.xml</code> 中添加 <code>&lt;depend&gt;std_msgs&lt;/depend&gt;</code> 。</p>
 </blockquote>
 </li>
 </ul>
 <h3 id="注释规范"><a href="#注释规范" class="headerlink" title="注释规范"></a><strong>注释规范</strong></h3><ul>
-<li><p><strong>所有注释以 <code>#</code> 开头</strong>：  </p>
+<li><p><strong>所有注释以 <code>#</code> 开头</strong> ：  </p>
 <div class="code-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 人信息消息</span><br><span class="line"># 作者：ROS Team</span><br><span class="line"># 日期：2023-10-01</span><br><span class="line"></span><br><span class="line">string name  # 姓名（小写+下划线）</span><br><span class="line">uint8 age    # 年龄（0-255）</span><br><span class="line">string gender # 性别（&quot;male&quot; / &quot;female&quot;）</span><br></pre></td></tr></table></figure></div></li>
 </ul>
 <h3 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h3><table>
@@ -934,37 +934,37 @@
 </thead>
 <tbody><tr>
 <td><strong>消息文件名</strong></td>
-<td>全小写 + 下划线分隔（<code>*.msg</code>）</td>
+<td>全小写 + 下划线分隔（ <code>*.msg</code> ）</td>
 <td><code>person.msg</code></td>
 </tr>
 <tr>
 <td><strong>字段名</strong></td>
 <td>全小写 + 下划线分隔</td>
-<td><code>name</code>, <code>age</code>, <code>gender</code></td>
+<td><code>name</code> , <code>age</code> , <code>gender</code></td>
 </tr>
 <tr>
 <td><strong>禁止</strong></td>
 <td>首字母大写、驼峰式、数字开头</td>
-<td>❌ <code>PersonName</code>, ❌ <code>1st_name</code></td>
+<td>❌ <code>PersonName</code> , ❌ <code>1st_name</code></td>
 </tr>
 </tbody></table>
 <div class="callout callout--simple warning mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p><strong>为什么？</strong> ROS 严格要求命名规范，避免与 C++&#x2F;Python 代码冲突，提高可读性。</p></div></div>
 
 <h3 id="关键注意事项"><a href="#关键注意事项" class="headerlink" title="关键注意事项"></a><strong>关键注意事项</strong></h3><ol>
-<li><p><strong>文件位置</strong>：  </p>
+<li><p><strong>文件位置</strong> ：  </p>
 <ul>
-<li>消息文件必须放在 <strong>包的 <code>msg/</code> 目录下</strong>（如 <code>my_package/msg/Person.msg</code>）。  </li>
+<li>消息文件必须放在 <strong>包的 <code>msg/</code> 目录下</strong> （如 <code>my_package/msg/Person.msg</code> ）。  </li>
 <li>未按此结构放置，ROS 无法编译。</li>
 </ul>
 </li>
-<li><p><strong>字段唯一性</strong>：  </p>
+<li><p><strong>字段唯一性</strong> ：  </p>
 <ul>
-<li>同一消息中<strong>禁止重复字段名</strong>（如 <code>int32 id</code> 和 <code>int32 id</code> 重复）。</li>
+<li>同一消息中 <strong>禁止重复字段名</strong> （如 <code>int32 id</code> 和 <code>int32 id</code> 重复）。</li>
 </ul>
 </li>
-<li><p><strong>基本类型限制</strong>：  </p>
+<li><p><strong>基本类型限制</strong> ：  </p>
 <ul>
-<li>不能使用自定义类型（如 <code>MyCustomType</code>），需通过依赖的 <code>.msg</code> 文件定义。</li>
+<li>不能使用自定义类型（如 <code>MyCustomType</code> ），需通过依赖的 <code>.msg</code> 文件定义。</li>
 </ul>
 </li>
 </ol>
@@ -1038,8 +1038,8 @@
                 ></p>
 <p>消息类型由两部分组成：</p>
 <ul>
-<li><strong>Package名</strong>：消息所在的包（例如 <code>new_msg</code>）</li>
-<li><strong>消息名</strong>：具体消息名称（例如 <code>num</code>）</li>
+<li><strong>Package名</strong> ：消息所在的包（例如 <code>new_msg</code> ）</li>
+<li><strong>消息名</strong> ：具体消息名称（例如 <code>num</code> ）</li>
 </ul>
 <p>如果忘记包名，可直接省略包名，使用消息名进行查询：</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosmsg show num</span><br></pre></td></tr></table></figure></div>
@@ -1056,24 +1056,24 @@
 <hr>
 <h1 id="服务文件（-srv）的编写"><a href="#服务文件（-srv）的编写" class="headerlink" title="服务文件（.srv）的编写"></a>服务文件（.srv）的编写</h1><h2 id="服务文件格式"><a href="#服务文件格式" class="headerlink" title="服务文件格式"></a>服务文件格式</h2><p>服务文件分为请求和响应两部分：</p>
 <ul>
-<li><strong>请求部分</strong>：定义输入参数</li>
-<li><strong>响应部分</strong>：定义输出结果</li>
+<li><strong>请求部分</strong> ：定义输入参数</li>
+<li><strong>响应部分</strong> ：定义输出结果</li>
 </ul>
 <p>请求和响应部分字段定义与消息文件类似，支持多种数据类型和数组。</p>
 <h3 id="示例与规范"><a href="#示例与规范" class="headerlink" title="示例与规范"></a>示例与规范</h3><h4 id="示例：AddTwoInts-服务"><a href="#示例：AddTwoInts-服务" class="headerlink" title="示例：AddTwoInts 服务"></a>示例：AddTwoInts 服务</h4><div class="code-container" data-rel="Text"><figure class="iseeu highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 请求部分</span><br><span class="line">int64 a</span><br><span class="line">int64 b</span><br><span class="line"></span><br><span class="line"># 响应部分</span><br><span class="line">int64 sum</span><br></pre></td></tr></table></figure></div>
 
-<div class="callout callout--simple info mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p><strong>说明</strong>：定义一个AddTwoInts服务，请求包含两个整数，响应返回它们的和。</p></div></div>
+<div class="callout callout--simple info mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p><strong>说明</strong> ：定义一个AddTwoInts服务，请求包含两个整数，响应返回它们的和。</p></div></div>
 
 <h4 id="规范要求"><a href="#规范要求" class="headerlink" title="规范要求"></a>规范要求</h4><ul>
 <li>服务文件名以小写字母开头</li>
 <li>请求和响应字段名应清晰描述功能，便于理解和使用</li>
-<li>例如：<code>add_two_ints.srv</code>（文件名），<code>a</code>、<code>b</code>（请求字段），<code>sum</code>（响应字段）</li>
+<li>例如： <code>add_two_ints.srv</code> （文件名）， <code>a</code> 、 <code>b</code> （请求字段）， <code>sum</code> （响应字段）</li>
 </ul>
 <h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
-<li><strong>字段名唯一性</strong>：请求和响应部分字段名不能重复，避免冲突，确保服务正常工作。</li>
-<li><strong>依赖声明</strong>：服务文件依赖其他消息类型时，需在<code>package.xml</code>中正确声明依赖，确保编译通过。</li>
-<li><strong>类型支持</strong>：支持ROS标准数据类型（如<code>int32</code>、<code>float64</code>、<code>string</code>等）及自定义消息类型。</li>
-<li><strong>结构清晰</strong>：服务文件应保持简洁，仅包含必要的请求和响应字段。</li>
+<li><strong>字段名唯一性</strong> ：请求和响应部分字段名不能重复，避免冲突，确保服务正常工作。</li>
+<li><strong>依赖声明</strong> ：服务文件依赖其他消息类型时，需在 <code>package.xml</code> 中正确声明依赖，确保编译通过。</li>
+<li><strong>类型支持</strong> ：支持ROS标准数据类型（如 <code>int32</code> 、 <code>float64</code> 、 <code>string</code> 等）及自定义消息类型。</li>
+<li><strong>结构清晰</strong> ：服务文件应保持简洁，仅包含必要的请求和响应字段。</li>
 </ol>
 <h2 id="创建服务文件"><a href="#创建服务文件" class="headerlink" title="创建服务文件"></a>创建服务文件</h2><p>在上面msg的package中创建一个服务：</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">roscd new_msg</span><br><span class="line"><span class="built_in">mkdir</span> srv</span><br></pre></td></tr></table></figure></div>
@@ -1109,7 +1109,7 @@
                      data-src="https://s2.loli.net/2025/10/03/mc2kbYIElwxS8Aa.png"
                       alt="image-20251003161849522"
                 ></p>
-<h2 id="编译srv节点"><a href="#编译srv节点" class="headerlink" title="编译srv节点"></a>编译srv节点</h2><p>参考<a href="#%E7%BC%96%E8%AF%91msg%E8%8A%82%E7%82%B9">2.2.4-编译msg节点</a>的编译</p>
+<h2 id="编译srv节点"><a href="#编译srv节点" class="headerlink" title="编译srv节点"></a>编译srv节点</h2><p>参考 <a href="#%E7%BC%96%E8%AF%91msg%E8%8A%82%E7%82%B9">2.2.4-编译msg节点</a> 的编译</p>
 <p>我们回到 ~&#x2F;Tika_ws下执行编译命令：</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">catkin_make -j1</span><br></pre></td></tr></table></figure></div>
 
@@ -1121,7 +1121,7 @@
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rossrv show new_msg/AddTwoInts</span><br></pre></td></tr></table></figure></div>
 
 <p>你将会看到:</p>
-<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int64 a</span><br><span class="line">int64 b</span><br><span class="line">---</span><br><span class="line">int64 <span class="built_in">sum</span></span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int64 a</span><br><span class="line">int64 b</span><br><span class="line">\---</span><br><span class="line">int64 <span class="built_in">sum</span></span><br></pre></td></tr></table></figure></div>
 
 <p>跟rosmsg类似, 你也可以不指定具体的package名来查找服务文件：</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">tika@tika-virtual-machine:~/Tika$ rossrv show AddTwoInts</span><br><span class="line">[rospy_tutorials/AddTwoInts]:</span><br><span class="line">int64 a</span><br><span class="line">int64 b</span><br><span class="line">---</span><br><span class="line">int64 <span class="built_in">sum</span></span><br><span class="line"></span><br><span class="line">[new_msg/AddTwoInts]:</span><br><span class="line">int64 a</span><br><span class="line">int64 b</span><br><span class="line">---</span><br><span class="line">int64 <span class="built_in">sum</span></span><br></pre></td></tr></table></figure></div>
@@ -1132,7 +1132,7 @@
                      src="/images/loading.svg"
                      data-src="https://s2.loli.net/2025/10/03/dZ8kwxMtY5HLqXK.png"
                       alt="image-20251003202058180"
-                ></h2><h1 id="消息的发布与订阅"><a href="#消息的发布与订阅" class="headerlink" title="消息的发布与订阅"></a>消息的发布与订阅</h1><h2 id="编写发布节点"><a href="#编写发布节点" class="headerlink" title="编写发布节点"></a>编写发布节点</h2><p>在我们前几节的功能包（new_msg)中，运行如下命令，创建<code>scripts</code>来存放我们的python代码</p>
+                ></h2><h1 id="消息的发布与订阅"><a href="#消息的发布与订阅" class="headerlink" title="消息的发布与订阅"></a>消息的发布与订阅</h1><h2 id="编写发布节点"><a href="#编写发布节点" class="headerlink" title="编写发布节点"></a>编写发布节点</h2><p>在我们前几节的功能包（new_msg)中，运行如下命令，创建 <code>scripts</code> 来存放我们的python代码</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> scripts</span><br><span class="line"><span class="built_in">cd</span> scripts</span><br></pre></td></tr></table></figure></div>
 
 <p>然后运行以下命令</p>
@@ -1187,7 +1187,7 @@
                      data-src="https://s2.loli.net/2025/10/03/8oTfngqcXMuYHi1.png"
                       alt="image-20251003210137094"
                 ></p>
-<p>在第一行末尾加上<code>scripts/listener.py</code>，整个字段的就是</p>
+<p>在第一行末尾加上 <code>scripts/listener.py</code> ，整个字段的就是</p>
 <div class="code-container" data-rel="Txt"><figure class="iseeu highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">catkin_install_python(PROGRAMS scripts/talker.py scripts/listener.py</span><br><span class="line">  DESTINATION $&#123;CATKIN_PACKAGE_BIN_DESTINATION&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></div>
 
 <p><img  
@@ -1196,7 +1196,7 @@
                      data-src="https://s2.loli.net/2025/10/03/1u6RpZAKhgNw7yL.png"
                       alt="image-20251003211607992"
                 ></p>
-<div class="callout callout--simple warning mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>需要注意的是<code>scripts/talker.py</code>和<code>scripts/listener.py</code>中间有一个空格</p></div></div>
+<div class="callout callout--simple warning mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center"><div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) shrink-0 opacity-60"></div><div class="callout__content markdown-body flex-1 min-w-0"><p>需要注意的是 <code>scripts/talker.py</code> 和 <code>scripts/listener.py</code> 中间有一个空格</p></div></div>
 
 <h2 id="编译节点"><a href="#编译节点" class="headerlink" title="编译节点"></a>编译节点</h2><p>我们使用CMake作为构建系统，即使对于Python节点，也必须使用它。这是为了确保创建用于消息和服务的自动生成的Python代码。因为CMake不直接编译项目，而是通过CMakeLists.txt配置文件生成适用于不同平台的构建文件（如Makefile、Visual Studio工程文件等），这些文件再由实际的编译工具（如make、MSBuild）执行编译过程。</p>
 <p>转到根目录并运行catkin_make：</p>
@@ -1204,7 +1204,7 @@
 
 <hr>
 <h1 id="测试消息发布器和订阅器"><a href="#测试消息发布器和订阅器" class="headerlink" title="测试消息发布器和订阅器"></a>测试消息发布器和订阅器</h1><p>我们新建终端，运行如下命令</p>
-<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/Tika_ws/</span><br><span class="line"><span class="built_in">source</span> devel/setup.bash</span><br><span class="line">roscore</span><br></pre></td></tr></table></figure></div>
+<div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/Tika_ws/</span><br><span class="line"><span class="built_in">source</span> devel/setup.bash</span><br><span class="line">roscore</span><br></pre></td></tr></table></figure></div>
 
 <p>然后我们再次新建一个终端，在工程根目录下运行如下命令，以启动”talker”的发布器节点</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosrun new_msg talker.py </span><br></pre></td></tr></table></figure></div>
@@ -1275,9 +1275,9 @@
 <div class="code-container" data-rel="Cmake"><figure class="iseeu highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">generate_messages(</span><br><span class="line">  DEPENDENCIES</span><br><span class="line">  std_msgs</span><br><span class="line">)</span><br></pre></td></tr></table></figure></div></li>
 </ol>
 <h2 id="修改原因"><a href="#修改原因" class="headerlink" title="修改原因"></a>修改原因</h2><ol>
-<li><strong>CMake 规则要求</strong>：每个 ROS 包中只能调用一次 <code>generate_messages()</code> 函数</li>
-<li><strong>依赖声明必要性</strong>：为了正确生成服务代码，需要显式声明对标准消息包 <code>std_msgs</code> 的依赖</li>
-<li><strong>代码生成</strong>：只有正确配置后，<code>catkin_make</code> 才能生成服务对应的 Python 模块，解决导入错误</li>
+<li><strong>CMake 规则要求</strong> ：每个 ROS 包中只能调用一次 <code>generate_messages()</code> 函数</li>
+<li><strong>依赖声明必要性</strong> ：为了正确生成服务代码，需要显式声明对标准消息包 <code>std_msgs</code> 的依赖</li>
+<li><strong>代码生成</strong> ：只有正确配置后， <code>catkin_make</code> 才能生成服务对应的 Python 模块，解决导入错误</li>
 </ol>
 <h2 id="编译节点-1"><a href="#编译节点-1" class="headerlink" title="编译节点"></a>编译节点</h2><p>回到我们的工作空间根目录并执行编译</p>
 <div class="code-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">catkin_make -j1</span><br></pre></td></tr></table></figure></div>
@@ -1323,7 +1323,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2026-03-15 19:52:43
+                    :</strong> 2026-03-15 20:13:40
             </li>
         
         <li>
