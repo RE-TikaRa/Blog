@@ -9,7 +9,7 @@
     <atom:link href="https://re-tikara.fun/Blog/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>重构的版本</description>
-    <pubDate>Sun, 15 Mar 2026 10:32:17 GMT</pubDate>
+    <pubDate>Sun, 15 Mar 2026 10:36:31 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -23,7 +23,7 @@
       
       
       
-      <category domain="https://re-tikara.fun/Blog/categories/ROS/">ROS</category>
+      <category domain="https://re-tikara.fun/Blog/categories/ROS%E5%AE%9E%E8%B7%B5/">ROS实践</category>
       
       
       
@@ -42,7 +42,7 @@
       
       
       
-      <category domain="https://re-tikara.fun/Blog/categories/ROS/">ROS</category>
+      <category domain="https://re-tikara.fun/Blog/categories/ROS%E5%AE%9E%E8%B7%B5/">ROS实践</category>
       
       
       
@@ -61,7 +61,7 @@
       
       
       
-      <category domain="https://re-tikara.fun/Blog/categories/ROS/">ROS</category>
+      <category domain="https://re-tikara.fun/Blog/categories/ROS%E5%AE%9E%E8%B7%B5/">ROS实践</category>
       
       
       
