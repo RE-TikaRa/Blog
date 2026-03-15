@@ -3,12 +3,12 @@
   xmlns:atom="http://www.w3.org/2005/Atom"
   xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>ALp_Studio Article Library</title>
+    <title>ALp_Studio Articles</title>
     <link>https://re-tikara.fun/Blog/</link>
     
     <atom:link href="https://re-tikara.fun/Blog/rss2.xml" rel="self" type="application/rss+xml"/>
     
-    <description>重构的版本</description>
+    <description>重构</description>
     <pubDate>Sun, 15 Mar 2026 10:36:57 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
