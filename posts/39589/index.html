@@ -94,7 +94,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png">
 <meta property="article:published_time" content="2024-01-21T03:38:55.000Z">
-<meta property="article:modified_time" content="2026-04-01T11:05:23.243Z">
+<meta property="article:modified_time" content="2026-04-01T12:18:33.849Z">
 <meta property="article:author" content="亓翎_Re-Tikara">
 <meta property="article:tag" content="Hexo建设日志">
 <meta name="twitter:card" content="summary">
@@ -699,11 +699,11 @@
 
         <div class="statistics flex justify-around my-2.5">
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">24</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">33</div>
         <div class="label text-third-text-color text-sm">标签</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/categories">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">33</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">32</div>
         <div class="label text-third-text-color text-sm">分类</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/archives">
@@ -729,8 +729,12 @@
 
 		<div class="article-title relative w-full">
 			
-			<div class="w-full flex items-center pt-6 justify-start">
-				<h1 class="article-title-regular text-second-text-color tracking-tight text-4xl md:text-6xl font-semibold px-2 sm:px-6 md:px-8 py-3">Hexo建设日志03-对于Error Spawn failed报错的修复（歪门邪道）</h1>
+			
+			
+			<img src="https://s2.loli.net/2025/12/22/uBnZDzxcI7JHCX3.png" alt="Hexo建设日志03-对于Error Spawn failed报错的修复（歪门邪道）" class="w-full h-60 sm:h-72 md:h-80 object-cover sm:rounded-t-large dark:brightness-75" />
+			
+			<div class="w-full flex items-center absolute bottom-0 justify-start">
+				<h1 class="article-title-cover text-center mx-6 my-6 text-second-text-color bg-background-color-transparent px-4 py-3 text-3xl sm:text-4xl md:text-5xl font-semibold backdrop-blur-lg rounded-xl border border-border-color ">Hexo建设日志03-对于Error Spawn failed报错的修复（歪门邪道）</h1>
 			</div>
 			
 		</div>
@@ -758,8 +762,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2026-04-01 19:05:23</span>
-            <span class="mobile">2026-04-01 19:05:23</span>
+            <span class="desktop">2026-04-01 20:18:33</span>
+            <span class="mobile">2026-04-01 20:18:33</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -818,11 +822,19 @@
 		
 
 		
+		<div class="article-expire hidden mt-4 mx-2 sm:mx-6 md:mx-8 callout callout--simple red mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center" id="expiration-container" data-expires="Wed Jan 21 2026 11:38:55 GMT+0800 (中国标准时间)" data-updated="Wed Apr 01 2026 20:18:33 GMT+0800">
+			<div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) opacity-60 shrink-0"></div>
+			<i class="expire-icon callout__icon fa-solid fa-timer text-(--callout-primary-color) text-base shrink-0"></i>
+			<div class="callout__content markdown-body flex-1 min-w-0">
+				<span class="expire-label text-(--callout-primary-color)" id="expiration-date">这篇文章最后更新于 some 天前，内容可能已经过时。</span>
+			</div>
+		</div>
+		
 
 
 		<div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-			<h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><p>&emsp;&emsp;最近被Error:Spawn failed这个报错，折磨得一塌糊涂。试了试网上的，什么删除.deploy_git文件夹，什么改_config.yml里面的deploy:repo的<a class="link"   href="mailto:&#103;&#105;&#116;&#x40;&#x67;&#105;&#116;&#104;&#x75;&#98;&#46;&#99;&#111;&#x6d;" >git@github.com<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>:，还有本地推送啥的，对我都没作用。试了试一个偏方。在这把方法分享一下。</p>
-<span id="more"></span>
+			<h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><p>&emsp;&emsp;最近被Error:Spawn failed这个报错，折磨得一塌糊涂。试了试网上的，什么删除.deploy_git文件夹，什么改_config.yml里面的deploy:repo的<a class="link"   href="mailto:&#x67;&#x69;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#x6d;" >git@github.com<i class="fa-solid fa-arrow-up-right ml-[0.2em] font-light align-text-top text-[0.7em] link-icon"></i></a>:，还有本地推送啥的，对我都没作用。试了试一个偏方。在这把方法分享一下。</p>
+<!--more-->
 
 <hr>
 <h1 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h1><p>&emsp;&emsp;首先，我们直接打开Git Bash，不要在任何一个文件夹下运行。打开应该是下图这个样子（ <em><strong>~</strong></em> 后面没有任何东西，或者是一个 <em><strong>&#x2F;</strong></em> 但是后面也没有东西）（我是在win菜单下运行的，没有添加到win菜单的话，你可以在你安装Git的文件夹下找到这个Git Bash）<br><img  
@@ -904,7 +916,7 @@ IdentityFile ~/.ssh/id_rsa
         
             <li>
                 <strong>更新于
-                    :</strong> 2026-04-01 19:05:23
+                    :</strong> 2026-04-01 20:18:33
             </li>
         
         <li>
@@ -1013,7 +1025,7 @@ IdentityFile ~/.ssh/id_rsa
                     </span>
                     
                         <span>
-                            共 112.1k 字
+                            共 111.8k 字
                         </span>
                     
                 </p>

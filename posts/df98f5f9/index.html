@@ -94,7 +94,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png">
 <meta property="article:published_time" content="2026-02-06T18:21:28.000Z">
-<meta property="article:modified_time" content="2026-02-09T18:48:46.982Z">
+<meta property="article:modified_time" content="2026-04-01T12:34:53.384Z">
 <meta property="article:author" content="亓翎_Re-Tikara">
 <meta property="article:tag" content="C Language">
 <meta name="twitter:card" content="summary">
@@ -699,11 +699,11 @@
 
         <div class="statistics flex justify-around my-2.5">
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">24</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">33</div>
         <div class="label text-third-text-color text-sm">标签</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/categories">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">33</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">32</div>
         <div class="label text-third-text-color text-sm">分类</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/archives">
@@ -762,8 +762,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2026-02-10 02:48:46</span>
-            <span class="mobile">2026-02-10 02:48:46</span>
+            <span class="desktop">2026-04-01 20:34:53</span>
+            <span class="mobile">2026-04-01 20:34:53</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -832,7 +832,7 @@
 		
 
 		
-		<div class="article-expire hidden mt-4 mx-2 sm:mx-6 md:mx-8 callout callout--simple red mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center" id="expiration-container" data-expires="Fri Dec 31 9999 23:59:59 GMT+0800 (中国标准时间)" data-updated="Tue Feb 10 2026 02:48:46 GMT+0800">
+		<div class="article-expire hidden mt-4 mx-2 sm:mx-6 md:mx-8 callout callout--simple red mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center" id="expiration-container" data-expires="Fri Feb 07 2031 02:21:28 GMT+0800 (中国标准时间)" data-updated="Wed Apr 01 2026 20:34:53 GMT+0800">
 			<div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) opacity-60 shrink-0"></div>
 			<i class="expire-icon callout__icon fa-solid fa-timer text-(--callout-primary-color) text-base shrink-0"></i>
 			<div class="callout__content markdown-body flex-1 min-w-0">
@@ -947,6 +947,7 @@
 <hr>
 <h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>&emsp;&emsp;C语言中没有专门存放字符串的字符串变量，字符串如果要放在变量中，必须用字符数组（char[]）来存储。为了方便区分字符串常量和字符数组，有如下示例：</p>
 <div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="comment">// ===== 字符串常量示例 =====</span></span><br><span class="line">    <span class="comment">// 字符串常量：存储在只读内存中的固定字符串</span></span><br><span class="line">    <span class="comment">// 以下两种写法等效</span></span><br><span class="line">    <span class="type">char</span> *strConst1 = <span class="string">&quot;Hello&quot;</span>;         <span class="comment">// 不可修改内容，指向只读内存的指针</span></span><br><span class="line">    <span class="type">const</span> <span class="type">char</span> strConst2[] = <span class="string">&quot;World&quot;</span>;  <span class="comment">// 数组形式的常量字符串（内容不可修改）</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 尝试修改字符串常量会导致未定义行为</span></span><br><span class="line">    <span class="comment">// strConst1[0] = &#x27;h&#x27;;  // 不建议取消注释此行</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ===== 字符数组示例 =====</span></span><br><span class="line">    <span class="comment">// 可变的字符串存储方式</span></span><br><span class="line">    <span class="type">char</span> strArray1[<span class="number">20</span>] = <span class="string">&quot;Hello&quot;</span>;  <span class="comment">// 明确指定大小</span></span><br><span class="line">    <span class="type">char</span> strArray2[] = <span class="string">&quot;World&quot;</span>;    <span class="comment">// 自动计算大小</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 修改字符数组内容是合法的</span></span><br><span class="line">    strArray1[<span class="number">0</span>] = <span class="string">&#x27;h&#x27;</span>;  <span class="comment">// 合法操作</span></span><br><span class="line">    strArray2[<span class="number">0</span>] = <span class="string">&#x27;w&#x27;</span>;  </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 输出结果</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;字符串常量示例:\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;strConst1: %s\n&quot;</span>, strConst1);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;strConst2: %s\n\n&quot;</span>, strConst2);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;字符数组示例:\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;修改后 strArray1: %s\n&quot;</span>, strArray1);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;修改后 strArray2: %s\n&quot;</span>, strArray2);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ===== 常见操作对比 =====</span></span><br><span class="line">    <span class="comment">// 字符串拼接：目标必须是可修改的字符数组</span></span><br><span class="line">    <span class="type">char</span> dest[<span class="number">50</span>] = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">    <span class="built_in">strcat</span>(dest, <span class="string">&quot; World&quot;</span>);  <span class="comment">// 合法</span></span><br><span class="line">    <span class="comment">// strcat(strConst1, &quot;!&quot;);  // 非法 - 不要取消注释</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 字符串复制</span></span><br><span class="line">    <span class="type">char</span> dest2[<span class="number">50</span>];</span><br><span class="line">    <span class="built_in">strcpy</span>(dest2, strConst1);  <span class="comment">// 合法</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
 		</div>
 
 		
@@ -960,7 +961,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2026-02-10 02:48:46
+                    :</strong> 2026-04-01 20:34:53
             </li>
         
         <li>
@@ -998,12 +999,12 @@
 		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
 			
 			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-				<a class="prev" rel="prev" href="/Blog/posts/c6ad4934/">
+				<a class="prev" rel="prev" href="/Blog/posts/2b7d2eb0/">
 					<span class="left arrow-icon flex justify-center items-center">
 						<i class="fa-solid fa-chevron-left"></i>
 					</span>
 					<span class="title flex justify-center items-center">
-						<span class="post-nav-title-item truncate max-w-48">第四章——选择结构 拓展节——goto</span>
+						<span class="post-nav-title-item truncate max-w-48">第六章——字符型数据 第四节——字符型变量的定义</span>
 						<span class="post-nav-item">上一篇</span>
 					</span>
 				</a>
@@ -1069,7 +1070,7 @@
                     </span>
                     
                         <span>
-                            共 112.1k 字
+                            共 111.8k 字
                         </span>
                     
                 </p>

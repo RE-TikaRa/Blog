@@ -94,7 +94,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2025/12/22/nBapAxK8NowjZFP.png">
 <meta property="article:published_time" content="2026-02-06T18:21:28.000Z">
-<meta property="article:modified_time" content="2026-02-09T18:48:46.977Z">
+<meta property="article:modified_time" content="2026-04-01T12:38:22.617Z">
 <meta property="article:author" content="亓翎_Re-Tikara">
 <meta property="article:tag" content="C Language">
 <meta name="twitter:card" content="summary">
@@ -699,11 +699,11 @@
 
         <div class="statistics flex justify-around my-2.5">
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">24</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">33</div>
         <div class="label text-third-text-color text-sm">标签</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/categories">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">33</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">32</div>
         <div class="label text-third-text-color text-sm">分类</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/Blog/archives">
@@ -762,8 +762,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2026-02-10 02:48:46</span>
-            <span class="mobile">2026-02-10 02:48:46</span>
+            <span class="desktop">2026-04-01 20:38:22</span>
+            <span class="mobile">2026-04-01 20:38:22</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -832,7 +832,7 @@
 		
 
 		
-		<div class="article-expire hidden mt-4 mx-2 sm:mx-6 md:mx-8 callout callout--simple red mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center" id="expiration-container" data-expires="Fri Dec 31 9999 23:59:59 GMT+0800 (中国标准时间)" data-updated="Tue Feb 10 2026 02:48:46 GMT+0800">
+		<div class="article-expire hidden mt-4 mx-2 sm:mx-6 md:mx-8 callout callout--simple red mb-4 rounded-small shadow-redefine-flat bg-(--callout-bg-color) p-3 pl-1 relative flex flex-row gap-2 items-center" id="expiration-container" data-expires="Fri Feb 07 2031 02:21:28 GMT+0800 (中国标准时间)" data-updated="Wed Apr 01 2026 20:38:22 GMT+0800">
 			<div role="none" class="rounded-full self-stretch w-0.5 bg-(--callout-primary-color) opacity-60 shrink-0"></div>
 			<i class="expire-icon callout__icon fa-solid fa-timer text-(--callout-primary-color) text-base shrink-0"></i>
 			<div class="callout__content markdown-body flex-1 min-w-0">
@@ -851,6 +851,7 @@
 </ul>
 <hr>
 <div class="code-container" data-rel="C"><figure class="iseeu highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> arr[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line">    <span class="type">int</span> *p = arr;  <span class="comment">// 指针初始化指向数组首元素</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 示例1：通过指针移动遍历数组</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;遍历数组元素：\n&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;元素地址：%p，值：%d\n&quot;</span>, p, *p);</span><br><span class="line">        p++;  <span class="comment">// 指针向后移动一个int类型的位置</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 示例2：指针相减运算</span></span><br><span class="line">    <span class="type">int</span> *p1 = &amp;arr[<span class="number">2</span>];</span><br><span class="line">    <span class="type">int</span> *p2 = &amp;arr[<span class="number">4</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n两个指针相减的结果：%ld\n&quot;</span>, p2 - p1);  <span class="comment">// 输出2（两个int指针间隔2个元素）</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 示例3：错误的指针运算</span></span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>, b = <span class="number">20</span>;</span><br><span class="line">    <span class="type">int</span> *p3 = &amp;a;</span><br><span class="line">    <span class="comment">// 错误！不能对非数组指针执行算术运算</span></span><br><span class="line">    <span class="comment">// p3 += 1;  // 取消注释将导致未定义行为</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
 		</div>
 
 		
@@ -864,7 +865,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2026-02-10 02:48:46
+                    :</strong> 2026-04-01 20:38:22
             </li>
         
         <li>
@@ -902,12 +903,12 @@
 		<div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
 			
 			<div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-				<a class="prev" rel="prev" href="/Blog/posts/db9cac41/">
+				<a class="prev" rel="prev" href="/Blog/posts/ad030492/">
 					<span class="left arrow-icon flex justify-center items-center">
 						<i class="fa-solid fa-chevron-left"></i>
 					</span>
 					<span class="title flex justify-center items-center">
-						<span class="post-nav-title-item truncate max-w-48">第六章——字符型数据 拓展节02——字符串长度函数strlen</span>
+						<span class="post-nav-title-item truncate max-w-48">第八章——地址和指针 第零节——前言</span>
 						<span class="post-nav-item">上一篇</span>
 					</span>
 				</a>
@@ -915,9 +916,9 @@
 			
 			
 			<div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-				<a class="next" rel="next" href="/Blog/posts/601c8c23/">
+				<a class="next" rel="next" href="/Blog/posts/f5ae6e3a/">
 					<span class="title flex justify-center items-center">
-						<span class="post-nav-title-item truncate max-w-48">第六章——字符型数据 第一节——字符型常量的定义</span>
+						<span class="post-nav-title-item truncate max-w-48">第四章——选择结构 第三节——条件表达式及其构成的选择结构</span>
 						<span class="post-nav-item">下一篇</span>
 					</span>
 					<span class="right arrow-icon flex justify-center items-center">
@@ -973,7 +974,7 @@
                     </span>
                     
                         <span>
-                            共 112.1k 字
+                            共 111.8k 字
                         </span>
                     
                 </p>
